@@ -28,9 +28,13 @@ public class BasketRecipeParameters: BasketRecipeParametersProtocol {
     public var recipeOverview: TypeSafeBasketRecipeOverview
     public var recipeOverviewLoading: TypeSafeRecipeCardLoading
     public var basketProduct: TypeSafeBasketProduct
-    public var ingredientsAtHome: TypeSafeOptionalIngredients
-    public var removedIngredients: TypeSafeOptionalIngredients
-    public var unavailableIngredients: TypeSafeUnavailableIngredients
+    public var ingredientsAtHomeToggleButton: TypeSafeBaseButton
+    public var removedIngredientsToggleButton: TypeSafeBaseButton
+    public var unavailableIngredientsToggleButton: TypeSafeBaseButton
+    public var ingredientsAtHome: TypeSafeNotInBasketProduct
+    public var removedIngredients: TypeSafeNotInBasketProduct
+    public var unavailableIngredients: TypeSafeNotInBasketProduct
+    
     
     public init(
         onReplaceProduct: @escaping (String) -> Void,
@@ -42,6 +46,9 @@ public class BasketRecipeParameters: BasketRecipeParametersProtocol {
         self.recipeOverview = viewOptions.recipeOverview
         self.recipeOverviewLoading = viewOptions.recipeOverviewLoading
         self.basketProduct = viewOptions.basketProduct
+        self.ingredientsAtHomeToggleButton = viewOptions.ingredientsAtHomeToggleButton
+        self.removedIngredientsToggleButton = viewOptions.removedIngredientsToggleButton
+        self.unavailableIngredientsToggleButton = viewOptions.unavailableIngredientsToggleButton
         self.ingredientsAtHome = viewOptions.ingredientsAtHome
         self.removedIngredients = viewOptions.removedIngredients
         self.unavailableIngredients = viewOptions.unavailableIngredients

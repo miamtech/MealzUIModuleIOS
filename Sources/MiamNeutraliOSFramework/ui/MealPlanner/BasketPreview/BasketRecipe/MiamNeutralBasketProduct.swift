@@ -37,14 +37,12 @@ public struct MiamNeutralBasketProduct: BasketProductProtocol {
                 )
                 Spacer()
                 HStack(spacing: 12.0) {
-                    if data.isSubstitutable {
-                        changeProductButton(
-                            changeProduct: actions.onChangeProduct
-                        )
-                    }
+                    changeProductButton(
+                        changeProduct: actions.onChangeProduct
+                    )
                     MiamNeutralStepper(value: quantity, minValue: 0)
                         .onChange(of: quantity.wrappedValue) { qty in
-                            actions.onUpdateGuests(qty)
+                            actions.onQuantityChanged(qty)
                         }
                         .frame(width: 140.0)
                 }
@@ -116,12 +114,11 @@ struct MiamNeutralBasketProduct_Previews: PreviewProvider {
             description: "MY description",
             pictureURL: (URL(string: "https://picsum.photos/400/300") ?? URL(string: ""))!,
             sharedRecipeCount: 3,
-            isSubstitutable: false,
             pricePerUnit: 56.0,
             isLoading: false)
         let actions = BasketProductActions(
             onDeleteProduct: {},
-            onUpdateGuests: { _ in },
+            onQuantityChanged: { _ in },
             onChangeProduct: {})
         MiamNeutralBasketProduct().content(
             quantity: .constant(4),

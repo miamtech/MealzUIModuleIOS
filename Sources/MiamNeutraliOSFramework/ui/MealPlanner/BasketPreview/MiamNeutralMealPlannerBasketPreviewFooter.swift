@@ -11,7 +11,6 @@ import MiamIOSFramework
 
 @available(iOS 14, *)
 public struct MiamNeutralMealPlannerBasketPreviewFooter: MealPlannerBasketFooterProtocol {
-    
     public init() {}
     public func content(
         onNavigateToRecap: @escaping () -> Void,

@@ -12,7 +12,13 @@ import MiamIOSFramework
 public struct MiamNeutralGeneralEmpty: EmptyProtocol {
     public init() {}
     public func content(onOptionalCallback: (() -> Void)?) -> some View {
-        Text("I am empty inside :/")
+        VStack {
+            Image.mealzIcon(icon: .feelingBlue)
+            Text(Localization.catalog.tryAnotherSearch.localised)
+                .foregroundColor(Color.mealzColor(.primary))
+                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
+                .multilineTextAlignment(.center)
+        }
     }
 }
 
