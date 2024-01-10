@@ -25,7 +25,10 @@ public struct RecipeDetailsViewOptions {
     public var header: TypeSafeRecipeDetailsHeader
     public var sponsor: TypeSafeRecipeDetailsSponsor
     public var selectedControl: TypeSafeRecipeDetailsSelectedControl
-    public var products: TypeSafeRecipeDetailsProducts
+    public var ignoredProduct: TypeSafeRecipeDetailsIgnoredProducts
+    public var unaddedProduct: TypeSafeRecipeDetailsUnaddedProducts
+    public var addedProduct: TypeSafeRecipeDetailsAddedProducts
+    public var loadingProduct: TypeSafeLoading
     public var ingredients: TypeSafeRecipeDetailsIngredients
     public var steps: TypeSafeRecipeDetailsSteps
     public var tags: TypeSafeRecipeDetailsTags
@@ -38,7 +41,10 @@ public struct RecipeDetailsViewOptions {
         header: TypeSafeRecipeDetailsHeader = TypeSafeRecipeDetailsHeader(MiamNeutralRecipeDetailsHeaderView()),
         sponsor: TypeSafeRecipeDetailsSponsor = TypeSafeRecipeDetailsSponsor(MiamNeutralRecipeDetailsSponsor()),
         selectedControl: TypeSafeRecipeDetailsSelectedControl = TypeSafeRecipeDetailsSelectedControl(MiamNeutralRecipeDetailsSelectedControlView()),
-        products: TypeSafeRecipeDetailsProducts = TypeSafeRecipeDetailsProducts(MiamNeutralRecipeDetailsProductsView()),
+        ignoredProduct: TypeSafeRecipeDetailsIgnoredProducts = TypeSafeRecipeDetailsIgnoredProducts(MiamNeutralRecipeDetailsIgnoredProductView()),
+        unaddedProduct: TypeSafeRecipeDetailsUnaddedProducts = TypeSafeRecipeDetailsUnaddedProducts(MiamNeutralRecipeDetailsUnaddedProductView()),
+        addedProduct: TypeSafeRecipeDetailsAddedProducts = TypeSafeRecipeDetailsAddedProducts(MiamNeutralRecipeDetailsAddedProductView()),
+        loadingProduct: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView()),
         ingredients: TypeSafeRecipeDetailsIngredients = TypeSafeRecipeDetailsIngredients(MiamNeutralRecipeDetailsIngredientsView()),
         steps: TypeSafeRecipeDetailsSteps = TypeSafeRecipeDetailsSteps(MiamNeutralRecipeDetailsStepsView()),
         tags: TypeSafeRecipeDetailsTags = TypeSafeRecipeDetailsTags(MiamNeutralRecipeDetailsTagsView()),
@@ -50,7 +56,6 @@ public struct RecipeDetailsViewOptions {
         self.header = header
         self.sponsor = sponsor
         self.selectedControl = selectedControl
-        self.products = products
         self.ingredients = ingredients
         self.steps = steps
         self.tags = tags
@@ -58,5 +63,10 @@ public struct RecipeDetailsViewOptions {
         self.background = background
         self.empty = empty
         self.loading = loading
+        
+        self.ignoredProduct = ignoredProduct
+        self.unaddedProduct = unaddedProduct
+        self.addedProduct = addedProduct
+        self.loadingProduct = loadingProduct
     }
 }

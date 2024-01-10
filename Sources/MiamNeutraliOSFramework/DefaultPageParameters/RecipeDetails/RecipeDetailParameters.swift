@@ -23,14 +23,19 @@ import miamCore
 
 @available(iOS 14, *)
 public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
+    
     public var onClosed: () -> Void
     public var onSponsorDetailsTapped: (Sponsor) -> Void
     public var onContinueToBasket: (() -> Void)?
+    public var onReplaceProduct: (String) -> Void
     
     public var header: TypeSafeRecipeDetailsHeader
     public var sponsor: TypeSafeRecipeDetailsSponsor
     public var selectedControl: TypeSafeRecipeDetailsSelectedControl
-    public var products: TypeSafeRecipeDetailsProducts
+    public var ignoredProduct: TypeSafeRecipeDetailsIgnoredProducts
+    public var unaddedProduct: TypeSafeRecipeDetailsUnaddedProducts
+    public var addedProduct: TypeSafeRecipeDetailsAddedProducts
+    public var loadingProduct: TypeSafeLoading
     public var tags: TypeSafeRecipeDetailsTags
     public var ingredients: TypeSafeRecipeDetailsIngredients
     public var steps: TypeSafeRecipeDetailsSteps
@@ -43,11 +48,14 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
         onClosed: @escaping () -> Void,
         onSponsorDetailsTapped: @escaping (Sponsor) -> Void,
         onContinueToBasket: (() -> Void)? = nil,
+        onReplaceProduct: @escaping (String) -> Void,
         viewOption: RecipeDetailsViewOptions = RecipeDetailsViewOptions()
     ) {
         self.onClosed = onClosed
         self.onSponsorDetailsTapped = onSponsorDetailsTapped
         self.onContinueToBasket = onContinueToBasket
+        self.onReplaceProduct = onReplaceProduct
+        
         self.header = viewOption.header
         self.sponsor = viewOption.sponsor
         self.ingredients = viewOption.ingredients
@@ -56,9 +64,12 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
         self.background = viewOption.background
         self.empty = viewOption.empty
         self.loading = viewOption.loading
-        
         self.selectedControl = viewOption.selectedControl
-        self.products = viewOption.products
         self.tags = viewOption.tags
+        
+        self.ignoredProduct = viewOption.ignoredProduct
+        self.unaddedProduct = viewOption.unaddedProduct
+        self.addedProduct = viewOption.addedProduct
+        self.loadingProduct = viewOption.loadingProduct
     }
 }
