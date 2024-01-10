@@ -11,13 +11,97 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MiamNeutralRecipeDetailsAddedProductView: RecipeDetailsAddedProductsProtocol {
     public init() {}
-    public func content(data: RecipeProductData, onDeleteProduct: @escaping () -> Void, onChangeProduct: @escaping () -> Void, updateProductQuantity: @escaping (Int) -> Void) -> some View {
-        ZStack {
-            Color.green
-            VStack {
-                Button(action: onDeleteProduct, label: {Text("delete me")})
-                Button(action: onChangeProduct, label: {Text("change me")})
+    let dim = Dimension.sharedInstance
+    
+    public func content(
+        data: RecipeProductData,
+        onDeleteProduct: @escaping () -> Void,
+        onChangeProduct: @escaping () -> Void,
+        updateProductQuantity: @escaping (Int) -> Void
+    ) -> some View {
+        VStack {
+            HStack {
+                Text(data.ingredientName.capitalizingFirstLetter()).padding(dim.mPadding).miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
+                Spacer()
+                Text(String(format: "%g \(data.productUnit)", Float(data.productQuantity)))
+                    .padding(dim.mPadding)
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
+                
             }
-        }
+            .foregroundColor(Color.mealzColor(.white))
+            .frame(height: 40)
+            .background(Color.mealzColor(.primary))
+            .cornerRadius(dim.mCornerRadius, corners: .top)
+            
+            HStack {
+                if let pictureURL = URL(string: data.pictureURL) {
+                    AnyView(AsyncImage(url: pictureURL) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    }).frame(width: 72, height: 72)
+                        .padding(dim.mPadding)
+                }
+                
+                VStack(alignment: .leading) {
+                    if let brand = data.brand {
+                        Text(brand)
+                            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallBoldStyle)
+                    }
+                    Text(data.name)
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
+                    Text(data.description)
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
+                        .padding(dim.mPadding)
+                        .background(Capsule().fill(Color.mealzColor(.lightBackground)))
+                    Button(action: onChangeProduct, label: {
+                        Text(Localization.myBudget.replaceItem.localised)
+                            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
+                            .foregroundColor(Color.mealzColor(.primary))
+                    })
+                    
+                }.frame(maxWidth: .infinity,alignment: .leading)
+            }
+            HStack {
+                Text(data.formattedProductPrice)
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleBigStyle)
+                    .padding(.horizontal, 12)
+                    .foregroundColor(Color.mealzColor(.primary))
+                Spacer()
+                HStack{
+                    Button {
+                        if data.productQuantity == 1 {
+                            onDeleteProduct()
+                        } else {
+                            updateProductQuantity(data.productQuantity - 1)
+                        }
+                    } label: {
+                        Image.mealzIcon(icon: .minus)
+                            .renderingMode(.template)
+                            .foregroundColor(Color.mealzColor(.darkestGray))
+                    }
+                    Text(String(data.productQuantity)).frame(minWidth: 10, alignment: .center)
+                    
+                    Image.mealzIcon(icon: .guests)
+                        .renderingMode(.template)
+                        .foregroundColor(Color.mealzColor(.darkestGray))
+                    
+                    Button {
+                        updateProductQuantity(data.productQuantity + 1)
+                    } label: {
+                        Image.mealzIcon(icon: .plus)
+                            .renderingMode(.template)
+                            .foregroundColor(Color.mealzColor(.darkestGray))
+                    }
+                }
+                .padding(dim.mPadding)
+                .background(Capsule().foregroundColor(Color.mealzColor(.white)))
+                .padding(dim.lPadding)
+            }
+        }.overlay( /// apply a rounded border
+            RoundedRectangle(cornerRadius: dim.mCornerRadius)
+                .stroke(Color.mealzColor(.lightBackground), lineWidth: 1)
+        )
+        .padding(.horizontal, dim.mPadding)
     }
 }

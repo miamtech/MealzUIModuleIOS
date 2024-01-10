@@ -14,7 +14,9 @@ import miamCore
 public struct MiamNeutralRecipeDetailsSelectedControlView:
     RecipeDetailsSelectedControlProtocol {
     
-    var titles: [String] = ["Je fais mes courses", "Je cuisine"]
+    
+    
+    var titles: [String] = [Localization.recipeDetails.shopping.localised, Localization.recipeDetails.cooking.localised]
     @SwiftUI.State private var frames = Array<CGRect>(repeating: .zero, count: 4)
     
     public init() {}
@@ -24,9 +26,9 @@ public struct MiamNeutralRecipeDetailsSelectedControlView:
             ForEach(titles.indices, id:\.self) { index in
                 ZStack {
                     Rectangle()
-                        .fill(Color.miamColor(.backgroundSecondary))
+                        .fill(Color.mealzColor(.lightBackground))
                     Rectangle()
-                        .fill(Color.miamColor(.primary))
+                        .fill(Color.mealzColor(.primary))
                         .cornerRadius(25)
                         .padding(2)
                         .opacity(selection.wrappedValue == index ? 1 : 0.01)
