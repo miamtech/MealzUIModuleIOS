@@ -37,7 +37,7 @@ public struct MiamNeutralRecipeDetailsSelectedControlView:
                         }
                         .overlay(
                             Text(titles[index]).lineLimit(1)
-                                .miamFontStyle(style: MiamFontStyleProvider().bodyBigStyle)
+                                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
                                 .foregroundColor((selection.wrappedValue == index) ? .white : .black)
                                 
                         )
