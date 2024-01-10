@@ -24,18 +24,24 @@ import MiamIOSFramework
 public struct RecipeDetailsViewOptions {
     public var header: TypeSafeRecipeDetailsHeader
     public var sponsor: TypeSafeRecipeDetailsSponsor
+    public var selectedControl: TypeSafeRecipeDetailsSelectedControl
+    public var products: TypeSafeRecipeDetailsProducts
     public var ingredients: TypeSafeRecipeDetailsIngredients
     public var steps: TypeSafeRecipeDetailsSteps
+    public var tags: TypeSafeRecipeDetailsTags
     public var footer: TypeSafeRecipeDetailsFooter
     public var background: TypeSafeBackground
     public var empty: TypeSafeEmpty
     public var loading: TypeSafeLoading
-    
+
     public init(
         header: TypeSafeRecipeDetailsHeader = TypeSafeRecipeDetailsHeader(MiamNeutralRecipeDetailsHeaderView()),
         sponsor: TypeSafeRecipeDetailsSponsor = TypeSafeRecipeDetailsSponsor(MiamNeutralRecipeDetailsSponsor()),
+        selectedControl: TypeSafeRecipeDetailsSelectedControl = TypeSafeRecipeDetailsSelectedControl(MiamNeutralRecipeDetailsSelectedControlView()),
+        products: TypeSafeRecipeDetailsProducts = TypeSafeRecipeDetailsProducts(MiamNeutralRecipeDetailsProductsView()),
         ingredients: TypeSafeRecipeDetailsIngredients = TypeSafeRecipeDetailsIngredients(MiamNeutralRecipeDetailsIngredientsView()),
         steps: TypeSafeRecipeDetailsSteps = TypeSafeRecipeDetailsSteps(MiamNeutralRecipeDetailsStepsView()),
+        tags: TypeSafeRecipeDetailsTags = TypeSafeRecipeDetailsTags(MiamNeutralRecipeDetailsTagsView()),
         footer: TypeSafeRecipeDetailsFooter = TypeSafeRecipeDetailsFooter(MiamNeutralRecipeDetailsFooterView()),
         empty: TypeSafeEmpty = TypeSafeEmpty(DefaultEmptyView()),
         loading: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView()),
@@ -43,8 +49,11 @@ public struct RecipeDetailsViewOptions {
     ) {
         self.header = header
         self.sponsor = sponsor
+        self.selectedControl = selectedControl
+        self.products = products
         self.ingredients = ingredients
         self.steps = steps
+        self.tags = tags
         self.footer = footer
         self.background = background
         self.empty = empty

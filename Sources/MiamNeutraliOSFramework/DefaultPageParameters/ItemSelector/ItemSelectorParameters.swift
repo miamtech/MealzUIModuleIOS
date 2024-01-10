@@ -20,7 +20,7 @@ import MiamIOSFramework
 @available(iOS 14, *)
 /// This sets the Templates for the ItemSelector
 public struct ItemSelectorParameters: ItemSelectorParametersProtocol {
-    
+    public var searchBar: TypeSafeSearch
     public var selectedProduct: TypeSafeItemSelectorSelectedProduct
     public var productOptions: TypeSafeItemSelectorOptionProducts
     public var background: TypeSafeBackground
@@ -32,6 +32,7 @@ public struct ItemSelectorParameters: ItemSelectorParametersProtocol {
         onItemSelected: @escaping () -> Void,
         viewOptions : ItemSelectorViewOptions = ItemSelectorViewOptions()
     ){
+        self.searchBar = viewOptions.searchBar
         self.selectedProduct = viewOptions.selectedProduct
         self.productOptions = viewOptions.productOptions
         self.background = viewOptions.background

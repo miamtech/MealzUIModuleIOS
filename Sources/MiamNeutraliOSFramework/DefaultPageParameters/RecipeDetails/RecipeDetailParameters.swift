@@ -20,6 +20,7 @@ import miamCore
  - viewOptions: ``RecipeDetailsViewOptions`` -> An optional object where you can override the default Miam views for the component.
  
  */
+
 @available(iOS 14, *)
 public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
     public var onClosed: () -> Void
@@ -28,6 +29,9 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
     
     public var header: TypeSafeRecipeDetailsHeader
     public var sponsor: TypeSafeRecipeDetailsSponsor
+    public var selectedControl: TypeSafeRecipeDetailsSelectedControl
+    public var products: TypeSafeRecipeDetailsProducts
+    public var tags: TypeSafeRecipeDetailsTags
     public var ingredients: TypeSafeRecipeDetailsIngredients
     public var steps: TypeSafeRecipeDetailsSteps
     public var footer: TypeSafeRecipeDetailsFooter
@@ -52,5 +56,9 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
         self.background = viewOption.background
         self.empty = viewOption.empty
         self.loading = viewOption.loading
+        
+        self.selectedControl = viewOption.selectedControl
+        self.products = viewOption.products
+        self.tags = viewOption.tags
     }
 }
