@@ -27,6 +27,7 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
     public var onClosed: () -> Void
     public var onSponsorDetailsTapped: (Sponsor) -> Void
     public var onContinueToBasket: (() -> Void)?
+    public var onReplaceProduct: (String) -> Void
     
     public var header: TypeSafeRecipeDetailsHeader
     public var sponsor: TypeSafeRecipeDetailsSponsor
@@ -48,11 +49,13 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
         onClosed: @escaping () -> Void,
         onSponsorDetailsTapped: @escaping (Sponsor) -> Void,
         onContinueToBasket: (() -> Void)? = nil,
+        onReplaceProduct: @escaping (String) -> Void,
         viewOptions: RecipeDetailsViewOptions = RecipeDetailsViewOptions()
     ) {
         self.onClosed = onClosed
         self.onSponsorDetailsTapped = onSponsorDetailsTapped
         self.onContinueToBasket = onContinueToBasket
+        self.onReplaceProduct = onReplaceProduct
         
         self.header = viewOptions.header
         self.sponsor = viewOptions.sponsor

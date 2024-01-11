@@ -17,7 +17,7 @@ public struct MiamNeutralRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedPr
             HStack {
                 Text(data.ingredientName.capitalizingFirstLetter()).padding(dim.mPadding).miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
-                Text(String(format: "%g \(data.productUnit)", data.productQuantity))
+                Text(String(format: "%g \(data.productUnit)", Float(data.productQuantity)))
                     .padding(dim.mPadding)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
                 
