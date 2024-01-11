@@ -13,76 +13,100 @@ import MiamIOSFramework
 public struct MiamNeutralRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
     
     public init() {}
-    
     let dimension = Dimension.sharedInstance
+    
     public func content(
-        price: Double,
+        price: Double, 
+        pricePerGuest: Double,
+        priceStatus: ComponentUiState,
         ingredientsStatus: IngredientStatus,
         callToAction: @escaping () -> Void
     ) -> some View {
-        VStack(spacing: 0) {
-                VStack {
-                    Divider()
-                    Button(action: {
-                        callToAction()
-                    }, label: {
-                        Text(Localization.recipe.add.localised)
-                            .foregroundColor(Color.mealzColor(.primary))
-                            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
-                    })
-                    Spacer()
-                }.frame(height: 35)
-            VStack {
-                Divider()
-                Text(price.currencyFormatted)
-                Text(Localization.price.perGuest.localised)
-                    .foregroundColor(Color.mealzColor(.lightGray))
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
-                Spacer()
-            }.frame(height: 55)
+        var lockButton: Bool {
+            return priceStatus == ComponentUiState.locked || priceStatus == ComponentUiState.loading
         }
+        return HStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 1) {
+                if priceStatus == ComponentUiState.loading {
+                    ProgressLoader(color: .primary, size: 24)
+                } else {
+                    Text(pricePerGuest.currencyFormatted)
+                        .foregroundColor(Color.mealzColor(.primary))
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+                    Text(Localization.price.perGuest.localised)
+                        .foregroundColor(Color.mealzColor(.darkGray))
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
+                }
+            }
+            Spacer()
+            switch ingredientsStatus.type {
+            case .noMoreToAdd:
+                ContinueMyShoppingCTA(
+                    callToAction: callToAction,
+                    buttonText: Localization.recipeDetails.continueShopping.localised, 
+                    disableButton: lockButton)
+            case .initialState:
+                AddAllToBasketCTA(
+                    callToAction: callToAction,
+                    buttonText: Localization.recipeDetails.addAllProducts.localised,
+                    disableButton: lockButton)
+            default:
+                AddAllToBasketCTA(
+                    callToAction: callToAction,
+                    buttonText: Localization.ingredient.addProduct(
+                        numberOfProducts: ingredientsStatus.count
+                    ).localised,
+                    disableButton: lockButton)
+            }
+        }
+        .padding(Dimension.sharedInstance.lPadding)
         .frame(maxWidth: .infinity)
+        .frame(height: 70)
         .background(Color.white)
     }
+    
+    internal struct AddAllToBasketCTA: View {
+        let callToAction: () -> Void
+        let buttonText: String
+        let disableButton: Bool
+        
+        var body: some View {
+            Button(action: callToAction, label: {
+                Image.mealzIcon(icon: .basket)
+                    .renderingMode(.template)
+                    .resizable()
+                    .foregroundColor(Color.mealzColor(.white))
+                    .frame(width: 24, height: 24)
+                Text(buttonText)
+                    .foregroundColor(Color.mealzColor(.white))
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+            })
+            .padding(Dimension.sharedInstance.lPadding)
+            .background(Color.mealzColor(.primary))
+            .cornerRadius(Dimension.sharedInstance.mPadding)
+            .disabled(disableButton)
+            .darkenView(disableButton)
+        }
+    }
+    
+    internal struct ContinueMyShoppingCTA: View {
+        let callToAction: () -> Void
+        let buttonText: String
+        let disableButton: Bool
+        
+        var body: some View {
+            Button(action: callToAction, label: {
+                Text(buttonText)
+                    .foregroundColor(Color.mealzColor(.primary))
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+            })
+            .padding(Dimension.sharedInstance.lPadding)
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: Dimension.sharedInstance.mCornerRadius)
+                    .stroke(Color.mealzColor(.primary), lineWidth: 1)
+            )
+            .disabled(disableButton)
+            .darkenView(disableButton)
+        }
+    }
 }
-//
-//@available(iOS 14, *)
-//struct CoursesURecipeDetailsFooterView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ZStack {
-//            Color.miamColor(.lightGreyBackground)
-//            VStack {
-//                MiamNeutralRecipeDetailsFooterView().content(recipeId: "34134321", guestCount: 4, isInCart: false, onContinueToBasket: nil)
-//                MiamNeutralRecipeDetailsFooterView().content(recipeId: "34134321", guestCount: 4, isInCart: true, onContinueToBasket: nil)
-//                MiamNeutralRecipeDetailsFooterView().content(recipeId: "34134321", guestCount: 4, isInCart: false, onContinueToBasket: nil)
-//            }
-//        }
-//        GeometryReader { geometry in
-//            let safeArea = geometry.safeAreaInsets
-//            ZStack(alignment: .bottom) {
-//                ScrollView {
-//                    VStack {
-//                        LazyVStack(spacing: 0) {
-//                            ForEach(1..<11) { index in
-//                                VStack {
-//                                    Text("hello world \(index)")
-//                                    AsyncImage(url: URL(string: "https://picsum.photos/200/300")!) { image in
-//                                        image
-//                                            .resizable()
-//                                            .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
-//                                    }
-//                                }
-//                            }
-//                        }
-//                        .padding(.bottom, (geometry.safeAreaInsets.bottom + 150)) // Add padding for safe area at bottom
-//                    }
-//                }
-//                StickyFooter(safeArea: safeArea) {
-//                    MiamNeutralRecipeDetailsFooterView().content(recipeId: "34134321", guestCount: 4, isInCart: false, onContinueToBasket: nil)
-//                }
-//                .frame(maxWidth: .infinity)
-//            }
-//        }
-//    }
-//}
-//
