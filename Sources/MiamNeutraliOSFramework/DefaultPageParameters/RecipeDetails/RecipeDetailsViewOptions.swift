@@ -25,10 +25,6 @@ public struct RecipeDetailsViewOptions {
     public var header: TypeSafeRecipeDetailsHeader
     public var sponsor: TypeSafeRecipeDetailsSponsor
     public var selectedControl: TypeSafeRecipeDetailsSelectedControl
-    public var ignoredProduct: TypeSafeRecipeDetailsIgnoredProducts
-    public var unaddedProduct: TypeSafeRecipeDetailsUnaddedProducts
-    public var addedProduct: TypeSafeRecipeDetailsAddedProducts
-    public var loadingProduct: TypeSafeLoading
     public var ingredients: TypeSafeRecipeDetailsIngredients
     public var steps: TypeSafeRecipeDetailsSteps
     public var tags: TypeSafeRecipeDetailsTags
@@ -36,22 +32,28 @@ public struct RecipeDetailsViewOptions {
     public var background: TypeSafeBackground
     public var empty: TypeSafeEmpty
     public var loading: TypeSafeLoading
+    
+    public var ingredientsAtHomeToggleButton: TypeSafeBaseButton
+    public var unavailableIngredientsToggleButton: TypeSafeBaseButton
+    
+    public var ingredientsAtHome: TypeSafeNotInBasketProduct
+    public var unavailableIngredients: TypeSafeNotInBasketProduct
 
     public init(
         header: TypeSafeRecipeDetailsHeader = TypeSafeRecipeDetailsHeader(MiamNeutralRecipeDetailsHeaderView()),
         sponsor: TypeSafeRecipeDetailsSponsor = TypeSafeRecipeDetailsSponsor(MiamNeutralRecipeDetailsSponsor()),
         selectedControl: TypeSafeRecipeDetailsSelectedControl = TypeSafeRecipeDetailsSelectedControl(MiamNeutralRecipeDetailsSelectedControlView()),
-        ignoredProduct: TypeSafeRecipeDetailsIgnoredProducts = TypeSafeRecipeDetailsIgnoredProducts(MiamNeutralRecipeDetailsIgnoredProductView()),
-        unaddedProduct: TypeSafeRecipeDetailsUnaddedProducts = TypeSafeRecipeDetailsUnaddedProducts(MiamNeutralRecipeDetailsUnaddedProductView()),
-        addedProduct: TypeSafeRecipeDetailsAddedProducts = TypeSafeRecipeDetailsAddedProducts(MiamNeutralRecipeDetailsAddedProductView()),
-        loadingProduct: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView()),
         ingredients: TypeSafeRecipeDetailsIngredients = TypeSafeRecipeDetailsIngredients(MiamNeutralRecipeDetailsIngredientsView()),
         steps: TypeSafeRecipeDetailsSteps = TypeSafeRecipeDetailsSteps(MiamNeutralRecipeDetailsStepsView()),
         tags: TypeSafeRecipeDetailsTags = TypeSafeRecipeDetailsTags(MiamNeutralRecipeDetailsTagsView()),
         footer: TypeSafeRecipeDetailsFooter = TypeSafeRecipeDetailsFooter(MiamNeutralRecipeDetailsFooterView()),
         empty: TypeSafeEmpty = TypeSafeEmpty(DefaultEmptyView()),
         loading: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView()),
-        background: TypeSafeBackground = TypeSafeBackground(DefaultBackgroundView())
+        background: TypeSafeBackground = TypeSafeBackground(DefaultBackgroundView()),
+        ingredientsAtHomeToggleButton: TypeSafeBaseButton = TypeSafeBaseButton(MiamNeutralNotInBasketTitle()),
+        unavailableIngredientsToggleButton: TypeSafeBaseButton = TypeSafeBaseButton(MiamNeutralNotInBasketTitle()),
+        ingredientsAtHome: TypeSafeNotInBasketProduct = TypeSafeNotInBasketProduct(MiamNeutralNotInBasketProduct()),
+        unavailableIngredients: TypeSafeNotInBasketProduct = TypeSafeNotInBasketProduct(MiamNeutralNotInBasketProduct())
     ) {
         self.header = header
         self.sponsor = sponsor
@@ -64,9 +66,10 @@ public struct RecipeDetailsViewOptions {
         self.empty = empty
         self.loading = loading
         
-        self.ignoredProduct = ignoredProduct
-        self.unaddedProduct = unaddedProduct
-        self.addedProduct = addedProduct
-        self.loadingProduct = loadingProduct
+        self.ingredientsAtHomeToggleButton = ingredientsAtHomeToggleButton
+        self.unavailableIngredientsToggleButton = unavailableIngredientsToggleButton
+        
+        self.ingredientsAtHome = ingredientsAtHome
+        self.unavailableIngredients = unavailableIngredients
     }
 }

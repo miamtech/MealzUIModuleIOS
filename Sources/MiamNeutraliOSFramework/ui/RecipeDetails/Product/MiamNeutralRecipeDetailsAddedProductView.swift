@@ -9,7 +9,7 @@ import SwiftUI
 import MiamIOSFramework
 
 @available(iOS 14, *)
-public struct MiamNeutralRecipeDetailsAddedProductView: RecipeDetailsAddedProductsProtocol {
+public struct MiamNeutralRecipeDetailsAddedProductView: RecipeDetailsAddedProductProtocol {
     public init() {}
     let dim = Dimension.sharedInstance
     

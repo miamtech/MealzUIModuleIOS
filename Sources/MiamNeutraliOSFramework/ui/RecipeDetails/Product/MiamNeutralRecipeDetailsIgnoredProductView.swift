@@ -9,7 +9,7 @@ import SwiftUI
 import MiamIOSFramework
 
 @available(iOS 14, *)
-public struct MiamNeutralRecipeDetailsIgnoredProductView: RecipeDetailsIgnoredProductsProtocol {
+public struct MiamNeutralRecipeDetailsIgnoredProductView: RecipeDetailsIgnoredProductProtocol {
     
     public init() {}
     public func content(ingredientName: String, ingredientQuantity: String?, ingredientUnit: String?, addToBasket: @escaping () -> Void) -> some View {
