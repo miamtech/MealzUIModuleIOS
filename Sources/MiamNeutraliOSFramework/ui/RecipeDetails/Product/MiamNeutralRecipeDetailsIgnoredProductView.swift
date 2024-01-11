@@ -12,7 +12,7 @@ import MiamIOSFramework
 public struct MiamNeutralRecipeDetailsIgnoredProductView: RecipeDetailsIgnoredProductProtocol {
     
     public init() {}
-    public func content(ingredientName: String, ingredientQuantity: String?, ingredientUnit: String?, addToBasket: @escaping () -> Void) -> some View {
+    public func content(ingredientName: String, ingredientQuantity: String?, ingredientUnit: String?, onChooseProduct: @escaping () -> Void) -> some View {
         VStack {
             HStack {
                 Text(ingredientName.capitalizingFirstLetter())
@@ -27,7 +27,7 @@ public struct MiamNeutralRecipeDetailsIgnoredProductView: RecipeDetailsIgnoredPr
             Text(Localization.ingredient.willNotBeAdded.localised).padding(Dimension.sharedInstance.mPadding)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
             Button {
-                addToBasket()
+                onChooseProduct()
             } label: {
                 Text(Localization.ingredient.chooseProduct.localised).padding(Dimension.sharedInstance.mPadding)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
