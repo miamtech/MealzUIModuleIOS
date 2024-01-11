@@ -23,7 +23,6 @@ import miamCore
 
 @available(iOS 14, *)
 public class RecipeDetailsProductParameters: RecipeDetailsProductProtocol {
-    public var onReplaceProduct: (String) -> Void
     
     public var ignoredProduct: TypeSafeRecipeDetailsIgnoredProduct
     public var unaddedProduct: TypeSafeRecipeDetailsUnaddedProduct
@@ -31,10 +30,8 @@ public class RecipeDetailsProductParameters: RecipeDetailsProductProtocol {
     public var loadingProduct: TypeSafeLoading
     
     public init(
-        onReplaceProduct: @escaping (String) -> Void,
         viewOption: RecipeDetailsProductViewOptions = RecipeDetailsProductViewOptions()
     ) {
-        self.onReplaceProduct = onReplaceProduct
         self.ignoredProduct = viewOption.ignoredProduct
         self.unaddedProduct = viewOption.unaddedProduct
         self.addedProduct = viewOption.addedProduct
