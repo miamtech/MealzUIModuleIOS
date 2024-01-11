@@ -25,7 +25,7 @@ public struct MealPlannerBasketViewOptions {
     
     public init(
         footer: TypeSafeMealPlannerBasketFooter = TypeSafeMealPlannerBasketFooter(MiamNeutralMealPlannerBasketPreviewFooter()),
-        empty: TypeSafeEmpty = TypeSafeEmpty(DefaultEmptyView()),
+        empty: TypeSafeEmpty = TypeSafeEmpty(MiamNeutralGeneralEmpty()),
         loading: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView()),
         background: TypeSafeBackground = TypeSafeBackground(DefaultBackgroundView())
     ) {

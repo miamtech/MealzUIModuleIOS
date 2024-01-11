@@ -41,7 +41,7 @@ public struct MiamNeutralGeneralSearch: SearchProtocol {
                 .padding([.trailing], 2)
                 .overlay(Capsule().stroke(Color.gray, lineWidth: 1.0))
             }.padding(10)
-            Spacer()
+//            Spacer()
         }
     }
 }
