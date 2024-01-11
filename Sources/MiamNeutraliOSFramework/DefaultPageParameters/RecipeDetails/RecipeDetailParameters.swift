@@ -27,15 +27,10 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
     public var onClosed: () -> Void
     public var onSponsorDetailsTapped: (Sponsor) -> Void
     public var onContinueToBasket: (() -> Void)?
-    public var onReplaceProduct: (String) -> Void
     
     public var header: TypeSafeRecipeDetailsHeader
     public var sponsor: TypeSafeRecipeDetailsSponsor
     public var selectedControl: TypeSafeRecipeDetailsSelectedControl
-    public var ignoredProduct: TypeSafeRecipeDetailsIgnoredProducts
-    public var unaddedProduct: TypeSafeRecipeDetailsUnaddedProducts
-    public var addedProduct: TypeSafeRecipeDetailsAddedProducts
-    public var loadingProduct: TypeSafeLoading
     public var tags: TypeSafeRecipeDetailsTags
     public var ingredients: TypeSafeRecipeDetailsIngredients
     public var steps: TypeSafeRecipeDetailsSteps
@@ -44,32 +39,35 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
     public var empty: TypeSafeEmpty
     public var loading: TypeSafeLoading
     
+    public var ingredientsAtHomeToggleButton: TypeSafeBaseButton
+    public var unavailableIngredientsToggleButton: TypeSafeBaseButton
+    public var ingredientsAtHome: TypeSafeNotInBasketProduct
+    public var unavailableIngredients: TypeSafeNotInBasketProduct
+    
     public init(
         onClosed: @escaping () -> Void,
         onSponsorDetailsTapped: @escaping (Sponsor) -> Void,
         onContinueToBasket: (() -> Void)? = nil,
-        onReplaceProduct: @escaping (String) -> Void,
-        viewOption: RecipeDetailsViewOptions = RecipeDetailsViewOptions()
+        viewOptions: RecipeDetailsViewOptions = RecipeDetailsViewOptions()
     ) {
         self.onClosed = onClosed
         self.onSponsorDetailsTapped = onSponsorDetailsTapped
         self.onContinueToBasket = onContinueToBasket
-        self.onReplaceProduct = onReplaceProduct
         
-        self.header = viewOption.header
-        self.sponsor = viewOption.sponsor
-        self.ingredients = viewOption.ingredients
-        self.steps = viewOption.steps
-        self.footer = viewOption.footer
-        self.background = viewOption.background
-        self.empty = viewOption.empty
-        self.loading = viewOption.loading
-        self.selectedControl = viewOption.selectedControl
-        self.tags = viewOption.tags
+        self.header = viewOptions.header
+        self.sponsor = viewOptions.sponsor
+        self.ingredients = viewOptions.ingredients
+        self.steps = viewOptions.steps
+        self.footer = viewOptions.footer
+        self.background = viewOptions.background
+        self.empty = viewOptions.empty
+        self.loading = viewOptions.loading
+        self.selectedControl = viewOptions.selectedControl
+        self.tags = viewOptions.tags
         
-        self.ignoredProduct = viewOption.ignoredProduct
-        self.unaddedProduct = viewOption.unaddedProduct
-        self.addedProduct = viewOption.addedProduct
-        self.loadingProduct = viewOption.loadingProduct
+        self.ingredientsAtHomeToggleButton = viewOptions.ingredientsAtHomeToggleButton
+        self.unavailableIngredientsToggleButton = viewOptions.unavailableIngredientsToggleButton
+        self.ingredientsAtHome = viewOptions.ingredientsAtHome
+        self.unavailableIngredients = viewOptions.unavailableIngredients
     }
 }

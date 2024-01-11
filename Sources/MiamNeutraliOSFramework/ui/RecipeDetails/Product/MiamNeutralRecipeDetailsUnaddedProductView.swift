@@ -9,7 +9,7 @@ import SwiftUI
 import MiamIOSFramework
 
 @available(iOS 14, *)
-public struct MiamNeutralRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductsProtocol {
+public struct MiamNeutralRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductProtocol {
     public init() {}
     let dim = Dimension.sharedInstance
     public func content(data: RecipeProductData, onAddProduct: @escaping () -> Void, onIgnoreProduct: @escaping () -> Void, onChooseProduct: @escaping () -> Void) -> some View {
