@@ -33,7 +33,7 @@ public struct MiamNeutralBasketProduct: BasketProductProtocol {
             HStack {
                 priceContent(
                     price: data.price,
-                    pricePerUnit: data.pricePerUnit
+                    unitPrice: data.unitPrice
                 )
                 Spacer()
                 HStack(spacing: 12.0) {
@@ -76,12 +76,12 @@ public struct MiamNeutralBasketProduct: BasketProductProtocol {
         }.frame(maxWidth: .infinity)
     }
     
-    func priceContent(price: Double, pricePerUnit: Double) -> some View {
+    func priceContent(price: Double, unitPrice: Double) -> some View {
         return  VStack {
             Text(price.currencyFormatted)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 .foregroundColor(Color.mealzColor(.primary))
-            Text(formatPricePerUnit(pricePerUnit: price, unit: Localization.price.currency.localised))
+            Text(formatPricePerUnit(unitPrice: unitPrice, unit: Localization.price.currency.localised))
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
         }
     }
@@ -100,8 +100,8 @@ public struct MiamNeutralBasketProduct: BasketProductProtocol {
         }
     }
 
-    func formatPricePerUnit(pricePerUnit: Double, unit: String) -> String {
-        return String(format: "%.2f / %@", pricePerUnit, unit)
+    func formatPricePerUnit(unitPrice: Double, unit: String) -> String {
+        return String(format: "%.2f / %@", unitPrice, unit)
     }
 }
 
@@ -114,8 +114,8 @@ struct MiamNeutralBasketProduct_Previews: PreviewProvider {
             description: "MY description",
             pictureURL: (URL(string: "https://picsum.photos/400/300") ?? URL(string: ""))!,
             sharedRecipeCount: 3,
-            pricePerUnit: 56.0,
-            isLoading: false)
+            unitPrice: 56.0,
+            isReloading: false)
         let actions = BasketProductActions(
             onDeleteProduct: {},
             onQuantityChanged: { _ in },

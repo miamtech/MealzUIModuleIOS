@@ -5,7 +5,6 @@
 //  Created by didi on 3/8/23.
 //
 
-
 import SwiftUI
 import MiamIOSFramework
 
@@ -13,49 +12,71 @@ import MiamIOSFramework
 public struct MiamNeutralRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
     
     public init() {}
-    let imageHeight = 280.0
+    let imageHeight:CGFloat = 400
     public func content(
         infos: RecipeDetailsHeaderParameters,
-        onRecipeDetailsClosed: @escaping () -> Void
+        onRecipeDetailsClosed: @escaping () -> Void,
+        onUpdateGuests: @escaping(Int) -> Void
     ) -> some View {
-        VStack {
-                if let picture =  URL(string: infos.mediaURL ?? "") {
-                    AsyncImage(url: picture) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(minWidth: 0, maxWidth: .infinity)
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Button {
+                    onRecipeDetailsClosed()
+                } label: {
+                    Image.mealzIcon(icon: .caret)
+                        .renderingMode(.template)
+                        .rotationEffect(Angle(degrees: 180))
+                }.frame(width: 40, height: 40)
+                    .foregroundColor(Color.mealzColor(.primaryText))
+                    .background(Color.white)
+                    .clipShape(Circle()).padding()
+                Spacer()
+                
+                LikeButton(likeButtonInfo: LikeButtonInfo(recipeId: infos.recipeId)).padding(16)
+            }
+            Spacer()
+            HStack{
+                Spacer()
+                HStack{
+                    Button {
+                        onUpdateGuests(max((infos.currentGuests - 1), 1))
+                    } label: {
+                        Image.mealzIcon(icon: .minus)
+                            .renderingMode(.template).foregroundColor(.black)
                     }
-                    .frame(height: imageHeight)
-                    .clipped()
-                } else {
-                    Image.mealzIcon(icon: .pan).frame( height: imageHeight)
-                }
-                HStack {
-                    if infos.isLikeEnabled {
-                        LikeButton(likeButtonInfo: LikeButtonInfo(recipeId: infos.recipeId))
-                    }
-                    Spacer()
-                    // question mark
-                }
-                .padding(.horizontal, Dimension.sharedInstance.sPadding)
-                Divider()
-                VStack(alignment: .leading, spacing: Dimension.sharedInstance.mPadding) {
-                    Text(infos.title)
-                            .bold()
-                            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
-                            .padding(.bottom, Dimension.sharedInstance.sPadding)
-                    HStack(alignment: .center, spacing: Dimension.sharedInstance.xlPadding) {
-                        MiamNeutralRecipeDifficulty(difficulty: infos.difficulty)
-                        MiamNeutralRecipePreparationTime(duration: infos.totalTime)
-                        Spacer()
-                    }
-                        MiamNeutralRecipeTimeView(
-                            preparationTime: infos.preparationTime,
-                            cookingTime: infos.cookingTime,
-                            restingTime: infos.restingTime)
+                    Text("\(infos.currentGuests)").frame(minWidth: 10, alignment: .center)
                     
-                }.padding(.horizontal, Dimension.sharedInstance.lPadding)
+                    Image.mealzIcon(icon: .guests)
+                        .renderingMode(.template).foregroundColor(.black)
+                    Button {
+                        onUpdateGuests(infos.currentGuests + 1)
+                    } label: {
+                        Image.mealzIcon(icon: .plus)
+                            .renderingMode(.template).foregroundColor(.black)
+                    }
+                }.padding(8).background(Capsule().foregroundColor(Color.white))
+                    .padding(16)
             }
         }
+        .background(
+            mediaImageView(mediaURL: infos.mediaURL).frame(height: imageHeight),
+            alignment: .top)
+        .frame(maxWidth: .infinity)
+        .frame(height: imageHeight)
+    }
+    
+    @ViewBuilder
+    private func mediaImageView(mediaURL: String?) -> some View {
+        if let urlString = mediaURL, let url = URL(string: urlString) {
+            AsyncImage(url: url) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+            }
+        } else {
+            Image.mealzIcon(icon: .pan)
+        }
+    }
+
 }
