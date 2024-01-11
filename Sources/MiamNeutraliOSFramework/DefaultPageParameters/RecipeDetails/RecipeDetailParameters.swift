@@ -23,6 +23,7 @@ import miamCore
 
 @available(iOS 14, *)
 public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
+    
     public var onClosed: () -> Void
     public var onSponsorDetailsTapped: (Sponsor) -> Void
     public var onContinueToBasket: (() -> Void)?
@@ -30,7 +31,6 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
     public var header: TypeSafeRecipeDetailsHeader
     public var sponsor: TypeSafeRecipeDetailsSponsor
     public var selectedControl: TypeSafeRecipeDetailsSelectedControl
-    public var products: TypeSafeRecipeDetailsProducts
     public var tags: TypeSafeRecipeDetailsTags
     public var ingredients: TypeSafeRecipeDetailsIngredients
     public var steps: TypeSafeRecipeDetailsSteps
@@ -39,26 +39,35 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
     public var empty: TypeSafeEmpty
     public var loading: TypeSafeLoading
     
+    public var ingredientsAtHomeToggleButton: TypeSafeBaseButton
+    public var unavailableIngredientsToggleButton: TypeSafeBaseButton
+    public var ingredientsAtHome: TypeSafeNotInBasketProduct
+    public var unavailableIngredients: TypeSafeNotInBasketProduct
+    
     public init(
         onClosed: @escaping () -> Void,
         onSponsorDetailsTapped: @escaping (Sponsor) -> Void,
         onContinueToBasket: (() -> Void)? = nil,
-        viewOption: RecipeDetailsViewOptions = RecipeDetailsViewOptions()
+        viewOptions: RecipeDetailsViewOptions = RecipeDetailsViewOptions()
     ) {
         self.onClosed = onClosed
         self.onSponsorDetailsTapped = onSponsorDetailsTapped
         self.onContinueToBasket = onContinueToBasket
-        self.header = viewOption.header
-        self.sponsor = viewOption.sponsor
-        self.ingredients = viewOption.ingredients
-        self.steps = viewOption.steps
-        self.footer = viewOption.footer
-        self.background = viewOption.background
-        self.empty = viewOption.empty
-        self.loading = viewOption.loading
         
-        self.selectedControl = viewOption.selectedControl
-        self.products = viewOption.products
-        self.tags = viewOption.tags
+        self.header = viewOptions.header
+        self.sponsor = viewOptions.sponsor
+        self.ingredients = viewOptions.ingredients
+        self.steps = viewOptions.steps
+        self.footer = viewOptions.footer
+        self.background = viewOptions.background
+        self.empty = viewOptions.empty
+        self.loading = viewOptions.loading
+        self.selectedControl = viewOptions.selectedControl
+        self.tags = viewOptions.tags
+        
+        self.ingredientsAtHomeToggleButton = viewOptions.ingredientsAtHomeToggleButton
+        self.unavailableIngredientsToggleButton = viewOptions.unavailableIngredientsToggleButton
+        self.ingredientsAtHome = viewOptions.ingredientsAtHome
+        self.unavailableIngredients = viewOptions.unavailableIngredients
     }
 }
