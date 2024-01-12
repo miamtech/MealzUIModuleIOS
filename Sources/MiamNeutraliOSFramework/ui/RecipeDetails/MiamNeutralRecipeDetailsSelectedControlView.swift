@@ -48,5 +48,6 @@ public struct MiamNeutralRecipeDetailsSelectedControlView:
         }
         .frame(height: 50)
         .cornerRadius(25)
+        .padding(Dimension.sharedInstance.lPadding)
     }
 }

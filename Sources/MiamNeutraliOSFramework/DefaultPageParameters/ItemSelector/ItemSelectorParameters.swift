@@ -21,6 +21,7 @@ import MiamIOSFramework
 /// This sets the Templates for the ItemSelector
 public struct ItemSelectorParameters: ItemSelectorParametersProtocol {
     public var searchBar: TypeSafeSearch
+    public var title: TypeSafeBaseTitle
     public var selectedProduct: TypeSafeItemSelectorSelectedProduct
     public var productOptions: TypeSafeItemSelectorOptionProducts
     public var noResults: TypeSafeItemSelectorNoResults
@@ -34,6 +35,7 @@ public struct ItemSelectorParameters: ItemSelectorParametersProtocol {
         viewOptions : ItemSelectorViewOptions = ItemSelectorViewOptions()
     ){
         self.searchBar = viewOptions.searchBar
+        self.title = viewOptions.title
         self.selectedProduct = viewOptions.selectedProduct
         self.productOptions = viewOptions.productOptions
         self.noResults = viewOptions.noResults
