@@ -50,7 +50,7 @@ public struct MiamNeutralRecipeDetailsAddedProductView: RecipeDetailsAddedProduc
                     }
                     Text(data.name)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
-                    Text(data.description)
+                    Text(data.description + " " + data.productUnit)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
                         .padding(dim.mPadding)
                         .background(Capsule().fill(Color.mealzColor(.lightBackground)))
@@ -78,25 +78,22 @@ public struct MiamNeutralRecipeDetailsAddedProductView: RecipeDetailsAddedProduc
                     } label: {
                         Image.mealzIcon(icon: .minus)
                             .renderingMode(.template)
-                            .foregroundColor(Color.mealzColor(.darkestGray))
+                            .foregroundColor(Color.mealzColor(.primary))
                     }
                     Text(String(data.productQuantity)).frame(minWidth: 10, alignment: .center)
-                    
                     Button {
                         updateProductQuantity(data.productQuantity + 1)
                     } label: {
                         Image.mealzIcon(icon: .plus)
                             .renderingMode(.template)
-                            .foregroundColor(Color.mealzColor(.darkestGray))
+                            .foregroundColor(Color.mealzColor(.primary))
                     }
                 }
                 .padding(dim.mPadding)
-                .background(Capsule().foregroundColor(Color.mealzColor(.white)))
-                .padding(dim.lPadding)
             }
         }.overlay( /// apply a rounded border
             RoundedRectangle(cornerRadius: dim.mCornerRadius)
-                .stroke(Color.mealzColor(.lightBackground), lineWidth: 1)
+                .stroke(Color.mealzColor(.primary), lineWidth: 1)
         )
         .padding(.horizontal, dim.mPadding)
     }

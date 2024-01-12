@@ -20,6 +20,7 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct ItemSelectorViewOptions {
     public var searchBar: TypeSafeSearch
+    public var title: TypeSafeBaseTitle
     public var selectedProduct: TypeSafeItemSelectorSelectedProduct
     public var productOptions: TypeSafeItemSelectorOptionProducts
     public var noResults: TypeSafeItemSelectorNoResults
@@ -29,6 +30,7 @@ public struct ItemSelectorViewOptions {
     
     public init(
         searchBar: TypeSafeSearch = TypeSafeSearch(MiamNeutralGeneralSearch()),
+        title: TypeSafeBaseTitle = TypeSafeBaseTitle(MealzItemSelectorTitle()),
         selectedProduct: TypeSafeItemSelectorSelectedProduct = TypeSafeItemSelectorSelectedProduct(MiamNeutralItemSelectorSelectedProduct()),
         productOptions: TypeSafeItemSelectorOptionProducts =
             TypeSafeItemSelectorOptionProducts(MiamNeutralItemSelectorOptionProducts()),
@@ -38,6 +40,7 @@ public struct ItemSelectorViewOptions {
         background: TypeSafeBackground = TypeSafeBackground(DefaultBackgroundView())
     ) {
         self.searchBar = searchBar
+        self.title = title
         self.selectedProduct = selectedProduct
         self.productOptions = productOptions
         self.noResults = noResults

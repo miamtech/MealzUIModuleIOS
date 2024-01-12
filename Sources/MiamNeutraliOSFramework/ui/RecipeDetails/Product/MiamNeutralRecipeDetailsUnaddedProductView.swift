@@ -44,7 +44,7 @@ public struct MiamNeutralRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedPr
                     }
                     Text(data.name)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
-                    Text(data.description)
+                    Text(data.description + " " + data.productUnit)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
                         .padding(dim.mPadding)
                         .background(Capsule().fill(Color.mealzColor(.lightBackground)))
@@ -53,13 +53,13 @@ public struct MiamNeutralRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedPr
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                             .foregroundColor(Color.mealzColor(.primary))
                     })
-                    
-                }.frame(maxWidth: .infinity,alignment: .leading)
+                }
+                .frame(maxWidth: .infinity,alignment: .leading)
+                    .padding(dim.mlPadding)
             }
-            HStack {
+            HStack(spacing: Dimension.sharedInstance.mPadding) {
                 Text(data.formattedProductPrice)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleBigStyle)
-                    .padding(.horizontal, dim.mlPadding)
                     .foregroundColor(Color.mealzColor(.primary))
                 Spacer()
                 Button(action: onIgnoreProduct, label: {
@@ -69,13 +69,16 @@ public struct MiamNeutralRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedPr
                 })
                 Button(action: onAddProduct, label: {
                     Image.mealzIcon(icon: .basket)
+                        .renderingMode(.template)
+                        .foregroundColor(Color.mealzColor(.white))
                         .padding(dim.lPadding)
                         .background(Color.mealzColor(.primary).cornerRadius(dim.mPadding))
                         .frame(width: 48, height: 48)
                 })
-                .padding(dim.mlPadding)
             }
-        }.overlay( /// apply a rounded border
+            .padding(dim.mlPadding)
+        }
+        .overlay( /// apply a rounded border
             RoundedRectangle(cornerRadius: dim.mCornerRadius)
                 .stroke(Color.mealzColor(.lightBackground), lineWidth: 1)
         )
