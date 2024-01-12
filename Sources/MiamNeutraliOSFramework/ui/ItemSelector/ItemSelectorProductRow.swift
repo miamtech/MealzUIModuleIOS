@@ -1,6 +1,6 @@
 //
 //  ItemSelectorProductRow.swift
-//  
+//
 //
 //  Created by Miam on 04/10/2023.
 //
@@ -12,18 +12,18 @@ import MiamIOSFramework
 
 @available(iOS 14, *)
 struct ItemSelectorProductRow: View {
-
+    
     private var isSelected: Bool
     private var product: Item
-
+    
     init(product: Item, isSelected: Bool = false) {
         self.isSelected = isSelected
         self.product = product
     }
-
+    
     var body: some View {
-        let unitPrice = Double(product.attributes?.unitPrice ?? "0.0")?.currencyFormatted
-            return VStack {
+        VStack(spacing: 0) {
+            VStack {
                 HStack {
                     if let picture = URL(string: product.attributes?.image ?? "") {
                         AsyncImage(url: picture) { image in
@@ -42,23 +42,35 @@ struct ItemSelectorProductRow: View {
                             .padding(.bottom, 8)
                         Text(product.attributes?.name ??  "")
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallBoldStyle)
-                            .padding(.bottom, 32)
-                        HStack {
-                            Spacer()
-                            Text(unitPrice ?? "0.0")
-                                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
-                                .padding(.trailing, 16)
-                            Text(isSelected ? Localization.itemSelector.inBasket.localised : Localization.itemSelector.select.localised )
-                                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 9)
-                                .foregroundColor(Color.mealzColor(.white))
-                                .background( isSelected ? Color.mealzColor(.lightBackground) : Color.mealzColor(.primary))
-                                .cornerRadius(1000)
-                        }
+                        Text(product.capacity)
+                            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
+                            .padding(Dimension.sharedInstance.mPadding)
+                            .background(Capsule().fill(Color.mealzColor(.lightBackground)))
+                        Spacer()
                     }.padding(16)
+                    Spacer()
                 }
-                Divider()
+                HStack {
+                    if let unitPrice = product.attributes?.unitPrice, let price = Double(unitPrice) {
+                        Text(price.currencyFormatted)
+                            .foregroundColor(Color.mealzColor(.primary))
+                            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+                    }
+                    Spacer()
+                    Text(isSelected ? Localization.itemSelector.inBasket.localised : Localization.itemSelector.select.localised )
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 9)
+                        .foregroundColor(isSelected ? Color.mealzColor(.darkGray) : Color.mealzColor(.white))
+                        .background( isSelected ? Color.mealzColor(.lightGray) : Color.mealzColor(.primary))
+                        .cornerRadius(Dimension.sharedInstance.sCornerRadius)
+                }
             }
+            .padding([.horizontal, .bottom], Dimension.sharedInstance.lPadding)
+            .background(
+                isSelected ? Color.mealzColor(.itemSelectedBackground) : Color.clear
+            )
+            Divider()
         }
+    }
 }
