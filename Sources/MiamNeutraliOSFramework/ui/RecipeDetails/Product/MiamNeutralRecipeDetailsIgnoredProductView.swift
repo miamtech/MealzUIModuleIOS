@@ -19,8 +19,9 @@ public struct MiamNeutralRecipeDetailsIgnoredProductView: RecipeDetailsIgnoredPr
                     .padding(Dimension.sharedInstance.mPadding)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
-                if let ingredientQuantity {
-                    Text(ingredientQuantity).padding(Dimension.sharedInstance.mPadding)
+                if let ingredientQuantity = ingredientQuantity, let qty = Float(ingredientQuantity), let unit = ingredientUnit {
+                    Text(String(format: "%g \(unit)", qty))
+                        .padding(Dimension.sharedInstance.mPadding)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
                 }
             }.frame(height:40)

@@ -22,7 +22,7 @@ public struct MiamNeutralMyMealRecipeCard: MyMealRecipeCardProtocol {
         onShowRecipeDetails: @escaping (String) -> Void
     ) -> some View {
         let dimensions = Dimension.sharedInstance
-        let pictureSize = recipeCardDimensions.height - (Dimension.sharedInstance.lPadding * 2)
+        let pictureSize = recipeCardDimensions.height - (Dimension.sharedInstance.mlPadding * 2)
         
         func showTimeAndDifficulty() -> Bool {
             return recipeCardDimensions.height >= 320
@@ -34,41 +34,69 @@ public struct MiamNeutralMyMealRecipeCard: MyMealRecipeCardProtocol {
         
         return VStack(alignment: .leading, spacing: 0) {
             HStack {
-                AsyncImage(url: recipe.pictureURL) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: pictureSize, height: pictureSize)
-                        .cornerRadius(Dimension.sharedInstance.mCornerRadius)
+                ZStack(alignment: .bottomTrailing) {
+                    AsyncImage(url: recipe.pictureURL) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: pictureSize, height: pictureSize)
+                            .cornerRadius(Dimension.sharedInstance.mCornerRadius)
+                    }
+                    if let guests = recipe.attributes?.numberOfGuests {
+                        MealzSmallGuestView(guests: Int(guests))
+                            .padding(Dimension.sharedInstance.mPadding)
+                    }
                 }
                 .frame(width: pictureSize, height: pictureSize)
                 .clipped()
                 Spacer()
                     .frame(width: Dimension.sharedInstance.mPadding)
-                VStack(alignment: .leading, spacing: dimensions.lPadding) {
+                VStack(alignment: .leading, spacing: Dimension.sharedInstance.mPadding) {
                     HStack {
                         Text(recipe.title)
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
                             .lineLimit(2)
-                            .minimumScaleFactor(0.75)
+                            .minimumScaleFactor(0.8)
                         Spacer()
                         Button {
                             onDeleteRecipe()
                         } label: {
                             Image.mealzIcon(icon: .trash)
                                 .renderingMode(.template)
-                                .frame(width: 18, height: 18)
-                                .foregroundColor(Color.miamColor(.grey))
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(Color.mealzColor(.darkGray))
                         }
                     }
-                    // i localized in Android PR so i'll localize when that is merged
-                    Text("\(numberOfProductsInRecipe) articles")
+                    Text(String(numberOfProductsInRecipe) + Localization.myMeals.products.localised)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
+                        .foregroundColor(Color.mealzColor(.darkGray))
                     if let attributes = recipe.attributes {
                         PricePerPersonView(price: price, numberOfGuests: Int(attributes.numberOfGuests))
                     }
+                    Button(action: {
+                        onShowRecipeDetails(recipe.id)
+                    }, label: {
+                        HStack {
+                            Text(Localization.myMeals.seeProducts.localised)
+                                .foregroundColor(Color.mealzColor(.primary))
+                                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
+                            Spacer()
+                            Image.mealzIcon(icon: .arrow)
+                                .renderingMode(.template)
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(Color.mealzColor(.primary))
+                        }
+                    })
+                    .padding(Dimension.sharedInstance.mPadding)
+                    .overlay( /// apply a rounded border
+                        RoundedRectangle(cornerRadius: 50)
+                            .stroke(Color.mealzColor(.primary), lineWidth: 1)
+                    )
                 }
                 .frame(maxWidth: .infinity)
+//                .padding(.vertical, Dimension.sharedInstance.mPadding)
             }
             .padding(Dimension.sharedInstance.mPadding)
         }
@@ -81,9 +109,9 @@ public struct MiamNeutralMyMealRecipeCard: MyMealRecipeCardProtocol {
         .cornerRadius(Dimension.sharedInstance.mCornerRadius)
         .overlay(
             RoundedRectangle(cornerRadius: 12.0)
-                .stroke(Color.miamNeutralColor(.lightBorder), lineWidth: 1.0)
+                .stroke(Color.mealzColor(.border), lineWidth: 1.0)
         )
-        .padding(.horizontal, Dimension.sharedInstance.lPadding)
+        .padding(.horizontal, Dimension.sharedInstance.mPadding)
     }
     
     struct PricePerPersonView: View {
@@ -94,19 +122,15 @@ public struct MiamNeutralMyMealRecipeCard: MyMealRecipeCardProtocol {
             numberOfGuests != 0 ? price / Double(numberOfGuests) : 0.0
         }
 
-        private var formattedPrice: String {
-            String(format: "%.2f", pricePerPerson)
-        }
-
         var body: some View {
-            HStack(alignment: .center, spacing: 2) {
-                Text(formattedPrice)
+            HStack(alignment: .bottom, spacing: 2) {
+                Text(pricePerPerson.currencyFormatted)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
-                    .foregroundColor(Color.miamColor(.primary))
+                    .foregroundColor(Color.mealzColor(.darkestGray))
                     .multilineTextAlignment(.leading)
-                Text("per Person") // i localized in Android PR so i'll localize when that is merged
+                Text(Localization.myMeals.perPerson.localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
-                    .foregroundColor(Color.miamColor(.grey))
+                    .foregroundColor(Color.mealzColor(.darkGray))
             }
         }
     }

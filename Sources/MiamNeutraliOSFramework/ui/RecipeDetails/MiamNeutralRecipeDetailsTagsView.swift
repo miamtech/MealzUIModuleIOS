@@ -21,16 +21,15 @@ public struct MiamNeutralRecipeDetailsTagsView: RecipeDetailsTagsProtocol {
             ForEach(tags, id: \.id) { tag in
                 TagItem {
                     HStack{
-                        Image.mealzIcon(icon:tag.picto)
+                        Image.mealzIcon(icon: tag.picto)
                         Text(tag.text)
                     }
                 }
             }
         } plus: {
             AnyView(Text("...").padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
-                .background(Capsule().fill(Color.miamColor(.backgroundSecondary))))
+                .background(Capsule().fill(Color.mealzColor(.lightBackground))))
         }.frame(maxWidth: .infinity)
-        
     }
 }
 
@@ -49,7 +48,7 @@ struct TagItem <Content> : View where Content: View {
     var body: some View {
         content()
             .padding(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12)).miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
-            .background(Capsule().fill(Color.miamColor(.backgroundSecondary)))
+            .background(Capsule().fill(Color.mealzColor(.lightBackground)))
     }
 }
 

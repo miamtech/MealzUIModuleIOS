@@ -31,7 +31,7 @@ public struct RecipeDetailsProductViewOptions {
         ignoredProduct: TypeSafeRecipeDetailsIgnoredProduct = TypeSafeRecipeDetailsIgnoredProduct(MiamNeutralRecipeDetailsIgnoredProductView()),
         unaddedProduct: TypeSafeRecipeDetailsUnaddedProduct = TypeSafeRecipeDetailsUnaddedProduct(MiamNeutralRecipeDetailsUnaddedProductView()),
         addedProduct: TypeSafeRecipeDetailsAddedProduct = TypeSafeRecipeDetailsAddedProduct(MiamNeutralRecipeDetailsAddedProductView()),
-        loadingProduct: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView())
+        loadingProduct: TypeSafeLoading = TypeSafeLoading(MiamNeutralRecipeDetailsLoadingProductView())
     ) {
         self.ignoredProduct = ignoredProduct
         self.unaddedProduct = unaddedProduct

@@ -17,10 +17,11 @@ public struct MiamNeutralRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedPr
             HStack {
                 Text(data.ingredientName.capitalizingFirstLetter()).padding(dim.mPadding).miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
-                Text(String(format: "%g \(data.productUnit)", Float(data.productQuantity)))
-                    .padding(dim.mPadding)
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
-                
+                if let ingredientQuantity = data.ingredientQuantity, let qty = Float(ingredientQuantity), let unit = data.ingredientUnit {
+                    Text(String(format: "%g \(unit)", qty))
+                        .padding(dim.mPadding)
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
+                }
             }
             .foregroundColor(Color.mealzColor(.darkestGray))
             .frame(height: 40)
@@ -57,7 +58,7 @@ public struct MiamNeutralRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedPr
                 .frame(maxWidth: .infinity,alignment: .leading)
                     .padding(dim.mlPadding)
             }
-            HStack(spacing: Dimension.sharedInstance.mPadding) {
+            HStack(spacing: Dimension.sharedInstance.lPadding) {
                 Text(data.formattedProductPrice)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleBigStyle)
                     .foregroundColor(Color.mealzColor(.primary))
