@@ -53,9 +53,7 @@ public struct MiamNeutralRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
             default:
                 AddAllToBasketCTA(
                     callToAction: callToAction,
-                    buttonText: Localization.ingredient.addProduct(
-                        numberOfProducts: ingredientsStatus.count
-                    ).localised,
+                    buttonText: String(format: String.localizedStringWithFormat(Localization.ingredient.addProduct(numberOfProducts: ingredientsStatus.count).localised, ingredientsStatus.count), ingredientsStatus.count),
                     disableButton: lockButton)
             }
         }
