@@ -82,10 +82,6 @@ public struct MiamNeutralRecipeDetailsAddedProductView: RecipeDetailsAddedProduc
                     }
                     Text(String(data.productQuantity)).frame(minWidth: 10, alignment: .center)
                     
-                    Image.mealzIcon(icon: .guests)
-                        .renderingMode(.template)
-                        .foregroundColor(Color.mealzColor(.darkestGray))
-                    
                     Button {
                         updateProductQuantity(data.productQuantity + 1)
                     } label: {
