@@ -29,7 +29,7 @@ public struct ItemSelectorViewOptions {
     public var loading: TypeSafeLoading
     
     public init(
-        searchBar: TypeSafeSearch = TypeSafeSearch(MiamNeutralGeneralSearch()),
+        searchBar: TypeSafeSearch = TypeSafeSearch(MiamNeutralItemSelectorSearch()),
         title: TypeSafeBaseTitle = TypeSafeBaseTitle(MealzItemSelectorTitle()),
         selectedProduct: TypeSafeItemSelectorSelectedProduct = TypeSafeItemSelectorSelectedProduct(MiamNeutralItemSelectorSelectedProduct()),
         productOptions: TypeSafeItemSelectorOptionProducts =
