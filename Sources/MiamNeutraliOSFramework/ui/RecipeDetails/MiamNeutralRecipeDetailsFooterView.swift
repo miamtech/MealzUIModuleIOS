@@ -26,17 +26,10 @@ public struct MiamNeutralRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
             return priceStatus == ComponentUiState.locked || priceStatus == ComponentUiState.loading
         }
         return HStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 1) {
-                if priceStatus == ComponentUiState.loading {
-                    ProgressLoader(color: .primary, size: 24)
-                } else {
-                    Text(pricePerGuest.currencyFormatted)
-                        .foregroundColor(Color.mealzColor(.primary))
-                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
-                    Text(Localization.price.perGuest.localised)
-                        .foregroundColor(Color.mealzColor(.darkGray))
-                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
-                }
+            if priceStatus == ComponentUiState.loading {
+                ProgressLoader(color: .primary, size: 24)
+            } else {
+                MealzPricePerPerson(pricePerGuest: pricePerGuest)
             }
             Spacer()
             switch ingredientsStatus.type {
@@ -46,16 +39,14 @@ public struct MiamNeutralRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
                     buttonText: Localization.recipeDetails.continueShopping.localised, 
                     disableButton: lockButton)
             case .initialState:
-                AddAllToBasketCTA(
+                MealzAddAllToBasketCTA(
                     callToAction: callToAction,
                     buttonText: Localization.recipeDetails.addAllProducts.localised,
                     disableButton: lockButton)
             default:
-                AddAllToBasketCTA(
+                MealzAddAllToBasketCTA(
                     callToAction: callToAction,
-                    buttonText: Localization.ingredient.addProduct(
-                        numberOfProducts: ingredientsStatus.count
-                    ).localised,
+                    buttonText: String(format: String.localizedStringWithFormat(Localization.ingredient.addProduct(numberOfProducts: ingredientsStatus.count).localised, ingredientsStatus.count), ingredientsStatus.count),
                     disableButton: lockButton)
             }
         }
@@ -65,29 +56,7 @@ public struct MiamNeutralRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
         .background(Color.white)
     }
     
-    internal struct AddAllToBasketCTA: View {
-        let callToAction: () -> Void
-        let buttonText: String
-        let disableButton: Bool
-        
-        var body: some View {
-            Button(action: callToAction, label: {
-                Image.mealzIcon(icon: .basket)
-                    .renderingMode(.template)
-                    .resizable()
-                    .foregroundColor(Color.mealzColor(.white))
-                    .frame(width: 24, height: 24)
-                Text(buttonText)
-                    .foregroundColor(Color.mealzColor(.white))
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.subtitleStyle)
-            })
-            .padding(Dimension.sharedInstance.lPadding)
-            .background(Color.mealzColor(.primary))
-            .cornerRadius(Dimension.sharedInstance.mPadding)
-            .disabled(disableButton)
-            .darkenView(disableButton)
-        }
-    }
+    
     
     internal struct ContinueMyShoppingCTA: View {
         let callToAction: () -> Void
@@ -100,7 +69,7 @@ public struct MiamNeutralRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
                     .foregroundColor(Color.mealzColor(.primary))
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.subtitleStyle)
             })
-            .padding(Dimension.sharedInstance.lPadding)
+            .padding(Dimension.sharedInstance.mlPadding)
             .overlay( /// apply a rounded border
                 RoundedRectangle(cornerRadius: Dimension.sharedInstance.mCornerRadius)
                     .stroke(Color.mealzColor(.primary), lineWidth: 1)

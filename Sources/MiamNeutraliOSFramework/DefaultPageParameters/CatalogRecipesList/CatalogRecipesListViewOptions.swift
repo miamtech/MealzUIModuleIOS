@@ -26,7 +26,7 @@ public struct CatalogRecipesListViewOptions {
     public var loading: TypeSafeLoading
     
     public init(
-        recipeCard: TypeSafeCatalogRecipeCard = TypeSafeCatalogRecipeCard(MiamNeutralRecipeCard()),
+        recipeCard: TypeSafeCatalogRecipeCard = TypeSafeCatalogRecipeCard(MealzRecipeCard()),
         recipeCardLoading: TypeSafeRecipeCardLoading = TypeSafeRecipeCardLoading(MiamNeutralRecipeCardLoading()),
         title: TypeSafeBaseTitle = TypeSafeBaseTitle(MiamNeutralCatalogPackageTitle()),
         noResults: TypeSafeCatalogRecipesListNoResults = TypeSafeCatalogRecipesListNoResults(MiamNeutralCatalogRecipesListNoResults()),

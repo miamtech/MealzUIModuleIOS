@@ -92,7 +92,7 @@ struct MiamNeutralBudgetRecipeCardPreview: PreviewProvider {
             restingTime: 3000000000000,
             computedCost: nil,
             mediaUrl: "https://hips.hearstapps.com/hmg-prod/images/is-coconut-oil-healthy-1650650710.jpg?crop=0.669xw:1.00xh;0.0637xw,0&resize=1200:*",
-            difficulty: 3)
+            difficulty: 3, price: RecipePricing(price: 34.0, serves: Int32(4), pricePerServe: 12.0))
         let recipe = RecipeFakeFactory().create(
             id: "234",
             attributes: recipeAttributes,

@@ -23,10 +23,11 @@ public struct MiamNeutralRecipeDetailsAddedProductView: RecipeDetailsAddedProduc
             HStack {
                 Text(data.ingredientName.capitalizingFirstLetter()).padding(dim.mPadding).miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
-                Text(String(format: "%g \(data.productUnit)", Float(data.productQuantity)))
-                    .padding(dim.mPadding)
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
-                
+                if let ingredientQuantity = data.ingredientQuantity, let qty = Float(ingredientQuantity), let unit = data.ingredientUnit {
+                    Text(String(format: "%g \(unit)", qty))
+                        .padding(dim.mPadding)
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
+                }
             }
             .foregroundColor(Color.mealzColor(.white))
             .frame(height: 40)

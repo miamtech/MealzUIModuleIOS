@@ -186,3 +186,114 @@ public struct DemoCatalogRecipeCardView: CatalogRecipeCardProtocol {
         .background(Color.green).cornerRadius(10)
     }
 }
+
+@available(iOS 14, *)
+public struct MealzRecipeCard: CatalogRecipeCardProtocol {
+    public init() {}
+    public func content(
+        recipeCardDimensions: CGSize,
+        recipe: Recipe,
+        isCurrentlyInBasket: Bool,
+        onAddToBasket: @escaping (String) -> Void,
+        onShowRecipeDetails: @escaping (String) -> Void
+    ) -> some View {
+        let dimensions = Dimension.sharedInstance
+        let callToActionHeight: CGFloat = 70
+        let pictureHeight = recipeCardDimensions.height - callToActionHeight
+        
+        func showTimeAndDifficulty() -> Bool {
+            return recipeCardDimensions.height >= 320
+        }
+        
+        
+       
+        return VStack(spacing: 0.0) {
+            VStack(spacing: 0.0) {
+                ZStack(alignment: .topTrailing) {
+                    AsyncImage(url: recipe.pictureURL) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .padding(0)
+                            .frame(minWidth: 0, maxWidth: recipeCardDimensions.width, maxHeight:
+                                    pictureHeight)
+                    }.padding(0)
+                    LinearGradient(
+                        gradient: Gradient(
+                            colors: [Color.clear, Color.black.opacity(0.3)]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    VStack(alignment: .trailing, spacing: 0) {
+                        LikeButton(
+                            likeButtonInfo: LikeButtonInfo(
+                                recipeId: recipe.id
+                            ))
+                        .padding(dimensions.mPadding)
+                        Spacer()
+                        HStack {
+                            Text(recipe.title)
+                                .foregroundColor(Color.mealzColor(.white))
+                                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
+                                .lineLimit(2)
+                                .multilineTextAlignment(.leading)
+                                .minimumScaleFactor(0.75)
+                            Spacer()
+                            if let guests = recipe.attributes?.numberOfGuests {
+                                MealzSmallGuestView(guests: Int(guests))
+                            }
+                        }.padding(Dimension.sharedInstance.mlPadding)
+                    }
+                }
+                .padding(0)
+                .frame(height: pictureHeight)
+                .clipped()
+                if let pricePerServe = recipe.attributes?.price?.pricePerServe {
+                    HStack {
+                        MealzPricePerPerson(pricePerGuest: pricePerServe)
+                        Spacer()
+                        CallToAction(cardWidth: recipeCardDimensions.width) {
+                            onShowRecipeDetails(recipe.id)
+                        }
+                    }
+                    .frame(height: callToActionHeight)
+                    .padding(.horizontal, Dimension.sharedInstance.mlPadding)
+                }
+            }
+        }
+        .onTapGesture {
+            onShowRecipeDetails(recipe.id)
+        }
+        .padding(0)
+        .frame(width: recipeCardDimensions.width, height: recipeCardDimensions.height)
+        .cornerRadius(12.0)
+        .overlay(
+            RoundedRectangle(
+                cornerRadius: 12.0)
+            .stroke(Color.mealzColor(.border)
+                    , lineWidth: 1.0))
+    }
+    
+    internal struct CallToAction: View {
+        let cardWidth: CGFloat
+        let callToAction: () -> Void
+        var body: some View {
+            VStack {
+                if cardWidth >= 225 {
+                    MealzAddAllToBasketCTA(callToAction: callToAction)
+                } else {
+                    Button(action: callToAction, label: {
+                        Image.mealzIcon(icon: .basket)
+                            .renderingMode(.template)
+                            .resizable()
+                            .foregroundColor(Color.mealzColor(.white))
+                            .frame(width: 24, height: 24)
+                    })
+                    .padding(Dimension.sharedInstance.mlPadding)
+                    .background(Color.mealzColor(.primary))
+                    .cornerRadius(Dimension.sharedInstance.mPadding)
+                }
+            }
+        }
+    }
+}
