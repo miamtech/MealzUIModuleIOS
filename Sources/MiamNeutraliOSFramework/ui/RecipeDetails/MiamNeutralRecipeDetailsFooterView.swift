@@ -79,7 +79,7 @@ public struct MiamNeutralRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
                     .frame(width: 24, height: 24)
                 Text(buttonText)
                     .foregroundColor(Color.mealzColor(.white))
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.subtitleStyle)
             })
             .padding(Dimension.sharedInstance.lPadding)
             .background(Color.mealzColor(.primary))
@@ -98,7 +98,7 @@ public struct MiamNeutralRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
             Button(action: callToAction, label: {
                 Text(buttonText)
                     .foregroundColor(Color.mealzColor(.primary))
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.subtitleStyle)
             })
             .padding(Dimension.sharedInstance.lPadding)
             .overlay( /// apply a rounded border

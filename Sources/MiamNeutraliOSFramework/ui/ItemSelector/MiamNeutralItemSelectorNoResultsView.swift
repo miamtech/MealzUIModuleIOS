@@ -13,10 +13,18 @@ public struct MiamNeutralItemSelectorNoResultsView: ItemSelectorNoResultsProtoco
     public init() {}
     public func content(title: String, subtitle: String?, hasNoSubstitutes: Bool, goBack: @escaping () -> Void) -> some View {
         VStack {
-            Button(action: goBack, label: { Text(" return")})
-            if hasNoSubstitutes {
-                Text("No subs")
-            } else { Text("best search") }
+            Image.mealzIcon(icon: .feelingBlue)
+                .resizable()
+                .scaledToFit()
+                .frame(height: 250)
+            Text(title)
+                .foregroundColor(Color.mealzColor(.primary))
+                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
+            if let subtitle {
+                Text(subtitle)
+                    .foregroundColor(Color.mealzColor(.primary))
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.subtitleStyle)
+            }
         }
     }
 }
