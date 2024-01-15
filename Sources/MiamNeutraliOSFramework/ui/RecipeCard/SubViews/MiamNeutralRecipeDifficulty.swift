@@ -19,6 +19,8 @@ public struct MiamNeutralRecipeDifficulty: View {
     public var body: some View {
         VStack {
             Image.mealzIcon(icon: .chefHat)
+                .renderingMode(.template)
+                .foregroundColor(Color.mealzColor(.primary))
             Text(difficultyDescription)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                 .lineLimit(1)

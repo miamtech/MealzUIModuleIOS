@@ -15,11 +15,11 @@ public struct MealzItemSelectorTitle: BaseTitleProtocol {
         HStack(spacing: 2) {
             Text(title.capitalizingFirstLetter() + " :")
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
-                .foregroundColor(Color.mealzColor(.primaryText))
+                .foregroundColor(Color.mealzColor(.standardDarkText))
             if let subtitle {
                 Text(subtitle)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBoldStyle)
-                    .foregroundColor(Color.mealzColor(.darkestBlue))
+                    .foregroundColor(Color.mealzColor(.primary))
             }
         }
         .frame(maxWidth: .infinity)

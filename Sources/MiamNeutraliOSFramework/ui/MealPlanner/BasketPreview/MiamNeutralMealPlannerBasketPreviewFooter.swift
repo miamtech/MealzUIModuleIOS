@@ -41,8 +41,8 @@ public struct MiamNeutralMealPlannerBasketPreviewFooter: MealPlannerBasketFooter
             .overlay(RoundedRectangle(cornerRadius: Dimension.sharedInstance.mCornerRadius)
                 .stroke(Color.mealzColor(.primary), lineWidth: 1.0))
         }
-        .background(Color.white)
         .padding(Dimension.sharedInstance.lPadding)
+        .background(Color.mealzColor(.standardLightText))
     }
 }
 

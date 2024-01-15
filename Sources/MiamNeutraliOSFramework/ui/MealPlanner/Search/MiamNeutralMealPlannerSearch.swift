@@ -18,7 +18,7 @@ public struct MiamNeutralMealPlannerSearch: SearchProtocol {
                 Image.mealzIcon(icon: .search)
                     .renderingMode(.template)
                     .foregroundColor(Color.mealzColor(.primary))
-                TextField("Rechercher", text: searchText, onCommit: {
+                TextField(Localization.itemSelector.search.localised, text: searchText, onCommit: {
                     // TODO: Enter pressed, start searching? Or start searching everytime a char is entered?
                 })
                 .frame(maxWidth: .infinity)
@@ -32,6 +32,8 @@ public struct MiamNeutralMealPlannerSearch: SearchProtocol {
                 onApply()
             } label: {
                 Image.mealzIcon(icon: .filters)
+                    .renderingMode(.template)
+                    .foregroundColor(Color.mealzColor(.primary))
             }
         }
         .padding(Dimension.sharedInstance.lPadding)

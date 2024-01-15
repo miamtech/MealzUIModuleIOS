@@ -14,8 +14,6 @@ import miamCore
 public struct MiamNeutralRecipeDetailsSelectedControlView:
     RecipeDetailsSelectedControlProtocol {
     
-    
-    
     var titles: [String] = [Localization.recipeDetails.shopping.localised, Localization.recipeDetails.cooking.localised]
     @SwiftUI.State private var frames = Array<CGRect>(repeating: .zero, count: 4)
     
@@ -41,8 +39,10 @@ public struct MiamNeutralRecipeDetailsSelectedControlView:
                 .overlay(
                     Text(titles[index]).lineLimit(1)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
-                        .foregroundColor((selection.wrappedValue == index) ? .white : .black)
-                    
+                        .foregroundColor(
+                            (selection.wrappedValue == index) ?
+                            Color.mealzColor(.standardLightText) :
+                                Color.mealzColor(.standardDarkText))
                 )
             }
         }

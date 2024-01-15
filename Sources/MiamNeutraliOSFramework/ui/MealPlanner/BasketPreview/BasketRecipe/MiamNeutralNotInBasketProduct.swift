@@ -13,26 +13,30 @@ import miamCore
 public struct MiamNeutralNotInBasketProduct: NotInBasketProductProtocol {
     public init() {}
     public func content(item: BasketEntry, onAddToBasket: (() -> Void)?) -> some View {
-        HStack {
-            Text(item.name.capitalizingFirstLetter())
-                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
-                .foregroundColor(Color.mealzColor(.darkGray))
-            Spacer()
-            if let addIngredientAction = onAddToBasket {
-                Button(action: addIngredientAction) {
-                    Image.mealzIcon(icon: .plus)
-                        .renderingMode(.template)
-                        .resizable()
-                        .aspectRatio( contentMode: .fit)
-                        .frame(width: 30, height: 30, alignment: .center)
-                        .foregroundColor(Color.mealzColor(.primary))
-                    Text(Localization.basket.addProduct.localised)
-                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
-                        .foregroundColor(Color.mealzColor(.primary))
+        VStack {
+            HStack {
+                Text(item.name.capitalizingFirstLetter())
+                    .padding(Dimension.sharedInstance.mPadding)
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
+                Spacer()
+                if let ingredientQuantity = item.attributes?.quantity, let unit = item.selectedItem?.attributes?.capacityUnit {
+                    Text(String(format: "%g \(unit)", Float(truncating: ingredientQuantity)))
+                        .padding(Dimension.sharedInstance.mPadding)
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
                 }
+            }.frame(height:40)
+            Text(Localization.ingredient.willNotBeAdded.localised).padding(Dimension.sharedInstance.mPadding)
+                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
+            if let addIngredientAction = onAddToBasket {
+                Button(action: addIngredientAction, label: {
+                    Text(Localization.recipe.add.localised).padding(Dimension.sharedInstance.mPadding)
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
+                        .foregroundColor(Color.mealzColor(.primary))
+                })
             }
         }
-        .padding(.horizontal, Dimension.sharedInstance.lPadding)
-        .padding(.bottom, Dimension.sharedInstance.lPadding)
+        .background(Color.mealzColor(.lightBackground))
+            .cornerRadius(Dimension.sharedInstance.mCornerRadius)
+            .padding(.horizontal, Dimension.sharedInstance.mPadding)
     }
 }
