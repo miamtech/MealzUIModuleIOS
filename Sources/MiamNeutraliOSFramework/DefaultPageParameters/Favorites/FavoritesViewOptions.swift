@@ -26,7 +26,7 @@ public struct FavoritesViewOptions {
     public var loading: TypeSafeLoading
     
     public init(
-        recipeCard: TypeSafeCatalogRecipeCard = TypeSafeCatalogRecipeCard(MiamNeutralRecipeCard()),
+        recipeCard: TypeSafeCatalogRecipeCard = TypeSafeCatalogRecipeCard(MealzRecipeCard()),
         recipeCardLoading: TypeSafeRecipeCardLoading = TypeSafeRecipeCardLoading(MiamNeutralRecipeCardLoading()),
         empty: TypeSafeEmpty = TypeSafeEmpty(MiamNeutralMyMealsEmpty()),
         loading: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView()),

@@ -50,7 +50,7 @@ public struct MiamNeutralBasketRecipeOverview: BasketRecipeOverviewProtocol {
                     HStack(alignment: .top) {
                         Text(data.recipe.attributes?.title ?? "")
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
-                            .foregroundColor(Color.mealzColor(.darkestGray))
+                            .foregroundColor(Color.mealzColor(.standardDarkText))
                         Spacer()
                         Button {
                             actions.onDeleteRecipe()
@@ -62,7 +62,7 @@ public struct MiamNeutralBasketRecipeOverview: BasketRecipeOverviewProtocol {
                     }.frame(maxWidth: .infinity)
                     Text(data.price.pricePerPerson(numberOfGuests: data.guests))
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigLightStyle)
-                        .foregroundColor(Color.mealzColor(.darkGray))
+                        .foregroundColor(Color.mealzColor(.grayText))
                     HStack {
                         linkToRecipeDetail()
                         Spacer()

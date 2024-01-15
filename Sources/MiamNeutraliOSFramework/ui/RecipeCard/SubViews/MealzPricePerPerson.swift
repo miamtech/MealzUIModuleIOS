@@ -22,7 +22,7 @@ public struct MealzPricePerPerson: View {
                 .foregroundColor(Color.mealzColor(.primary))
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
             Text(Localization.myMeals.perPerson.localised)
-                .foregroundColor(Color.mealzColor(.darkGray))
+                .foregroundColor(Color.mealzColor(.grayText))
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
         }
     }

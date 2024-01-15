@@ -65,12 +65,12 @@ public struct MiamNeutralMyMealRecipeCard: MyMealRecipeCardProtocol {
                                 .renderingMode(.template)
                                 .resizable()
                                 .frame(width: 20, height: 20)
-                                .foregroundColor(Color.mealzColor(.darkGray))
+                                .foregroundColor(Color.mealzColor(.grayText))
                         }
                     }
                     Text(String(numberOfProductsInRecipe) + " " + Localization.myMeals.products.localised)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
-                        .foregroundColor(Color.mealzColor(.darkGray))
+                        .foregroundColor(Color.mealzColor(.grayText))
                     if let attributes = recipe.attributes {
                         PricePerPersonView(price: price, numberOfGuests: Int(attributes.numberOfGuests))
                     }
@@ -96,7 +96,6 @@ public struct MiamNeutralMyMealRecipeCard: MyMealRecipeCardProtocol {
                     )
                 }
                 .frame(maxWidth: .infinity)
-//                .padding(.vertical, Dimension.sharedInstance.mPadding)
             }
             .padding(Dimension.sharedInstance.mPadding)
         }
@@ -126,11 +125,11 @@ public struct MiamNeutralMyMealRecipeCard: MyMealRecipeCardProtocol {
             HStack(alignment: .bottom, spacing: 2) {
                 Text(pricePerPerson.currencyFormatted)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
-                    .foregroundColor(Color.mealzColor(.darkestGray))
+                    .foregroundColor(Color.mealzColor(.standardDarkText))
                     .multilineTextAlignment(.leading)
                 Text(Localization.myMeals.perPerson.localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
-                    .foregroundColor(Color.mealzColor(.darkGray))
+                    .foregroundColor(Color.mealzColor(.grayText))
             }
         }
     }
