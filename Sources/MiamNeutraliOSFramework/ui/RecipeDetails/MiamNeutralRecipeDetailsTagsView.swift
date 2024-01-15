@@ -22,7 +22,11 @@ public struct MiamNeutralRecipeDetailsTagsView: RecipeDetailsTagsProtocol {
                 TagItem {
                     HStack{
                         Image.mealzIcon(icon: tag.picto)
+                            .renderingMode(.template)
+                            .foregroundColor(Color.mealzColor(.standardDarkText))
                         Text(tag.text)
+                            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
+                            .foregroundColor(Color.mealzColor(.standardDarkText))
                     }
                 }
             }

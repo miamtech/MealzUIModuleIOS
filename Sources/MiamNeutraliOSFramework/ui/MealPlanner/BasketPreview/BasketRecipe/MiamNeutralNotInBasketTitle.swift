@@ -19,7 +19,7 @@ public class MiamNeutralNotInBasketTitle: BaseButtonProtocol {
             HStack {
                 Text(buttonText)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
-                    .foregroundColor(Color.mealzColor(.darkGray))
+                    .foregroundColor(Color.mealzColor(.grayText))
                 Spacer()
                 Image.mealzIcon(icon: .caret)
                     .resizable()

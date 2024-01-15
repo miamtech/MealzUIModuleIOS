@@ -59,7 +59,7 @@ internal struct SubmitButtonCollapsed: View {
                 ProgressLoader(color: .white)
                     .scaleEffect(0.5)
             } else {
-                Image.mealzIcon(icon: .check)
+                Image.mealzIcon(icon: .reset)
                     .renderingMode(.template)
                     .resizable()
                     .foregroundColor(Color.mealzColor(.white))

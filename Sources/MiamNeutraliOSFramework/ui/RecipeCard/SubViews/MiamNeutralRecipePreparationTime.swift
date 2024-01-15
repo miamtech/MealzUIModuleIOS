@@ -20,6 +20,8 @@ public struct MiamNeutralRecipePreparationTime: View {
     public var body: some View {
         VStack {
             Image.mealzIcon(icon: .time)
+                .renderingMode(.template)
+                .foregroundColor(Color.mealzColor(.primary))
             Text(duration.spellOutTimeUnit())
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                 .lineLimit(1)

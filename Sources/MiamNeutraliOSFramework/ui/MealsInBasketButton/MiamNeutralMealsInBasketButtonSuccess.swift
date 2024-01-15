@@ -21,11 +21,15 @@ public struct MiamNeutralMealsInBasketButtonSuccess: MealsInBasketButtonSuccessP
         } label: {
             HStack {
                 Image.mealzIcon(icon: .cutlery)
+                    .renderingMode(.template)
+                    .foregroundColor(Color.mealzColor(.primary))
                 Spacer()
                 Text(Localization.myMeals.mealsAdded(numberOfMeals: Int32(mealsCount)).localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
                 Image.mealzIcon(icon: .caret)
+                    .renderingMode(.template)
+                    .foregroundColor(Color.mealzColor(.primary))
             }
             .frame(maxWidth: .infinity)
             .padding(Dimension.sharedInstance.lPadding)

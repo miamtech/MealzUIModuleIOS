@@ -27,7 +27,7 @@ public struct MiamNeutralRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
                         .renderingMode(.template)
                         .rotationEffect(Angle(degrees: 180))
                 }.frame(width: 40, height: 40)
-                    .foregroundColor(Color.mealzColor(.primaryText))
+                    .foregroundColor(Color.mealzColor(.primary))
                     .background(Color.white)
                     .clipShape(Circle()).padding()
                 Spacer()
@@ -44,10 +44,12 @@ public struct MiamNeutralRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
                         Image.mealzIcon(icon: .minus)
                             .renderingMode(.template).foregroundColor(.black)
                     }
-                    Text("\(infos.currentGuests)").frame(minWidth: 10, alignment: .center)
-                    
+                    Text("\(infos.currentGuests)")
+                        .frame(minWidth: 10, alignment: .center)
+                        .foregroundColor(Color.mealzColor(.darkestGray))
                     Image.mealzIcon(icon: .guests)
-                        .renderingMode(.template).foregroundColor(.black)
+                        .renderingMode(.template)
+                        .foregroundColor(Color.mealzColor(.darkestGray))
                     Button {
                         onUpdateGuests(infos.currentGuests + 1)
                     } label: {

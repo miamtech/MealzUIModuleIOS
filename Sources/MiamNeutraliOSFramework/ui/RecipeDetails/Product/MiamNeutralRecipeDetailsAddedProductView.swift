@@ -53,6 +53,7 @@ public struct MiamNeutralRecipeDetailsAddedProductView: RecipeDetailsAddedProduc
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
                     Text(data.capacity)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
+                        .foregroundColor(Color.mealzColor(.standardDarkText))
                         .padding(dim.mPadding)
                         .background(Capsule().fill(Color.mealzColor(.lightBackground)))
                     Button(action: onChangeProduct, label: {
@@ -103,7 +104,7 @@ public struct MiamNeutralRecipeDetailsAddedProductView: RecipeDetailsAddedProduc
                             data.numberOfOtherRecipesSharingThisIngredient)
                     )
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
-                    .foregroundColor(Color.mealzColor(.darkGray))
+                    .foregroundColor(Color.mealzColor(.grayText))
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, Dimension.sharedInstance.mPadding)
