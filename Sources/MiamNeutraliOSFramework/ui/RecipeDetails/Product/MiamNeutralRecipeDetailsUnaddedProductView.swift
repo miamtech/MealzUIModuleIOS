@@ -45,7 +45,7 @@ public struct MiamNeutralRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedPr
                     }
                     Text(data.name)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
-                    Text(data.description + " " + data.productUnit)
+                    Text(data.capacity)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
                         .padding(dim.mPadding)
                         .background(Capsule().fill(Color.mealzColor(.lightBackground)))

@@ -14,10 +14,20 @@ public class MiamNeutralNotInBasketTitle: BaseButtonProtocol {
     public init() {}
     public func content(buttonText: String, onButtonAction: @escaping () -> Void) -> some View {
         Button(action: {
-            onButtonAction()
+            withAnimation { onButtonAction() }
         }, label: {
-            Text(buttonText)
-                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
+            HStack {
+                Text(buttonText)
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
+                    .foregroundColor(Color.mealzColor(.darkGray))
+                Spacer()
+                Image.mealzIcon(icon: .caret)
+                    .resizable()
+                    .renderingMode(.template)
+                    .rotationEffect(Angle(degrees: 90))
+                    .frame(width: 14, height: 14)
+                    .foregroundColor(Color.mealzColor(.primary))
+            }
         })
         .padding(Dimension.sharedInstance.lPadding)
         .frame(maxWidth: .infinity)

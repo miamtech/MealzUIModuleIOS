@@ -27,13 +27,11 @@ public struct MiamNeutralRecipeDetailsIgnoredProductView: RecipeDetailsIgnoredPr
             }.frame(height:40)
             Text(Localization.ingredient.willNotBeAdded.localised).padding(Dimension.sharedInstance.mPadding)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
-            Button {
-                onChooseProduct()
-            } label: {
+            Button(action: onChooseProduct, label: {
                 Text(Localization.ingredient.chooseProduct.localised).padding(Dimension.sharedInstance.mPadding)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                     .foregroundColor(Color.mealzColor(.primary))
-            }
+            })
         }.background(Color.mealzColor(.lightBackground))
             .cornerRadius(Dimension.sharedInstance.mCornerRadius)
             .padding(.horizontal, Dimension.sharedInstance.mPadding)
