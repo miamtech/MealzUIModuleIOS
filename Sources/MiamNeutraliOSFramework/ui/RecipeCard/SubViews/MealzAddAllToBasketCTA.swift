@@ -14,15 +14,18 @@ public struct MealzAddAllToBasketCTA: View {
     let callToAction: () -> Void
     let buttonText: String
     let disableButton: Bool
+    let isCurrentlyInBasket: Bool
     
     public init(
         callToAction: @escaping () -> Void,
         buttonText: String = Localization.recipeDetails.addAllProducts.localised,
-        disableButton: Bool = false
+        disableButton: Bool = false,
+        isCurrentlyInBasket: Bool = false
     ) {
         self.callToAction = callToAction
         self.buttonText = buttonText
         self.disableButton = disableButton
+        self.isCurrentlyInBasket = isCurrentlyInBasket
     }
     
     public var body: some View {
@@ -40,7 +43,7 @@ public struct MealzAddAllToBasketCTA: View {
                 .minimumScaleFactor(0.75)
         })
         .padding(Dimension.sharedInstance.mlPadding)
-        .background(Color.mealzColor(.primary))
+        .background(Color.mealzColor(isCurrentlyInBasket ? .lightBackground : .primary))
         .cornerRadius(Dimension.sharedInstance.mPadding)
         .disabled(disableButton)
         .darkenView(disableButton)

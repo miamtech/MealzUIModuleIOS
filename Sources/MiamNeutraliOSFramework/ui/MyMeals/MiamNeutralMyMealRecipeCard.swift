@@ -68,7 +68,7 @@ public struct MiamNeutralMyMealRecipeCard: MyMealRecipeCardProtocol {
                                 .foregroundColor(Color.mealzColor(.darkGray))
                         }
                     }
-                    Text(String(numberOfProductsInRecipe) + Localization.myMeals.products.localised)
+                    Text(String(numberOfProductsInRecipe) + " " + Localization.myMeals.products.localised)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                         .foregroundColor(Color.mealzColor(.darkGray))
                     if let attributes = recipe.attributes {
