@@ -16,6 +16,8 @@ public struct MiamNeutralRecipeCard: CatalogRecipeCardProtocol {
     public func content(
         recipeCardDimensions: CGSize,
         recipe: Recipe,
+        recipePrice: Double,
+        numberOfGuests: Int,
         isCurrentlyInBasket: Bool,
         onAddToBasket: @escaping (String) -> Void,
         onShowRecipeDetails: @escaping (String) -> Void
@@ -79,21 +81,21 @@ public struct MiamNeutralRecipeCard: CatalogRecipeCardProtocol {
                         Button {
                             ctaAction(recipe.id)
                         } label: {
-                                if isCurrentlyInBasket {
-                                    Text(Localization.recipe.showBasketPreview.localised)
+                            if isCurrentlyInBasket {
+                                Text(Localization.recipe.showBasketPreview.localised)
+                                    .foregroundColor(Color.mealzColor(.white))
+                                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBoldStyle)
+                            } else {
+                                HStack {
+                                    Image.mealzIcon(icon: .plus)
+                                        .renderingMode(.template)
+                                        .frame(width: 18, height: 18)
+                                        .foregroundColor(Color.mealzColor(.white))
+                                    Text(Localization.recipe.add.localised)
                                         .foregroundColor(Color.mealzColor(.white))
                                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBoldStyle)
-                                } else {
-                                    HStack {
-                                        Image.mealzIcon(icon: .plus)
-                                            .renderingMode(.template)
-                                            .frame(width: 18, height: 18)
-                                            .foregroundColor(Color.mealzColor(.white))
-                                        Text(Localization.recipe.add.localised)
-                                            .foregroundColor(Color.mealzColor(.white))
-                                            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBoldStyle)
-                                    }
                                 }
+                            }
                         }
                         .padding(.vertical, Dimension.sharedInstance.mPadding)
                         .padding(.horizontal, Dimension.sharedInstance.lPadding)
@@ -132,6 +134,8 @@ struct MiamNeutralRecipeCard_Previews: PreviewProvider {
         MiamNeutralRecipeCard().content(
             recipeCardDimensions: CGSize(width: 380, height: 100),
             recipe: recipe,
+            recipePrice: 12.4,
+            numberOfGuests: 4,
             isCurrentlyInBasket: false,
             onAddToBasket: {_ in },
             onShowRecipeDetails: {_ in}
@@ -146,6 +150,8 @@ public struct DemoCatalogRecipeCardView: CatalogRecipeCardProtocol {
     public func content(
         recipeCardDimensions: CGSize,
         recipe: Recipe,
+        recipePrice: Double,
+        numberOfGuests: Int,
         isCurrentlyInBasket: Bool,
         onAddToBasket: @escaping (String) -> Void,
         onShowRecipeDetails: @escaping (String) -> Void
@@ -193,6 +199,8 @@ public struct MealzRecipeCard: CatalogRecipeCardProtocol {
     public func content(
         recipeCardDimensions: CGSize,
         recipe: Recipe,
+        recipePrice: Double,
+        numberOfGuests: Int,
         isCurrentlyInBasket: Bool,
         onAddToBasket: @escaping (String) -> Void,
         onShowRecipeDetails: @escaping (String) -> Void
@@ -200,24 +208,25 @@ public struct MealzRecipeCard: CatalogRecipeCardProtocol {
         let dimensions = Dimension.sharedInstance
         let callToActionHeight: CGFloat = 70
         let pictureHeight = recipeCardDimensions.height - callToActionHeight
+        let pricePerServe = recipePrice / Double(numberOfGuests)
         
         func showTimeAndDifficulty() -> Bool {
             return recipeCardDimensions.height >= 320
         }
         
-        
-       
         return VStack(spacing: 0.0) {
             VStack(spacing: 0.0) {
-                ZStack(alignment: .topTrailing) {
+                ZStack {
                     AsyncImage(url: recipe.pictureURL) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .padding(0)
-                            .frame(minWidth: 0, maxWidth: recipeCardDimensions.width, maxHeight:
-                                    pictureHeight)
-                    }.padding(0)
+                            .frame(width: recipeCardDimensions.width, height: pictureHeight)
+                            .clipped()
+                    }
+                    .contentShape(Rectangle()) // this fixes gesture detector overflow to other cards
+                    .padding(0)
                     LinearGradient(
                         gradient: Gradient(
                             colors: [Color.clear, Color.black.opacity(0.3)]),
@@ -239,26 +248,22 @@ public struct MealzRecipeCard: CatalogRecipeCardProtocol {
                                 .multilineTextAlignment(.leading)
                                 .minimumScaleFactor(0.75)
                             Spacer()
-                            if let guests = recipe.attributes?.numberOfGuests {
-                                MealzSmallGuestView(guests: Int(guests))
-                            }
+                            MealzSmallGuestView(guests: Int(numberOfGuests))
                         }.padding(Dimension.sharedInstance.mlPadding)
                     }
                 }
                 .padding(0)
-                .frame(height: pictureHeight)
+                .frame(width: recipeCardDimensions.width, height: pictureHeight)
                 .clipped()
-                if let pricePerServe = recipe.attributes?.price?.pricePerServe {
-                    HStack {
-                        MealzPricePerPerson(pricePerGuest: pricePerServe)
-                        Spacer()
-                        CallToAction(cardWidth: recipeCardDimensions.width) {
-                            onShowRecipeDetails(recipe.id)
-                        }
+                HStack {
+                    MealzPricePerPerson(pricePerGuest: pricePerServe)
+                    Spacer()
+                    CallToAction(cardWidth: recipeCardDimensions.width, isCurrentlyInBasket: isCurrentlyInBasket) {
+                        onShowRecipeDetails(recipe.id)
                     }
-                    .frame(height: callToActionHeight)
-                    .padding(.horizontal, Dimension.sharedInstance.mlPadding)
                 }
+                .frame(height: callToActionHeight)
+                .padding(.horizontal, Dimension.sharedInstance.mlPadding)
             }
         }
         .onTapGesture {
@@ -276,11 +281,12 @@ public struct MealzRecipeCard: CatalogRecipeCardProtocol {
     
     internal struct CallToAction: View {
         let cardWidth: CGFloat
+        let isCurrentlyInBasket: Bool
         let callToAction: () -> Void
         var body: some View {
             VStack {
                 if cardWidth >= 225 {
-                    MealzAddAllToBasketCTA(callToAction: callToAction)
+                    MealzAddAllToBasketCTA(callToAction: callToAction, isCurrentlyInBasket: isCurrentlyInBasket)
                 } else {
                     Button(action: callToAction, label: {
                         Image.mealzIcon(icon: .basket)
@@ -290,7 +296,7 @@ public struct MealzRecipeCard: CatalogRecipeCardProtocol {
                             .frame(width: 24, height: 24)
                     })
                     .padding(Dimension.sharedInstance.mlPadding)
-                    .background(Color.mealzColor(.primary))
+                    .background(Color.mealzColor(isCurrentlyInBasket ? .lightBackground : .primary))
                     .cornerRadius(Dimension.sharedInstance.mPadding)
                 }
             }

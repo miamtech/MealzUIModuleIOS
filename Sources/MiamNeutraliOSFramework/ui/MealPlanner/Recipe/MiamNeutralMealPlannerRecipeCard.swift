@@ -40,12 +40,12 @@ public struct MiamNeutralMealPlannerRecipeCard: MealPlannerRecipeCardProtocol {
                 .padding(0)
                 .frame(width: 150.0)
                 .clipped()
-                VStack(spacing: dimensions.sPadding) {
-                    Text(recipe.title + "\n")
+                VStack(spacing: dimensions.mPadding) {
+                    Text(recipe.title)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                         .lineLimit(2)
-                        .minimumScaleFactor(0.9)
                         .multilineTextAlignment(.leading)
+                        .frame(height: 50)
                     HStack(spacing: dimensions.sPadding) {
                         MiamNeutralRecipeDifficulty(difficulty: recipe.difficulty)
                         MiamNeutralRecipePreparationTime(duration: recipe.cookingTimeIos)
@@ -58,13 +58,15 @@ public struct MiamNeutralMealPlannerRecipeCard: MealPlannerRecipeCardProtocol {
                             .onTapGesture {
                                 onReplaceRecipeFromMealPlanner()
                             }
-                        if #unavailable(iOS 15.0) {
-                            Image.mealzIcon(icon: .trash)
-                                .padding(dimensions.mPadding)
-                                .onTapGesture {
-                                    onRemoveRecipeFromMealPlanner()
-                                }
-                        }
+                        Spacer()
+                        Image.mealzIcon(icon: .trash)
+                            .renderingMode(.template)
+                            .foregroundColor(Color.mealzColor(.danger))
+                            .padding(dimensions.mPadding)
+                            .onTapGesture {
+                                onRemoveRecipeFromMealPlanner()
+                            }
+                        
                     }
                     .frame(maxWidth: .infinity)
                 }

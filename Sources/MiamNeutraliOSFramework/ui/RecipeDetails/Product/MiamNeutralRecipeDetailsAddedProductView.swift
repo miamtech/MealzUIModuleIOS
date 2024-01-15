@@ -51,8 +51,9 @@ public struct MiamNeutralRecipeDetailsAddedProductView: RecipeDetailsAddedProduc
                     }
                     Text(data.name)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
-                    Text(data.description + " " + data.productUnit)
+                    Text(data.capacity)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
+                        .foregroundColor(Color.mealzColor(.standardDarkText))
                         .padding(dim.mPadding)
                         .background(Capsule().fill(Color.mealzColor(.lightBackground)))
                     Button(action: onChangeProduct, label: {
@@ -91,6 +92,23 @@ public struct MiamNeutralRecipeDetailsAddedProductView: RecipeDetailsAddedProduc
                     }
                 }
                 .padding(dim.mPadding)
+            }
+            if data.numberOfOtherRecipesSharingThisIngredient > 1 {
+                HStack(alignment: .center) {
+                    Text(
+                        String(format: String.localizedStringWithFormat(
+                            Localization.ingredient.productsSharedRecipe(
+                                numberOfProducts: Int32(data.numberOfOtherRecipesSharingThisIngredient)
+                            ).localised,
+                            data.numberOfOtherRecipesSharingThisIngredient),
+                            data.numberOfOtherRecipesSharingThisIngredient)
+                    )
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
+                    .foregroundColor(Color.mealzColor(.grayText))
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, Dimension.sharedInstance.mPadding)
+                .background(Color.mealzColor(.lightBackground))
             }
         }.overlay( /// apply a rounded border
             RoundedRectangle(cornerRadius: dim.mCornerRadius)
