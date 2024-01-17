@@ -30,9 +30,6 @@ public class MealPlannerRecipePickerParameters: MealPlannerRecipePickerParameter
     public var search: TypeSafeSearch
     public var recipeCard: TypeSafeCatalogRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public init(
         onShowRecipeDetails: @escaping (String) -> Void,
@@ -46,8 +43,5 @@ public class MealPlannerRecipePickerParameters: MealPlannerRecipePickerParameter
         self.search = viewOptions.search
         self.recipeCard = viewOptions.recipeCard
         self.recipeCardLoading = viewOptions.recipeCardLoading
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
     }
 }

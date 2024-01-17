@@ -15,9 +15,7 @@ import MiamIOSFramework
  - ingredients:  An implementation of ``RecipeDetailsIngredientsProtocol``. The content of the ingredients list in the recipe details.
  - steps:  An implementation of ``RecipeDetailsStepsProtocol``. The content of the steps in the recipe details.
  - footer:  An implementation of ``RecipeDetailsFooterProtocol``. TThe content of the footer in the recipe details.
- - loading:  An implementation of ``LoadingProtocol``
- - empty:  An implementation of ``EmptyProtocol``
- - background: An implementation of ``BackgroundProtocol```
+`
  
  */
 @available(iOS 14, *)

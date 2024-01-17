@@ -16,9 +16,7 @@ import MiamIOSFramework
  - recipeCardLoading:  An implementation of ``RecipeCardLoadingProtocol``
  - placeholder:  An implementation of ``MealPlannerRecipePlaceholderProtocol``
  - emptyResults:  An implementation of ``MealPlannerResultsEmptyProtocol``
- - loading:  An implementation of ``LoadingProtocol``
- - empty:  An implementation of ``EmptyProtocol``
- - background: An implementation of ``BackgroundProtocol``
+
 
  */
 @available(iOS 14, *)
@@ -29,9 +27,6 @@ public struct MealPlannerResultsViewOptions {
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     public var placeholder: TypeSafeMealPlannerRecipePlaceholder
     public var emptyResults: TypeSafeMealPlannerResultsEmpty
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public init(
         toolbar: TypeSafeMealPlannerResultsToolbar = TypeSafeMealPlannerResultsToolbar(MealzMealPlannerResultsToolbar()),
@@ -39,10 +34,7 @@ public struct MealPlannerResultsViewOptions {
         recipeCard: TypeSafeMealPlannerRecipeCard = TypeSafeMealPlannerRecipeCard(MealzMealPlannerRecipeCard()),
         recipeCardLoading: TypeSafeRecipeCardLoading = TypeSafeRecipeCardLoading(MealzMealPlannerRecipeCardLoading()),
         placeholder: TypeSafeMealPlannerRecipePlaceholder = TypeSafeMealPlannerRecipePlaceholder(MealzMealPlannerRecipePlaceholder()),
-        emptyResults: TypeSafeMealPlannerResultsEmpty = TypeSafeMealPlannerResultsEmpty(MealzMealPlannerResultsEmpty()),
-        empty: TypeSafeEmpty = TypeSafeEmpty(DefaultEmptyView()),
-        loading: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView()),
-        background: TypeSafeBackground = TypeSafeBackground(DefaultBackgroundView())
+        emptyResults: TypeSafeMealPlannerResultsEmpty = TypeSafeMealPlannerResultsEmpty(MealzMealPlannerResultsEmpty())
     ) {
         self.toolbar = toolbar
         self.footer = footer
@@ -50,8 +42,5 @@ public struct MealPlannerResultsViewOptions {
         self.recipeCardLoading = recipeCardLoading
         self.placeholder = placeholder
         self.emptyResults = emptyResults
-        self.background = background
-        self.empty = empty
-        self.loading = loading
     }
 }

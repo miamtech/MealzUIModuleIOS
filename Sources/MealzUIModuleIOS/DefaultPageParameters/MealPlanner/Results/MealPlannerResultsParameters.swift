@@ -32,9 +32,6 @@ public class MealPlannerResultsParameters: MealPlannerResultsParametersProtocol 
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     public var placeholder: TypeSafeMealPlannerRecipePlaceholder
     public var emptyResults: TypeSafeMealPlannerResultsEmpty
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public init(
         onShowRecipeDetails: @escaping (String) -> Void,
@@ -51,8 +48,5 @@ public class MealPlannerResultsParameters: MealPlannerResultsParametersProtocol 
         self.recipeCardLoading = viewOptions.recipeCardLoading
         self.placeholder = viewOptions.placeholder
         self.emptyResults = viewOptions.emptyResults
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
     }
 }

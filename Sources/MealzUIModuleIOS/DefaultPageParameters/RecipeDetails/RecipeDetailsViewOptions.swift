@@ -15,9 +15,7 @@ import MiamIOSFramework
  - ingredients:  An implementation of ``RecipeDetailsIngredientsProtocol``. The content of the ingredients list in the recipe details.
  - steps:  An implementation of ``RecipeDetailsStepsProtocol``. The content of the steps in the recipe details.
  - footer:  An implementation of ``RecipeDetailsFooterProtocol``. TThe content of the footer in the recipe details.
- - loading:  An implementation of ``LoadingProtocol``
- - empty:  An implementation of ``EmptyProtocol``
- - background: An implementation of ``BackgroundProtocol```
+`
  
  */
 @available(iOS 14, *)
@@ -28,9 +26,6 @@ public struct RecipeDetailsViewOptions {
     public var ingredients: TypeSafeRecipeDetailsIngredients
     public var steps: TypeSafeRecipeDetailsSteps
     public var footer: TypeSafeRecipeDetailsFooter
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public var ingredientsAtHomeToggleButton: TypeSafeBaseButton
     public var unavailableIngredientsToggleButton: TypeSafeBaseButton
@@ -45,9 +40,6 @@ public struct RecipeDetailsViewOptions {
         ingredients: TypeSafeRecipeDetailsIngredients = TypeSafeRecipeDetailsIngredients(MealzRecipeDetailsIngredientsView()),
         steps: TypeSafeRecipeDetailsSteps = TypeSafeRecipeDetailsSteps(MealzRecipeDetailsStepsView()),
         footer: TypeSafeRecipeDetailsFooter = TypeSafeRecipeDetailsFooter(MealzRecipeDetailsFooterView()),
-        empty: TypeSafeEmpty = TypeSafeEmpty(DefaultEmptyView()),
-        loading: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView()),
-        background: TypeSafeBackground = TypeSafeBackground(DefaultBackgroundView()),
         ingredientsAtHomeToggleButton: TypeSafeBaseButton = TypeSafeBaseButton(MealzNotInBasketTitle()),
         unavailableIngredientsToggleButton: TypeSafeBaseButton = TypeSafeBaseButton(MealzNotInBasketTitle()),
         ingredientsAtHome: TypeSafeNotInBasketProduct = TypeSafeNotInBasketProduct(MealzNotInBasketProduct()),
@@ -59,9 +51,6 @@ public struct RecipeDetailsViewOptions {
         self.ingredients = ingredients
         self.steps = steps
         self.footer = footer
-        self.background = background
-        self.empty = empty
-        self.loading = loading
         
         self.ingredientsAtHomeToggleButton = ingredientsAtHomeToggleButton
         self.unavailableIngredientsToggleButton = unavailableIngredientsToggleButton

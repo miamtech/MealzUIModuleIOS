@@ -18,18 +18,12 @@ import MiamIOSFramework
 public struct MealPlannerRecapViewOptions {
     public var success: TypeSafeMealPlannerRecap
     public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public init(
         success: TypeSafeMealPlannerRecap = TypeSafeMealPlannerRecap(MealzMealPlannerRecap()),
-        empty: TypeSafeEmpty = TypeSafeEmpty(DefaultEmptyView()),
-        loading: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView()),
         background: TypeSafeBackground = TypeSafeBackground(DefaultBackgroundView())
     ) {
         self.success = success
         self.background = background
-        self.empty = empty
-        self.loading = loading
     }
 }

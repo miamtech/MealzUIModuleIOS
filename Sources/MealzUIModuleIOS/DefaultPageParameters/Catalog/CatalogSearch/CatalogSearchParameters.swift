@@ -22,9 +22,6 @@ import MiamIOSFramework
 public class CatalogSearchParameters: CatalogSearchParametersProtocol {
     public var onApplied: () -> Void
     public var search: TypeSafeSearch
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
-    public var background: TypeSafeBackground
     
     public init(
         onApplied: @escaping () -> Void,
@@ -32,8 +29,5 @@ public class CatalogSearchParameters: CatalogSearchParametersProtocol {
     ) {
         self.onApplied = onApplied
         self.search = viewOptions.search
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
-        self.background = viewOptions.background
     }
 }

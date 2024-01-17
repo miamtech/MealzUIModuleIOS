@@ -27,9 +27,6 @@ public class FavoritesParameters: FavoritesParametersProtocol {
     
     public var recipeCard: TypeSafeCatalogRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public init(
         onNoResultsRedirect: @escaping () -> Void,
@@ -42,8 +39,6 @@ public class FavoritesParameters: FavoritesParametersProtocol {
         self.onRecipeCallToActionTapped = onRecipeCallToActionTapped
         self.recipeCard = viewOptions.recipeCard
         self.recipeCardLoading = viewOptions.recipeCardLoading
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
+        
     }
 }

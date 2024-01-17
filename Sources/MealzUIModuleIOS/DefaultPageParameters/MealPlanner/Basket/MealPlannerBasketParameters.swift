@@ -25,9 +25,6 @@ public class MealPlannerBasketParameters: MealPlannerBasketParametersProtocol {
     public var onNavigateToBasket: () -> Void
     
     public var footer: TypeSafeMealPlannerBasketFooter
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public init(
         onNavigateToRecap: @escaping () -> Void,
@@ -37,8 +34,5 @@ public class MealPlannerBasketParameters: MealPlannerBasketParametersProtocol {
         self.onNavigateToRecap = onNavigateToRecap
         self.onNavigateToBasket = onNavigateToBasket
         self.footer = viewOptions.footer
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
     }
 }

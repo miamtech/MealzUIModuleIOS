@@ -35,9 +35,6 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
     public var ingredients: TypeSafeRecipeDetailsIngredients
     public var steps: TypeSafeRecipeDetailsSteps
     public var footer: TypeSafeRecipeDetailsFooter
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public var ingredientsAtHomeToggleButton: TypeSafeBaseButton
     public var unavailableIngredientsToggleButton: TypeSafeBaseButton
@@ -61,9 +58,6 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
         self.ingredients = viewOptions.ingredients
         self.steps = viewOptions.steps
         self.footer = viewOptions.footer
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
         self.selectedControl = viewOptions.selectedControl
         
         self.ingredientsAtHomeToggleButton = viewOptions.ingredientsAtHomeToggleButton

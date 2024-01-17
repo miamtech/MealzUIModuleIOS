@@ -23,9 +23,7 @@ public class MealPlannerRecapParameters: MealPlannerRecapParametersProtocol {
     
     public var success: TypeSafeMealPlannerRecap
     public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
-    
+
     public init(
         onNavigateAwayFromMealPlanner: @escaping () -> Void,
         viewOptions: MealPlannerRecapViewOptions = MealPlannerRecapViewOptions()
@@ -33,7 +31,5 @@ public class MealPlannerRecapParameters: MealPlannerRecapParametersProtocol {
         self.onNavigateAwayFromMealPlanner = onNavigateAwayFromMealPlanner
         self.success = viewOptions.success
         self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
     }
 }
