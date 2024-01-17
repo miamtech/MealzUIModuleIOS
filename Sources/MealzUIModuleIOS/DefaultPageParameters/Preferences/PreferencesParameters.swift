@@ -28,9 +28,6 @@ public class PreferencesParameters: PreferencesParametersProtocol {
     public var ingredientsSection: TypeSafePreferencesIngredients
     public var equipmentSection: TypeSafePreferencesEquipment
     public var footer: TypeSafePreferencesFooter
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public init(
         onClosed: @escaping () -> Void,
@@ -44,8 +41,5 @@ public class PreferencesParameters: PreferencesParametersProtocol {
         self.ingredientsSection = viewOptions.ingredientsSection
         self.equipmentSection = viewOptions.equipmentSection
         self.footer = viewOptions.footer
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
     }
 }

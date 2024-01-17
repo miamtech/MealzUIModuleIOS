@@ -25,9 +25,7 @@ public struct ItemSelectorParameters: ItemSelectorParametersProtocol {
     public var selectedProduct: TypeSafeItemSelectorSelectedProduct
     public var productOptions: TypeSafeItemSelectorOptionProducts
     public var noResults: TypeSafeItemSelectorNoResults
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
+    
     public var onItemSelected: () -> Void
     
     public init(
@@ -39,9 +37,7 @@ public struct ItemSelectorParameters: ItemSelectorParametersProtocol {
         self.selectedProduct = viewOptions.selectedProduct
         self.productOptions = viewOptions.productOptions
         self.noResults = viewOptions.noResults
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
+        
         self.onItemSelected = onItemSelected
     }
 }

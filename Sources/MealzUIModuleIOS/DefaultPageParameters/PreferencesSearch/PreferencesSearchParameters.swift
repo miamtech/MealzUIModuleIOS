@@ -22,9 +22,7 @@ public class PreferencesSearchParameters: PreferencesSearchProtocol {
     public var onClosed: () -> Void
     public var search: TypeSafeSearch
     public var tagButton: TypeSafeBaseButton
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
+    
     public init(
         onClosed: @escaping () -> Void,
         viewOptions: PreferencesSearchViewOptions = PreferencesSearchViewOptions()
@@ -32,8 +30,5 @@ public class PreferencesSearchParameters: PreferencesSearchProtocol {
         self.onClosed = onClosed
         self.search = viewOptions.search
         self.tagButton = viewOptions.tagButton
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
     }
 }

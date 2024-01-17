@@ -25,9 +25,6 @@ public class RecipeCarouselParameters: RecipeCarouselParametersProtocol {
     
     public var recipeCard: TypeSafeCatalogRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public init(
         onShowRecipeDetails: @escaping (String) -> Void,
@@ -38,8 +35,5 @@ public class RecipeCarouselParameters: RecipeCarouselParametersProtocol {
         self.onRecipeCallToActionTapped = onRecipeCallToActionTapped
         self.recipeCard = viewOptions.recipeCard
         self.recipeCardLoading = viewOptions.recipeCardLoading
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
     }
 }

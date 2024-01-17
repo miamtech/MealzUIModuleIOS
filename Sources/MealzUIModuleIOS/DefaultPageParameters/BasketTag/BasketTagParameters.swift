@@ -23,9 +23,6 @@ public class BasketTagParameters: BasketTagParametersProtocol {
     public var onShowRecipeDetails: (String) -> Void
     
     public var title: TypeSafeBaseTitle
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public init(
         onShowRecipeDetails: @escaping (String) -> Void,
@@ -33,9 +30,6 @@ public class BasketTagParameters: BasketTagParametersProtocol {
     ) {
         self.onShowRecipeDetails = onShowRecipeDetails
         self.title = viewOptions.title
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
     }
 }
 

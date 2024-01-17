@@ -26,9 +26,6 @@ public class MyMealsParameters: MyMealsParametersProtocol {
   
     public var recipeCard: TypeSafeMyMealRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public init(
         onNoResultsRedirect: @escaping () -> Void,
@@ -39,8 +36,5 @@ public class MyMealsParameters: MyMealsParametersProtocol {
         self.onShowRecipeDetails = onShowRecipeDetails
         self.recipeCard = viewOptions.recipeCard
         self.recipeCardLoading = viewOptions.recipeCardLoading
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
     }
 }

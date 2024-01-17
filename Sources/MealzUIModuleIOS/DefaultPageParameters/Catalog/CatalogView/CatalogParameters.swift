@@ -35,9 +35,7 @@ public struct CatalogParameters: CatalogParametersProtocol {
     public var onMealsInBasketButtonTapped: () -> Void
     public var catalogToolbar: TypeSafeCatalogToolbar
     public var resultsToolbar: TypeSafeCatalogToolbar
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
+    
     public var mealPlannerCTA: TypeSafeMealPlannerCTA
     public var mealsInBasketButton: MealsInBasketButtonParameters
     
@@ -56,9 +54,7 @@ public struct CatalogParameters: CatalogParametersProtocol {
         self.onPreferencesTapped = onPreferencesTapped
         self.onLaunchMealPlanner = onLaunchMealPlanner
         self.onMealsInBasketButtonTapped = onMealsInBasketButtonTapped
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
+        
         self.catalogToolbar = viewOptions.catalogToolbar
         self.resultsToolbar = viewOptions.resultsToolbar
         self.mealPlannerCTA = viewOptions.mealPlannerCTA

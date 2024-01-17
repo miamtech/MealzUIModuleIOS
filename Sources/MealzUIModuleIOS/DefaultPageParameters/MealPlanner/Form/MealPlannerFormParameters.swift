@@ -22,9 +22,7 @@ public class MealPlannerFormParameters: MealPlannerFormParametersProtocol {
     public var onNavigateToMealPlannerResults: ([String]) -> Void
     
     public var form: TypeSafeMealPlannerForm
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
+    
     
     public init(
         onNavigateToMealPlannerResults: @escaping ([String]) -> Void,
@@ -32,8 +30,6 @@ public class MealPlannerFormParameters: MealPlannerFormParametersProtocol {
     ) {
         self.onNavigateToMealPlannerResults = onNavigateToMealPlannerResults
         self.form = viewOptions.form
-        self.background = viewOptions.background
-        self.empty = viewOptions.empty
-        self.loading = viewOptions.loading
+        
     }
 }

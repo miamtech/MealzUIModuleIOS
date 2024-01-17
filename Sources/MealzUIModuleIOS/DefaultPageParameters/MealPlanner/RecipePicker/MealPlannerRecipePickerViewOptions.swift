@@ -13,9 +13,7 @@ import MiamIOSFramework
  - search:  An implementation of ``SearchProtocol``
  - recipeCard:  An implementation of ``CatalogRecipeCardProtocol``
  - recipeCardLoading:  An implementation of ``RecipeCardLoadingProtocol``
- - loading:  An implementation of ``LoadingProtocol``
- - empty:  An implementation of ``EmptyProtocol``
- - background: An implementation of ``BackgroundProtocol``
+
 
  */
 @available(iOS 14, *)
@@ -23,23 +21,14 @@ public struct MealPlannerRecipePickerViewOptions {
     public var search: TypeSafeSearch
     public var recipeCard: TypeSafeCatalogRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
-    public var background: TypeSafeBackground
-    public var empty: TypeSafeEmpty
-    public var loading: TypeSafeLoading
     
     public init(
         search: TypeSafeSearch = TypeSafeSearch(MealzMealPlannerSearch()),
         recipeCard: TypeSafeCatalogRecipeCard = TypeSafeCatalogRecipeCard(MealzRecipeCard()),
-        recipeCardLoading: TypeSafeRecipeCardLoading = TypeSafeRecipeCardLoading(MealzRecipeCardLoading()),
-        empty: TypeSafeEmpty = TypeSafeEmpty(DefaultEmptyView()),
-        loading: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView()),
-        background: TypeSafeBackground = TypeSafeBackground(DefaultBackgroundView())
+        recipeCardLoading: TypeSafeRecipeCardLoading = TypeSafeRecipeCardLoading(MealzRecipeCardLoading())
     ) {
         self.search = search
         self.recipeCard = recipeCard
         self.recipeCardLoading = recipeCardLoading
-        self.background = background
-        self.empty = empty
-        self.loading = loading
     }
 }
