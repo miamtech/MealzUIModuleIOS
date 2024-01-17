@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
 
-  spec.name         = "MiamNeutraliOSFramework"
+  spec.name         = "MealziOSFramework"
   spec.version      = "0.0.1"
   spec.summary      = "Miam iOS SDK for Miam Neutral"
   spec.description  = <<-DESC
@@ -12,7 +12,7 @@ Miam iOS SDK for Courses U.
   spec.author             = { "Diarmuid McGonagle" => "it@miam.tech" }
   spec.platform     = :ios, "11.0"
   spec.swift_versions = "5.8"
-  spec.resources = "Sources/MiamNeutraliOSFramework/Resources/**/*.png"
+  spec.resources = "Sources/MealziOSFramework/Resources/**/*.png"
 
   
   spec.source       = { :git => "https://github.com/miamtech/coursesU-x-Miam-Framework.git", :tag => "#{spec.version}" }
