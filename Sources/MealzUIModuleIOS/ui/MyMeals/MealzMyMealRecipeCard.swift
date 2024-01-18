@@ -16,7 +16,8 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
     public func content(
         recipeCardDimensions: CGSize,
         recipe: Recipe,
-        price: Double,
+        numberOfGuests: Int,
+        totalPrice: Double,
         numberOfProductsInRecipe: Int,
         onDeleteRecipe: @escaping () -> Void,
         onShowRecipeDetails: @escaping (String) -> Void
@@ -41,10 +42,8 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                             .frame(width: pictureSize, height: pictureSize)
                             .cornerRadius(Dimension.sharedInstance.mCornerRadius)
                     }
-                    if let guests = recipe.attributes?.numberOfGuests {
-                        MealzSmallGuestView(guests: Int(guests))
-                            .padding(Dimension.sharedInstance.mPadding)
-                    }
+                    MealzSmallGuestView(guests: numberOfGuests)
+                        .padding(Dimension.sharedInstance.mPadding)
                 }
                 .frame(width: pictureSize, height: pictureSize)
                 .clipped()
@@ -71,7 +70,7 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                         .foregroundColor(Color.mealzColor(.grayText))
                     if let attributes = recipe.attributes {
-                        PricePerPersonView(price: price, numberOfGuests: Int(attributes.numberOfGuests))
+                        PricePerPersonView(price: totalPrice, numberOfGuests: numberOfGuests)
                     }
                     Button(action: {
                         onShowRecipeDetails(recipe.id)
@@ -138,8 +137,9 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
 #Preview {
     MealzMyMealRecipeCard().content(
         recipeCardDimensions: CGSize(width: 400, height: 200),
-        recipe: FakeRecipe().createRandomFakeRecipe(), 
-        price: 34.2,
+        recipe: FakeRecipe().createRandomFakeRecipe(),
+        numberOfGuests: 4,
+        totalPrice: 34.2,
         numberOfProductsInRecipe: 2,
         onDeleteRecipe: {},
         onShowRecipeDetails: { _ in }
