@@ -8,6 +8,8 @@
 import SwiftUI
 import MiamIOSFramework
 
+public let mealzProductHeight: CGFloat = 230
+
 @available(iOS 14, *)
 public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProtocol {
     public init() {}
@@ -33,7 +35,6 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
             .frame(height: 40)
             .background(Color.mealzColor(.primary))
             .cornerRadius(dim.mCornerRadius, corners: .top)
-            
             HStack {
                 if let pictureURL = URL(string: data.pictureURL) {
                     AnyView(AsyncImage(url: pictureURL) { image in
@@ -61,8 +62,10 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                             .foregroundColor(Color.mealzColor(.primary))
                     })
-                    
-                }.frame(maxWidth: .infinity,alignment: .leading)
+                }
+                .frame(maxWidth: .infinity,alignment: .leading)
+                .padding(.horizontal, dim.mlPadding)
+                .padding(.top, dim.mPadding)
             }
             HStack {
                 Text(data.formattedProductPrice)
@@ -93,6 +96,7 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                 }
                 .padding(dim.mPadding)
             }
+            Spacer()
             if data.numberOfOtherRecipesSharingThisIngredient > 1 {
                 HStack(alignment: .center) {
                     Text(
@@ -110,7 +114,9 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                 .padding(.vertical, Dimension.sharedInstance.mPadding)
                 .background(Color.mealzColor(.lightBackground))
             }
-        }.overlay( /// apply a rounded border
+        }
+        .frame(height: mealzProductHeight)
+        .overlay( /// apply a rounded border
             RoundedRectangle(cornerRadius: dim.mCornerRadius)
                 .stroke(Color.mealzColor(.primary), lineWidth: 1)
         )

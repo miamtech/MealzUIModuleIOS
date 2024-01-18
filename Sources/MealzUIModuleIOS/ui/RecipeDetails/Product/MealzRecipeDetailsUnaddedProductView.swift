@@ -61,7 +61,8 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
                     })
                 }
                 .frame(maxWidth: .infinity,alignment: .leading)
-                    .padding(dim.mlPadding)
+                .padding(.horizontal, dim.mlPadding)
+                .padding(.top, dim.mPadding)
             }
             HStack(spacing: Dimension.sharedInstance.lPadding) {
                 Text(data.formattedProductPrice)
@@ -82,8 +83,10 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
                         .frame(width: 48, height: 48)
                 })
             }
-            .padding(dim.mlPadding)
+            .padding(.horizontal, dim.mlPadding)
+            Spacer()
         }
+        .frame(height: mealzProductHeight)
         .overlay( /// apply a rounded border
             RoundedRectangle(cornerRadius: dim.mCornerRadius)
                 .stroke(Color.mealzColor(.lightBackground), lineWidth: 1)
