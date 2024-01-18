@@ -12,12 +12,20 @@ import MiamIOSFramework
 public struct MealzGeneralEmpty: EmptyProtocol {
     public init() {}
     public func content(onOptionalCallback: (() -> Void)?) -> some View {
-        VStack {
+        VStack(spacing: Dimension.sharedInstance.mPadding) {
             Image.mealzIcon(icon: .feelingBlue)
-            Text(Localization.catalog.tryAnotherSearch.localised)
-                .foregroundColor(Color.mealzColor(.primary))
-                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
+            Text(Localization.catalog.noRecipeFound.localised)
+                .foregroundColor(Color.mealzColor(.standardDarkText))
+                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.subtitleStyle)
                 .multilineTextAlignment(.center)
+            if let onOptionalCallback {
+                Button(action: onOptionalCallback, label: {
+                    Text(Localization.catalog.tryAnotherSearch.localised)
+                        .foregroundColor(Color.mealzColor(.primary))
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+                        .multilineTextAlignment(.center)
+                })
+            }
         }
     }
 }
