@@ -1,8 +1,8 @@
 //
-//  BaseViewParameters.swift
+//  BaseComponentViewParameters.swift
 //
 //
-//  Created by Diarmuid McGonagle on 17/01/2024.
+//  Created by Diarmuid McGonagle on 18/01/2024.
 //
 
 import Foundation
@@ -10,14 +10,14 @@ import MiamIOSFramework
 import SwiftUI
 
 @available(iOS 14, *)
-public struct BaseViewParameters: BaseViewsProtocol {
+public struct BaseComponentViewParameters: BaseViewsProtocol {
     public var loading: TypeSafeLoading
     public var empty: TypeSafeEmpty
     public var background: TypeSafeBackground
     
     public init(
-        loading: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView()),
-        empty: TypeSafeEmpty = TypeSafeEmpty(MealzGeneralEmpty()),
+        loading: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView(size: 10)),
+        empty: TypeSafeEmpty = TypeSafeEmpty(DefaultEmptyView()),
         background: TypeSafeBackground = TypeSafeBackground(DefaultBackgroundView())
     ) {
         self.loading = loading

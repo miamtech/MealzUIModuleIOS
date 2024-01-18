@@ -24,7 +24,7 @@ public struct MealzRecipeDetailsLoadingProductView: LoadingProtocol {
                     .frame(width: 160.0, height: linePlaceholderHeight)
             }
         }
-        .frame(height: 180)
+        .frame(height: mealzProductHeight)
         .frame(maxWidth: .infinity)
         .overlay( /// apply a rounded border
             RoundedRectangle(cornerRadius: dim.mCornerRadius)

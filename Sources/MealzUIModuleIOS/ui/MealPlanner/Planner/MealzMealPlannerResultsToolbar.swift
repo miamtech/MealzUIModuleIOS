@@ -50,6 +50,8 @@ internal struct SubmitButtonCollapsed: View {
     let dimension = Dimension.sharedInstance
     var body: some View {
         Button {
+            // dismiss keyboard
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             withAnimation {
                 isLoading.toggle()
                 onButtonAction()

@@ -26,10 +26,12 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
             return priceStatus == ComponentUiState.locked || priceStatus == ComponentUiState.loading
         }
         return HStack(spacing: 0) {
-            if priceStatus == ComponentUiState.loading {
+            if lockButton {
                 ProgressLoader(color: .primary, size: 24)
             } else {
-                MealzPricePerPerson(pricePerGuest: pricePerGuest)
+                if price > 0 {
+                    MealzPricePerPerson(pricePerGuest: pricePerGuest)
+                }
             }
             Spacer()
             switch ingredientsStatus.type {
