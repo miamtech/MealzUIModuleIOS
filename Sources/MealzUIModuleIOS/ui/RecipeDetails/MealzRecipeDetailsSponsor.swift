@@ -12,22 +12,19 @@ import miamCore
 @available(iOS 14, *)
 public struct MealzRecipeDetailsSponsor: RecipeDetailsSponsorProtocol {
     public init() {}
-    public func content(
-        sponsor: Sponsor,
-        onSponsorTapped: @escaping () -> Void
-    ) -> some View {
+    public func content(params: RecipeDetailsSponsorParameters) -> some View {
         HStack(spacing: 0.0) {
             VStack(alignment: .leading, spacing: 8.0) {
                 Text(Localization.sponsorBanner.sponsorBannerSpeach.localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
                 Button {
-                    onSponsorTapped()
+                    params.onSponsorTapped()
                 } label: {
                     Text(Localization.sponsorBanner.sponsorBannerMoreInfo.localised)
                 }
             }
             Spacer(minLength: 16.0)
-            if let sponsorAttributes = sponsor.attributes, let logoURL = URL(string: sponsorAttributes.logoUrl) {
+            if let sponsorAttributes = params.sponsor.attributes, let logoURL = URL(string: sponsorAttributes.logoUrl) {
                 AsyncImage(url: logoURL) { image in
                     image
                         .resizable()

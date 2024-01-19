@@ -21,18 +21,15 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class MealPlannerBasketParameters: MealPlannerBasketParametersProtocol {
-    public var onNavigateToRecap: () -> Void
-    public var onNavigateToBasket: () -> Void
+    public var actions: MealPlannerBasketActions
     
     public var footer: TypeSafeMealPlannerBasketFooter
     
     public init(
-        onNavigateToRecap: @escaping () -> Void,
-        onNavigateToBasket: @escaping () -> Void,
+        actions: MealPlannerBasketActions,
         viewOptions: MealPlannerBasketViewOptions = MealPlannerBasketViewOptions()
     ) {
-        self.onNavigateToRecap = onNavigateToRecap
-        self.onNavigateToBasket = onNavigateToBasket
+        self.actions = actions
         self.footer = viewOptions.footer
     }
 }

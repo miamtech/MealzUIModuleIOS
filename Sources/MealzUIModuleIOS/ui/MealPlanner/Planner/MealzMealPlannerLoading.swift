@@ -12,7 +12,7 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzMealPlannerLoading: LoadingProtocol {
     public init() {}
-    public func content() -> some View {
+    public func content(params: BaseLoadingParameters) -> some View {
         VStack {
             HStack {
                 ProgressLoader(color: Color.mealzColor(.primary))

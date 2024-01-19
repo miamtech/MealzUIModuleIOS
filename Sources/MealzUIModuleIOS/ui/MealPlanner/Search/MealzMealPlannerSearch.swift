@@ -12,13 +12,13 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzMealPlannerSearch: SearchProtocol {
     public init() {}
-    public func content(searchText: Binding<String>, onApply: @escaping () -> Void) -> some View {
+    public func content(params: SearchParameters) -> some View {
         HStack(spacing: 8.0) {
             HStack(spacing: 4.0) {
                 Image.mealzIcon(icon: .search)
                     .renderingMode(.template)
                     .foregroundColor(Color.mealzColor(.primary))
-                TextField(Localization.itemSelector.search.localised, text: searchText, onCommit: {
+                TextField(Localization.itemSelector.search.localised, text: params.searchText, onCommit: {
                     // TODO: Enter pressed, start searching? Or start searching everytime a char is entered?
                 })
                 .frame(maxWidth: .infinity)
@@ -29,7 +29,7 @@ public struct MealzMealPlannerSearch: SearchProtocol {
             .overlay(RoundedRectangle(cornerRadius: Dimension.sharedInstance.mCornerRadius).stroke(Color.mealzColor(.border), lineWidth: 1.0))
 
             Button {
-                onApply()
+                params.onApply()
             } label: {
                 Image.mealzIcon(icon: .filters)
                     .renderingMode(.template)

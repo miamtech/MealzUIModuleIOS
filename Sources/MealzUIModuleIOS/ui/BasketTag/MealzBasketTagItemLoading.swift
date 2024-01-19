@@ -11,7 +11,7 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzBasketTagItemLoading: LoadingProtocol {
     public init() {}
-    public func content() -> some View {
+    public func content(params: BaseLoadingParameters) -> some View {
        EmptyView()
     }
 }
@@ -19,6 +19,6 @@ public struct MealzBasketTagItemLoading: LoadingProtocol {
 @available(iOS 14, *)
 struct MealzBasketTagItemLoading_Previews: PreviewProvider {
     static var previews: some View {
-        MealzBasketTagItemLoading().content()
+        MealzBasketTagItemLoading().content(params: BaseLoadingParameters())
     }
 }

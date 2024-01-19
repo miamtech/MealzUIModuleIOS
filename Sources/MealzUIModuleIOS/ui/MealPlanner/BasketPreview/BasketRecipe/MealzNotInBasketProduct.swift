@@ -12,14 +12,14 @@ import miamCore
 @available(iOS 14, *)
 public struct MealzNotInBasketProduct: NotInBasketProductProtocol {
     public init() {}
-    public func content(item: BasketEntry, onAddToBasket: (() -> Void)?) -> some View {
+    public func content(params: NotInBasketProductParameters) -> some View {
         VStack {
             HStack {
-                Text(item.name.capitalizingFirstLetter())
+                Text(params.item.name.capitalizingFirstLetter())
                     .padding(Dimension.sharedInstance.mPadding)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
-                if let ingredientQuantity = item.attributes?.quantity, let unit = item.selectedItem?.attributes?.capacityUnit {
+                if let ingredientQuantity = params.item.attributes?.quantity, let unit = params.item.selectedItem?.attributes?.capacityUnit {
                     Text(String(format: "%g \(unit)", Float(truncating: ingredientQuantity)))
                         .padding(Dimension.sharedInstance.mPadding)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
@@ -27,7 +27,7 @@ public struct MealzNotInBasketProduct: NotInBasketProductProtocol {
             }.frame(height:40)
             Text(Localization.ingredient.willNotBeAdded.localised).padding(Dimension.sharedInstance.mPadding)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
-            if let addIngredientAction = onAddToBasket {
+            if let addIngredientAction = params.onAddToBasket {
                 Button(action: addIngredientAction, label: {
                     Text(Localization.recipe.add.localised).padding(Dimension.sharedInstance.mPadding)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)

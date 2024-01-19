@@ -21,19 +21,16 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public class MyMealsParameters: MyMealsParametersProtocol {
     
-    public var onNoResultsRedirect: () -> Void
-    public var onShowRecipeDetails: (String) -> Void
+    public var actions: MyMealsActions
   
     public var recipeCard: TypeSafeMyMealRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     
     public init(
-        onNoResultsRedirect: @escaping () -> Void,
-        onShowRecipeDetails: @escaping (String) -> Void,
+        actions: MyMealsActions,
         viewOptions: MyMealsViewOptions = MyMealsViewOptions()
     ) {
-        self.onNoResultsRedirect = onNoResultsRedirect
-        self.onShowRecipeDetails = onShowRecipeDetails
+        self.actions = actions
         self.recipeCard = viewOptions.recipeCard
         self.recipeCardLoading = viewOptions.recipeCardLoading
     }

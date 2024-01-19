@@ -13,7 +13,7 @@ public struct MealzRecipeDetailsLoadingProductView: LoadingProtocol {
     public init() {}
     let dim = Dimension.sharedInstance
     private let linePlaceholderHeight = 13.0
-    public func content() -> some View {
+    public func content(params: BaseLoadingParameters) -> some View {
         VStack {
             VStack {
                 RoundedRectangle(cornerRadius: dim.lCornerRadius)
@@ -24,7 +24,7 @@ public struct MealzRecipeDetailsLoadingProductView: LoadingProtocol {
                     .frame(width: 160.0, height: linePlaceholderHeight)
             }
         }
-        .frame(height: 180)
+        .frame(height: mealzProductHeight)
         .frame(maxWidth: .infinity)
         .overlay( /// apply a rounded border
             RoundedRectangle(cornerRadius: dim.mCornerRadius)

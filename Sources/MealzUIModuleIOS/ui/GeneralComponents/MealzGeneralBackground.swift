@@ -11,7 +11,7 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzGeneralBackground: BackgroundProtocol {
     public init() {}
-    public func content() -> some View {
+    public func content(params: BaseBackgroundParameters) -> some View {
         HStack {}
     }
 }
@@ -19,6 +19,6 @@ public struct MealzGeneralBackground: BackgroundProtocol {
 @available(iOS 14, *)
 struct MealzGeneralBackground_Previews: PreviewProvider {
     static var previews: some View {
-        MealzGeneralBackground().content()
+        MealzGeneralBackground().content(params: BaseBackgroundParameters())
     }
 }

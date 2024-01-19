@@ -11,14 +11,9 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
     public init() {}
-    public func content(
-        recipeCardDimensions: CGSize,
-        data: BasketRecipeData,
-        actions: BasketRecipeActions
-    ) -> some View {
-        
+    public func content(params: BasketRecipeOverviewParameters) -> some View {
         func recipePicture() -> some View {
-            return AsyncImage(url: data.recipe.pictureURL) { image in
+            return AsyncImage(url: params.data.recipe.pictureURL) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -29,13 +24,13 @@ public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
         }
         
         var chevronAngle: CGFloat {
-            if data.isExpanded { return 90.0}
+            if params.data.isExpanded { return 90.0}
             else { return 0.0 }
         }
         
         func linkToRecipeDetail() -> some View {
             return  Button {
-                actions.onShowRecipeDetails(data.recipe.id)
+                params.onShowRecipeDetails(params.data.recipe.id)
             } label: {
                 Text(Localization.recipe.showDetails.localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
@@ -48,28 +43,28 @@ public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
                 recipePicture()
                 VStack(alignment: .leading) {
                     HStack(alignment: .top) {
-                        Text(data.recipe.attributes?.title ?? "")
+                        Text(params.data.recipe.attributes?.title ?? "")
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
                             .foregroundColor(Color.mealzColor(.standardDarkText))
                         Spacer()
                         Button {
-                            actions.onDeleteRecipe()
+                            params.onDeleteRecipe()
                         } label: {
                             Image.mealzIcon(icon: .trash)
                                 .renderingMode(.template)
                                 .foregroundColor(Color.mealzColor(.primary))
                         }
                     }.frame(maxWidth: .infinity)
-                    Text(data.price.pricePerPersonWithText(numberOfGuests: data.guests))
+                    Text(params.data.price.pricePerPersonWithText(numberOfGuests: params.data.guests))
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigLightStyle)
                         .foregroundColor(Color.mealzColor(.grayText))
                     HStack {
                         linkToRecipeDetail()
                         Spacer()
-                        if data.isExpandable {
+                        if params.data.isExpandable {
                             Button {
                                 withAnimation(.default) {
-                                    actions.onExpand()
+                                    params.onExpand()
                                 }
                             } label: {
                                 Image.mealzIcon(icon: .caret)
@@ -81,52 +76,28 @@ public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
                     }
                 }.padding([.leading], Dimension.sharedInstance.sPadding)
             }
-            .frame(height: recipeCardDimensions.height, alignment: .topLeading)
+            .frame(height: params.recipeCardDimensions.height, alignment: .topLeading)
             HStack {
-                if data.isReloading {
+                if params.data.isReloading {
                     ProgressLoader(color: Color.mealzColor(.primary))
                         .scaleEffect(0.5)
                 } else {
-                    Text(data.price.currencyFormatted)
+                    Text(params.data.price.currencyFormatted)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                         .foregroundColor(Color.mealzColor(.primary))
                 }
                 Spacer()
                 MealzCounterView(
-                    count: data.guests,
+                    count: params.data.guests,
                     lightMode: false,
-                    onCounterChanged: { guestCount in actions.onUpdateGuests(guestCount) },
-                    isLoading: data.isReloading,
-                    isDisable: data.isReloading,
+                    onCounterChanged: { guestCount in params.onUpdateGuests(guestCount) },
+                    isLoading: params.data.isReloading,
+                    isDisable: params.data.isReloading,
                     minValue: 1,
                     maxValue: 99)
             }
         }
         .padding([.leading, .trailing], 16.0)
         .padding(.top, Dimension.sharedInstance.sPadding)
-    }
-}
-
-@available(iOS 14, *)
-struct MealzBasketRecipeOverview_Previews: PreviewProvider {
-    static var previews: some View {
-        let data = BasketRecipeData(
-            recipe: FakeRecipe().createRandomFakeRecipe(),
-            price: 40.4,
-            guests: 4,
-            isReloading: false,
-            totalProductCount: 5,
-            isExpandable: true,
-            isExpanded: true)
-        let actions = BasketRecipeActions(
-            onDeleteRecipe: {},
-            onExpand: {},
-            onUpdateGuests: { _ in },
-            onShowRecipeDetails: { _ in })
-        
-        return MealzBasketRecipeOverview().content(
-            recipeCardDimensions: CGSize(width: 150.0, height: 300.0),
-            data: data,
-            actions: actions)
     }
 }

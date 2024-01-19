@@ -12,14 +12,16 @@ import MiamIOSFramework
 public struct MealzRecipeDetailsIgnoredProductView: RecipeDetailsIgnoredProductProtocol {
     
     public init() {}
-    public func content(ingredientName: String, ingredientQuantity: String?, ingredientUnit: String?, onChooseProduct: @escaping () -> Void) -> some View {
+    public func content(params: RecipeDetailsIgnoredProductParameters) -> some View {
         VStack {
             HStack {
-                Text(ingredientName.capitalizingFirstLetter())
+                Text(params.ingredientName.capitalizingFirstLetter())
                     .padding(Dimension.sharedInstance.mPadding)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
-                if let ingredientQuantity = ingredientQuantity, let qty = Float(ingredientQuantity), let unit = ingredientUnit {
+                if let ingredientQuantity = params.ingredientQuantity,
+                    let qty = Float(ingredientQuantity),
+                   let unit = params.ingredientUnit {
                     Text(String(format: "%g \(unit)", qty))
                         .padding(Dimension.sharedInstance.mPadding)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
@@ -27,7 +29,7 @@ public struct MealzRecipeDetailsIgnoredProductView: RecipeDetailsIgnoredProductP
             }.frame(height:40)
             Text(Localization.ingredient.willNotBeAdded.localised).padding(Dimension.sharedInstance.mPadding)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
-            Button(action: onChooseProduct, label: {
+            Button(action: params.onChooseProduct, label: {
                 Text(Localization.ingredient.chooseProduct.localised).padding(Dimension.sharedInstance.mPadding)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                     .foregroundColor(Color.mealzColor(.primary))

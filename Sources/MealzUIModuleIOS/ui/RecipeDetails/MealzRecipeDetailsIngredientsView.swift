@@ -14,25 +14,25 @@ public struct MealzRecipeDetailsIngredientsView: RecipeDetailsIngredientsProtoco
     public init() {}
     
     public func content(
-        data: RecipeDetailsIngredientsParameters
+        params: RecipeDetailsIngredientsParameters
     ) -> some View {
         
         VStack(alignment: .leading) {
             Text(
                 String(format: String.localizedStringWithFormat(
                     Localization.recipe.numberOfIngredients(
-                        numberOfIngredients: Int32(data.ingredients.count)).localised,
-                    data.ingredients.count),
-                       data.ingredients.count)
+                        numberOfIngredients: Int32(params.ingredients.count)).localised,
+                    params.ingredients.count),
+                       params.ingredients.count)
             )
             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
             .padding()
-            GridStack(rows: Int(ceil(Double(data.ingredients.count) / 3)), columns: 3) { row, col in
+            GridStack(rows: Int(ceil(Double(params.ingredients.count) / 3)), columns: 3) { row, col in
                 let index = row * 3 + col
-                if index < data.ingredients.count {
+                if index < params.ingredients.count {
                     IngrediantCard(
-                        guestCount: data.currentGuests,
-                        ingredient: data.ingredients[index]
+                        guestCount: params.currentGuests,
+                        ingredient: params.ingredients[index]
                     )
                 } else { Color.clear }
             }
@@ -65,7 +65,7 @@ public struct MealzRecipeDetailsIngredientsView: RecipeDetailsIngredientsProtoco
 struct MealzRecipeDetailsIngredientsView_Previews: PreviewProvider {
     static var previews: some View {
         MealzRecipeDetailsIngredientsView().content(
-            data: RecipeDetailsIngredientsParameters(
+            params: RecipeDetailsIngredientsParameters(
                 ingredients: [], recipeGuests: 4, currentGuests: 6))
     }
 }

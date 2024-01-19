@@ -19,15 +19,15 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class PreferencesSearchParameters: PreferencesSearchProtocol {
-    public var onClosed: () -> Void
+    public var actions: PreferencesSearchActions
     public var search: TypeSafeSearch
     public var tagButton: TypeSafeBaseButton
     
     public init(
-        onClosed: @escaping () -> Void,
+        actions: PreferencesSearchActions,
         viewOptions: PreferencesSearchViewOptions = PreferencesSearchViewOptions()
     ) {
-        self.onClosed = onClosed
+        self.actions = actions
         self.search = viewOptions.search
         self.tagButton = viewOptions.tagButton
     }

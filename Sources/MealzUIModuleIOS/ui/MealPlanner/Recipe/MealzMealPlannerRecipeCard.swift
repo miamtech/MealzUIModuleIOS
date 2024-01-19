@@ -15,40 +15,34 @@ public struct MealzMealPlannerRecipeCard: MealPlannerRecipeCardProtocol {
     
     let dimensions = Dimension.sharedInstance
     public init() {}
-    public func content(
-        recipeCardDimensions: CGSize,
-        recipe: Recipe,
-        onShowRecipeDetails: @escaping (String) -> Void,
-        onRemoveRecipeFromMealPlanner: @escaping () -> Void,
-        onReplaceRecipeFromMealPlanner: @escaping () -> Void
-    ) -> some View {
+    public func content(params: MealPlannerRecipeCardParameters) -> some View {
         VStack(spacing: 0.0) {
             Divider()
             HStack(spacing: 0.0) {
                 ZStack(alignment: .topTrailing) {
-                    AsyncImage(url: recipe.pictureURL) { image in
+                    AsyncImage(url: params.recipe.pictureURL) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .padding(0)
                             .frame(minWidth: 0, maxWidth: .infinity)
-                            .frame(height: recipeCardDimensions.height)
+                            .frame(height: params.recipeCardDimensions.height)
                     }.padding(0)
-                    LikeButton(likeButtonInfo: LikeButtonInfo(recipeId: recipe.id))
+                    LikeButton(likeButtonInfo: LikeButtonInfo(recipeId: params.recipe.id))
                         .padding(dimensions.lPadding)
                 }
                 .padding(0)
                 .frame(width: 150.0)
                 .clipped()
                 VStack(spacing: dimensions.mPadding) {
-                    Text(recipe.title)
+                    Text(params.recipe.title)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                         .lineLimit(2)
                         .multilineTextAlignment(.leading)
                         .frame(height: 50)
                     HStack(spacing: dimensions.sPadding) {
-                        MealzRecipeDifficulty(difficulty: recipe.difficulty)
-                        MealzRecipePreparationTime(duration: recipe.cookingTimeIos)
+                        MealzRecipeDifficulty(difficulty: params.recipe.difficulty)
+                        MealzRecipePreparationTime(duration: params.recipe.cookingTimeIos)
                     }
                     HStack {
                         Text(Localization.basket.swapProduct.localised)
@@ -56,7 +50,7 @@ public struct MealzMealPlannerRecipeCard: MealPlannerRecipeCardProtocol {
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                             .padding(dimensions.lPadding)
                             .onTapGesture {
-                                onReplaceRecipeFromMealPlanner()
+                                params.onReplaceRecipeFromMealPlanner()
                             }
                         Spacer()
                         Image.mealzIcon(icon: .trash)
@@ -64,7 +58,7 @@ public struct MealzMealPlannerRecipeCard: MealPlannerRecipeCardProtocol {
                             .foregroundColor(Color.mealzColor(.danger))
                             .padding(dimensions.mPadding)
                             .onTapGesture {
-                                onRemoveRecipeFromMealPlanner()
+                                params.onRemoveRecipeFromMealPlanner()
                             }
                         
                     }
@@ -75,10 +69,10 @@ public struct MealzMealPlannerRecipeCard: MealPlannerRecipeCardProtocol {
             Divider()
         }
         .onTapGesture {
-            onShowRecipeDetails(recipe.id)
+            params.onShowRecipeDetails(params.recipe.id)
         }
         .frame(maxWidth: .infinity)
-        .frame(height: recipeCardDimensions.height)
+        .frame(height: params.recipeCardDimensions.height)
     }
 }
 
@@ -100,10 +94,12 @@ struct MealzBudgetRecipeCardPreview: PreviewProvider {
             attributes: recipeAttributes,
             relationships: nil)
         MealzMealPlannerRecipeCard().content(
-            recipeCardDimensions: CGSize(),
-            recipe: recipe,
-            onShowRecipeDetails: { _ in },
-            onRemoveRecipeFromMealPlanner: {},
-            onReplaceRecipeFromMealPlanner: {})
+            params: MealPlannerRecipeCardParameters(
+                recipeCardDimensions: CGSize(),
+                recipe: recipe,
+                onShowRecipeDetails: { _ in },
+                onRemoveRecipeFromMealPlanner: {},
+                onReplaceRecipeFromMealPlanner: {})
+        )
     }
 }

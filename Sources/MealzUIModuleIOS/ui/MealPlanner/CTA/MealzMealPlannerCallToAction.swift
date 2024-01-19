@@ -13,9 +13,9 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzMealPlannerCallToAction: MealPlannerCTAProtocol {
     public init() {}
-    public func content(onTapGesture: @escaping () -> Void) -> some View {
+    public func content(params: MealPlannerCTAViewParameters) -> some View {
         Button {
-            onTapGesture()
+            params.onTapGesture()
         } label: {
             HStack {
                 VStack {

@@ -22,9 +22,7 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class MealPlannerResultsParameters: MealPlannerResultsParametersProtocol {
-    public var onShowRecipeDetails: (String) -> Void
-    public var onOpenReplaceRecipe: (Int) -> Void
-    public var onNavigateToBasket: () -> Void
+    public var actions: MealPlannerResultsActions
     
     public var toolbar: TypeSafeMealPlannerResultsToolbar
     public var footer: TypeSafeMealPlannerResultsFooter
@@ -34,14 +32,10 @@ public class MealPlannerResultsParameters: MealPlannerResultsParametersProtocol 
     public var emptyResults: TypeSafeMealPlannerResultsEmpty
     
     public init(
-        onShowRecipeDetails: @escaping (String) -> Void,
-        onOpenReplaceRecipe: @escaping (Int) -> Void,
-        onNavigateToBasket: @escaping () -> Void,
+        actions: MealPlannerResultsActions,
         viewOptions: MealPlannerResultsViewOptions = MealPlannerResultsViewOptions()
     ) {
-        self.onShowRecipeDetails = onShowRecipeDetails
-        self.onOpenReplaceRecipe = onOpenReplaceRecipe
-        self.onNavigateToBasket = onNavigateToBasket
+        self.actions = actions
         self.toolbar = viewOptions.toolbar
         self.footer = viewOptions.footer
         self.recipeCard = viewOptions.recipeCard

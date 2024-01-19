@@ -20,14 +20,14 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class MealPlannerCTAParameters: MealPlannerCTAParametersProtocol {
-    public var onNavigateToMealPlannerForm: () -> Void
+    public var actions: MealPlannerCTAActions
     public var callToAction: TypeSafeMealPlannerCTA
     
     public init(
-        onNavigateToMealPlannerForm: @escaping () -> Void,
+        actions: MealPlannerCTAActions,
         viewOptions: MealPlannerCTAViewOptions = MealPlannerCTAViewOptions()
     ) {
-        self.onNavigateToMealPlannerForm = onNavigateToMealPlannerForm
+        self.actions = actions
         self.callToAction = viewOptions.callToAction
     }
 }

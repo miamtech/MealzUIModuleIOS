@@ -43,7 +43,7 @@ public struct MealzMealPlannerRecipeCardLoading: RecipeCardLoadingProtocol {
         }
     }
 
-    public func content(recipeCardDimensions: CGSize) -> some View {
+    public func content(params: RecipeCardLoadingParameters) -> some View {
         HStack(alignment: .top, spacing: 0.0) {
             Rectangle()
                 .fill(Color.mealzColor(.lightBackground))
@@ -71,7 +71,7 @@ public struct MealzMealPlannerRecipeCardLoading: RecipeCardLoadingProtocol {
             .padding(.top, dimensions.lPadding)
         }
         .frame(maxWidth: .infinity)
-        .frame(height: recipeCardDimensions.height)
+        .frame(height: params.recipeCardDimensions.height)
         .redacted(reason: .placeholder).opacity(opacity)
         .transition(.opacity).onAppear {
             let baseAnimation = Animation.easeInOut(duration: Constants.duration)
@@ -86,6 +86,7 @@ public struct MealzMealPlannerRecipeCardLoading: RecipeCardLoadingProtocol {
 @available(iOS 14, *)
 struct MealzMealPlannerRecipeCardLoadingView_Previews: PreviewProvider {
     static var previews: some View {
-        MealzMealPlannerRecipeCardLoading().content(recipeCardDimensions: CGSize())
+        MealzMealPlannerRecipeCardLoading().content(
+            params: RecipeCardLoadingParameters(recipeCardDimensions: CGSize()))
     }
 }

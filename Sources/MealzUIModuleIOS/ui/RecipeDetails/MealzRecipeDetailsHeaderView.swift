@@ -10,20 +10,14 @@ import MiamIOSFramework
 
 @available(iOS 14, *)
 public struct MealzRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
-    
     public init() {}
     let imageHeight:CGFloat = 400
-    public func content(
-        infos: RecipeDetailsHeaderParameters,
-        tags: [RecipeDetailTags],
-        onRecipeDetailsClosed: @escaping () -> Void,
-        onUpdateGuests: @escaping(Int) -> Void
-    ) -> some View {
+    public func content(params: RecipeDetailsHeaderParameters) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     Button {
-                        onRecipeDetailsClosed()
+                        params.onRecipeDetailsClosed()
                     } label: {
                         Image.mealzIcon(icon: .caret)
                             .renderingMode(.template)
@@ -33,27 +27,26 @@ public struct MealzRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
                         .background(Color.white)
                         .clipShape(Circle()).padding()
                     Spacer()
-                    
-                    LikeButton(likeButtonInfo: LikeButtonInfo(recipeId: infos.recipeId)).padding(16)
+                    LikeButton(likeButtonInfo: LikeButtonInfo(recipeId: params.recipeId)).padding(16)
                 }
                 Spacer()
                 HStack{
                     Spacer()
                     HStack{
                         Button {
-                            onUpdateGuests(max((infos.currentGuests - 1), 1))
+                            params.onUpdateGuests(max((params.currentGuests - 1), 1))
                         } label: {
                             Image.mealzIcon(icon: .minus)
                                 .renderingMode(.template).foregroundColor(.black)
                         }
-                        Text("\(infos.currentGuests)")
+                        Text("\(params.currentGuests)")
                             .frame(minWidth: 10, alignment: .center)
                             .foregroundColor(Color.mealzColor(.darkestGray))
                         Image.mealzIcon(icon: .guests)
                             .renderingMode(.template)
                             .foregroundColor(Color.mealzColor(.darkestGray))
                         Button {
-                            onUpdateGuests(infos.currentGuests + 1)
+                            params.onUpdateGuests(params.currentGuests + 1)
                         } label: {
                             Image.mealzIcon(icon: .plus)
                                 .renderingMode(.template).foregroundColor(.black)
@@ -63,16 +56,16 @@ public struct MealzRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
                 }
             }
             .background(
-                mediaImageView(mediaURL: infos.mediaURL).frame(height: imageHeight),
+                mediaImageView(mediaURL: params.mediaURL).frame(height: imageHeight),
                 alignment: .top)
             .frame(maxWidth: .infinity)
             .frame(height: imageHeight)
-            Text(infos.title)
+            Text(params.title)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
                 .padding(.bottom, Dimension.sharedInstance.sPadding)
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
-            MealzRecipeDetailsTagsView(tags: tags)
+            MealzRecipeDetailsTagsView(tags: params.tags)
         }
     }
     

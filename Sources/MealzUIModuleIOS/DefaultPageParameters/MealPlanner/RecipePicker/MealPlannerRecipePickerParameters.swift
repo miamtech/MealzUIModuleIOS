@@ -23,23 +23,17 @@ import miamCore
  */
 @available(iOS 14, *)
 public class MealPlannerRecipePickerParameters: MealPlannerRecipePickerParametersProtocol {
-    public var onShowRecipeDetails: (String) -> Void
-    public var onSelectRecipeForMealPlanner: (String) -> Void
-    public var onOpenFiltersOptions: (FilterInstance) -> Void
+    public var actions: MealPlannerRecipePickerActions
     
     public var search: TypeSafeSearch
     public var recipeCard: TypeSafeCatalogRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     
     public init(
-        onShowRecipeDetails: @escaping (String) -> Void,
-        onSelectRecipeForMealPlanner: @escaping (String) -> Void,
-        onOpenFiltersOptions: @escaping (FilterInstance) -> Void,
+        actions: MealPlannerRecipePickerActions,
         viewOptions: MealPlannerRecipePickerViewOptions = MealPlannerRecipePickerViewOptions()
     ) {
-        self.onShowRecipeDetails = onShowRecipeDetails
-        self.onSelectRecipeForMealPlanner = onSelectRecipeForMealPlanner
-        self.onOpenFiltersOptions = onOpenFiltersOptions
+        self.actions = actions
         self.search = viewOptions.search
         self.recipeCard = viewOptions.recipeCard
         self.recipeCardLoading = viewOptions.recipeCardLoading

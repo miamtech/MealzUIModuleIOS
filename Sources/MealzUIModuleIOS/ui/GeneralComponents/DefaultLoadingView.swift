@@ -13,7 +13,7 @@ public struct DefaultLoadingView: LoadingProtocol {
     public init(size: CGFloat = 60) {
         self.size = size
     }
-    public func content() -> some View {
+    public func content(params: BaseLoadingParameters) -> some View {
         ProgressLoader(
             color: Color.mealzColor(.primary),
             size: size
@@ -24,6 +24,6 @@ public struct DefaultLoadingView: LoadingProtocol {
 @available(iOS 14, *)
 struct DefaultLoadingView_Previews: PreviewProvider {
     static var previews: some View {
-        DefaultLoadingView().content()
+        DefaultLoadingView().content(params: BaseLoadingParameters())
     }
 }

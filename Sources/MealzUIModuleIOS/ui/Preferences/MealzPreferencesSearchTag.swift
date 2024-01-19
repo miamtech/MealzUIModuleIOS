@@ -12,11 +12,11 @@ import miamCore
 @available(iOS 14, *)
 public struct MealzPreferencesSearchTag: BaseButtonProtocol {
     public init() {}
-    public func content(buttonText: String, onButtonAction: @escaping () -> Void) -> some View {
+    public func content(params: BaseButtonParameters) -> some View {
         Button {
-            onButtonAction()
+            params.onButtonAction()
         } label: {
-            Text(buttonText)
+            Text(params.buttonText)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
                 .padding(8)
         }
@@ -26,8 +26,8 @@ public struct MealzPreferencesSearchTag: BaseButtonProtocol {
 @available(iOS 14, *)
 struct MealzPreferencesSearchTag_Previews: PreviewProvider {
     static var previews: some View {
-        MealzPreferencesSearchTag().content(
+        MealzPreferencesSearchTag().content(params: BaseButtonParameters(
             buttonText: "Test",
-            onButtonAction: { })
+            onButtonAction: { }))
     }
 }

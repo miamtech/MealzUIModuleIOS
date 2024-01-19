@@ -21,22 +21,16 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class FavoritesParameters: FavoritesParametersProtocol {
-    public var onNoResultsRedirect: () -> Void
-    public var onShowRecipeDetails: (String) -> Void
-    public var onRecipeCallToActionTapped: (String) -> Void
+    public var actions: FavoritesActions
     
     public var recipeCard: TypeSafeCatalogRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     
     public init(
-        onNoResultsRedirect: @escaping () -> Void,
-        onShowRecipeDetails: @escaping (String) -> Void,
-        onRecipeCallToActionTapped: @escaping (String) -> Void,
+        actions: FavoritesActions,
         viewOptions: FavoritesViewOptions = FavoritesViewOptions()
     ) {
-        self.onNoResultsRedirect = onNoResultsRedirect
-        self.onShowRecipeDetails = onShowRecipeDetails
-        self.onRecipeCallToActionTapped = onRecipeCallToActionTapped
+        self.actions = actions
         self.recipeCard = viewOptions.recipeCard
         self.recipeCardLoading = viewOptions.recipeCardLoading
         

@@ -12,37 +12,33 @@ import MiamIOSFramework
 public struct MealzBasketProduct: BasketProductProtocol {
     
     public init() {}
-    public func content(
-        quantity: Binding<Int>,
-        data: BasketProductData,
-        actions: BasketProductActions
-    ) -> some View {
+    public func content(params: BasketProductParameters) -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: Dimension.sharedInstance.lPadding) {
-                AsyncImage(url: data.pictureURL) { image in
+                AsyncImage(url: params.data.pictureURL) { image in
                     image.resizable()
                 }
                 .frame(width: 96, height: 96)
                 infoAndTitle(
-                    name: data.name,
-                    description: data.description,
-                    delete: actions.onDeleteProduct
+                    name: params.data.name,
+                    description: params.data.description,
+                    delete: params.onDeleteProduct
                 )
             }
             .frame(maxWidth: .infinity)
             HStack {
                 priceContent(
-                    price: data.price,
-                    unitPrice: data.unitPrice
+                    price: params.data.price,
+                    unitPrice: params.data.unitPrice
                 )
                 Spacer()
                 HStack(spacing: 12.0) {
                     changeProductButton(
-                        changeProduct: actions.onChangeProduct
+                        changeProduct: params.onChangeProduct
                     )
-                    MealzStepper(value: quantity, minValue: 0)
-                        .onChange(of: quantity.wrappedValue) { qty in
-                            actions.onQuantityChanged(qty)
+                    MealzStepper(value: params.quantity, minValue: 0)
+                        .onChange(of: params.quantity.wrappedValue) { qty in
+                            params.onQuantityChanged(qty)
                         }
                         .frame(width: 140.0)
                 }
@@ -102,27 +98,5 @@ public struct MealzBasketProduct: BasketProductProtocol {
 
     func formatPricePerUnit(unitPrice: Double, unit: String) -> String {
         return String(format: "%.2f / %@", unitPrice, unit)
-    }
-}
-
-@available(iOS 14, *)
-struct MealzBasketProduct_Previews: PreviewProvider {
-    static var previews: some View {
-        let data = BasketProductData(
-            price: 34.0,
-            name: "Test",
-            description: "MY description",
-            pictureURL: (URL(string: "https://picsum.photos/400/300") ?? URL(string: ""))!,
-            sharedRecipeCount: 3,
-            unitPrice: 56.0,
-            isReloading: false)
-        let actions = BasketProductActions(
-            onDeleteProduct: {},
-            onQuantityChanged: { _ in },
-            onChangeProduct: {})
-        MealzBasketProduct().content(
-            quantity: .constant(4),
-            data: data,
-            actions: actions)
     }
 }

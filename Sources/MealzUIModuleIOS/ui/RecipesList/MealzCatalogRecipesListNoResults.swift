@@ -12,20 +12,16 @@ import miamCore
 @available(iOS 14, *)
 public struct MealzCatalogRecipesListNoResults: CatalogRecipesListNoResultsProtocol {
     public init() {}
-    public func content(
-        catalogContent: CatalogContent,
-        searchText: String,
-        onNoResultsRedirect: @escaping () -> Void
-    ) -> some View {
+    public func content(params: CatalogRecipesListNoResultsParameters) -> some View {
         VStack(spacing: 32.0) {
             Image.mealzIcon(icon: .feelingBlue)
-            if catalogContent == CatalogContent.favorite {
+            if params.catalogContent == CatalogContent.favorite {
                 Text(Localization.catalog.preferencesNoResult.localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleBigStyle)
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color.mealzColor(.white))
                 Button {
-                    onNoResultsRedirect()
+                    params.onNoResultsRedirect()
                 } label: {
                     Text(Localization.catalog.browseRecipes.localised)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
@@ -36,7 +32,7 @@ public struct MealzCatalogRecipesListNoResults: CatalogRecipesListNoResultsProto
                 .background(Capsule().foregroundColor(.white))
                 .overlay(Capsule().stroke(.white, lineWidth: 1.0))
             } else {
-                Text("\(Localization.catalog.noRecipeFound.localised) \n\"\(searchText)\"")
+                Text("\(Localization.catalog.noRecipeFound.localised) \n\"\(params.searchText)\"")
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
                     .multilineTextAlignment(.center)
                     .foregroundColor(Color.mealzColor(.white))
@@ -56,8 +52,10 @@ public struct MealzCatalogRecipesListNoResults: CatalogRecipesListNoResultsProto
 struct MealzCatalogRecipesListNoResults_Previews: PreviewProvider {
     static var previews: some View {
         MealzCatalogRecipesListNoResults().content(
+            params: CatalogRecipesListNoResultsParameters(
             catalogContent: CatalogContent.categoriesList,
             searchText: "",
             onNoResultsRedirect: {})
+            )
     }
 }

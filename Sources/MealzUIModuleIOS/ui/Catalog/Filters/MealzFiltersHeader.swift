@@ -12,15 +12,13 @@ import MiamIOSFramework
 public struct MealzFiltersHeader: FiltersHeaderProtocol {
     
     public init() {}
-    public func content(
-        onCloseFilters: @escaping () -> Void
-    ) -> some View {
+    public func content(params: FiltersHeaderParameters) -> some View {
         HStack {
             Text(Localization.catalog.filtersTitle.localised)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
             Spacer()
             Button {
-                onCloseFilters()
+                params.onCloseFilters()
             } label: {
                 Image.mealzIcon(icon: .plus)
             }
@@ -31,6 +29,6 @@ public struct MealzFiltersHeader: FiltersHeaderProtocol {
 @available(iOS 14, *)
 struct MealzFiltersHeader_Previews: PreviewProvider {
     static var previews: some View {
-        MealzFiltersHeader().content(onCloseFilters: {})
+        MealzFiltersHeader().content(params: FiltersHeaderParameters(onCloseFilters: {}))
     }
 }

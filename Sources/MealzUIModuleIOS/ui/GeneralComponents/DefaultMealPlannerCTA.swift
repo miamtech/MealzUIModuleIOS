@@ -11,7 +11,7 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct DefaultMealPlannerCTA: MealPlannerCTAProtocol {
     public init() {}
-    public func content(onTapGesture: @escaping () -> Void) -> some View {
+    public func content(params: MealPlannerCTAViewParameters) -> some View {
         HStack {}
     }
 }
@@ -19,6 +19,9 @@ public struct DefaultMealPlannerCTA: MealPlannerCTAProtocol {
 @available(iOS 14, *)
 struct DefaultMealPlannerCTA_Previews: PreviewProvider {
     static var previews: some View {
-        DefaultMealPlannerCTA().content(onTapGesture: {})
+        DefaultMealPlannerCTA().content(
+            params: MealPlannerCTAViewParameters(
+            onTapGesture: {})
+            )
     }
 }

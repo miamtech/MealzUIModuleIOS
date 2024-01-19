@@ -12,12 +12,12 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public class MealzNotInBasketTitle: BaseButtonProtocol {
     public init() {}
-    public func content(buttonText: String, onButtonAction: @escaping () -> Void) -> some View {
+    public func content(params: BaseButtonParameters) -> some View {
         Button(action: {
-            withAnimation { onButtonAction() }
+            withAnimation { params.onButtonAction() }
         }, label: {
             HStack {
-                Text(buttonText)
+                Text(params.buttonText)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
                     .foregroundColor(Color.mealzColor(.grayText))
                 Spacer()

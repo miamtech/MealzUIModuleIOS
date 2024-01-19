@@ -15,10 +15,12 @@ struct ItemSelectorProductRow: View {
     
     private var isSelected: Bool
     private var product: Item
+    private var onSelectProduct: ((Item) -> Void)?
     
-    init(product: Item, isSelected: Bool = false) {
+    init(product: Item, isSelected: Bool = false, onSelectProduct: ((Item) -> Void)? = nil) {
         self.isSelected = isSelected
         self.product = product
+        self.onSelectProduct = onSelectProduct
     }
     
     var body: some View {
@@ -57,13 +59,19 @@ struct ItemSelectorProductRow: View {
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
                     }
                     Spacer()
-                    Text(isSelected ? Localization.itemSelector.inBasket.localised : Localization.itemSelector.select.localised )
-                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 9)
-                        .foregroundColor(isSelected ? Color.mealzColor(.grayText) : Color.mealzColor(.white))
-                        .background( isSelected ? Color.mealzColor(.lightBackground) : Color.mealzColor(.primary))
-                        .cornerRadius(Dimension.sharedInstance.sCornerRadius)
+                    Button(action: {
+                        if let onSelectProduct {
+                            onSelectProduct(product)
+                        }
+                    }, label: {
+                        Text(isSelected ? Localization.itemSelector.inBasket.localised : Localization.itemSelector.select.localised )
+                            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 9)
+                            .foregroundColor(isSelected ? Color.mealzColor(.grayText) : Color.mealzColor(.white))
+                            .background( isSelected ? Color.mealzColor(.lightBackground) : Color.mealzColor(.primary))
+                            .cornerRadius(Dimension.sharedInstance.sCornerRadius)
+                    })
                 }
             }
             .padding([.horizontal, .bottom], Dimension.sharedInstance.lPadding)

@@ -19,16 +19,16 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class MealPlannerFormParameters: MealPlannerFormParametersProtocol {
-    public var onNavigateToMealPlannerResults: ([String]) -> Void
+    public var actions: MealPlannerFormActions
     
     public var form: TypeSafeMealPlannerForm
     
     
     public init(
-        onNavigateToMealPlannerResults: @escaping ([String]) -> Void,
+        actions: MealPlannerFormActions,
         viewOptions: MealPlannerFormViewOptions = MealPlannerFormViewOptions()
     ) {
-        self.onNavigateToMealPlannerResults = onNavigateToMealPlannerResults
+        self.actions = actions
         self.form = viewOptions.form
         
     }

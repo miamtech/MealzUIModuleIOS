@@ -18,8 +18,7 @@ public struct MealzRecipeDetailsSelectedControlView:
     @SwiftUI.State private var frames = Array<CGRect>(repeating: .zero, count: 4)
     
     public init() {}
-    
-    public func content(selection: Binding<Int>) -> some View {
+    public func content(params: RecipeDetailsSelectedControlParameters) -> some View {
         HStack(spacing: 0) {
             ForEach(titles.indices, id:\.self) { index in
                 ZStack {
@@ -29,10 +28,10 @@ public struct MealzRecipeDetailsSelectedControlView:
                         .fill(Color.mealzColor(.primary))
                         .cornerRadius(25)
                         .padding(2)
-                        .opacity(selection.wrappedValue == index ? 1 : 0.01)
+                        .opacity(params.selection.wrappedValue == index ? 1 : 0.01)
                         .onTapGesture {
                             withAnimation(.interactiveSpring()) {
-                                selection.wrappedValue = index
+                                params.selection.wrappedValue = index
                             }
                         }
                 }
@@ -40,7 +39,7 @@ public struct MealzRecipeDetailsSelectedControlView:
                     Text(titles[index]).lineLimit(1)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
                         .foregroundColor(
-                            (selection.wrappedValue == index) ?
+                            (params.selection.wrappedValue == index) ?
                             Color.mealzColor(.standardLightText) :
                                 Color.mealzColor(.standardDarkText))
                 )

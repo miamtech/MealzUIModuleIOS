@@ -20,19 +20,16 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class RecipeCarouselParameters: RecipeCarouselParametersProtocol {
-    public var onShowRecipeDetails: (String) -> Void
-    public var onRecipeCallToActionTapped: (String) -> Void
+    public var actions: RecipeCarouselActions
     
     public var recipeCard: TypeSafeCatalogRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     
     public init(
-        onShowRecipeDetails: @escaping (String) -> Void,
-        onRecipeCallToActionTapped: @escaping (String) -> Void,
+        actions: RecipeCarouselActions,
         viewOptions: RecipeCarouselViewOptions = RecipeCarouselViewOptions()
     ) {
-        self.onShowRecipeDetails = onShowRecipeDetails
-        self.onRecipeCallToActionTapped = onRecipeCallToActionTapped
+        self.actions = actions
         self.recipeCard = viewOptions.recipeCard
         self.recipeCardLoading = viewOptions.recipeCardLoading
     }

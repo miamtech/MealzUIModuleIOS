@@ -27,12 +27,7 @@ import miamCore
 @available(iOS 14, *)
 public struct CatalogParameters: CatalogParametersProtocol {
     
-    public var onFiltersTapped: (FilterInstance) -> Void
-    public var onSearchTapped: (FilterInstance) -> Void
-    public var onFavoritesTapped: () -> Void
-    public var onPreferencesTapped: () -> Void
-    public var onLaunchMealPlanner: (() -> Void)?
-    public var onMealsInBasketButtonTapped: () -> Void
+    public var actions: CatalogActions
     public var catalogToolbar: TypeSafeCatalogToolbar
     public var resultsToolbar: TypeSafeCatalogToolbar
     
@@ -40,20 +35,10 @@ public struct CatalogParameters: CatalogParametersProtocol {
     public var mealsInBasketButton: MealsInBasketButtonParameters
     
     public init(
-        onFiltersTapped: @escaping (FilterInstance) -> Void,
-        onSearchTapped: @escaping (FilterInstance) -> Void,
-        onFavoritesTapped: @escaping () -> Void,
-        onPreferencesTapped: @escaping () -> Void,
-        onLaunchMealPlanner: (() -> Void)? = nil,
-        onMealsInBasketButtonTapped: @escaping () -> Void,
+        actions: CatalogActions,
         viewOptions: CatalogViewOptions = CatalogViewOptions()
     ) {
-        self.onFiltersTapped = onFiltersTapped
-        self.onSearchTapped = onSearchTapped
-        self.onFavoritesTapped = onFavoritesTapped
-        self.onPreferencesTapped = onPreferencesTapped
-        self.onLaunchMealPlanner = onLaunchMealPlanner
-        self.onMealsInBasketButtonTapped = onMealsInBasketButtonTapped
+        self.actions = actions
         
         self.catalogToolbar = viewOptions.catalogToolbar
         self.resultsToolbar = viewOptions.resultsToolbar

@@ -11,16 +11,13 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzPreferencesGuest: PreferencesGuestProtocol {
     public init() {}
-    public func content(
-        guests: Int?,
-        onGuestChanged: @escaping (Int) -> Void
-    ) -> some View {
+    public func content(params: PreferencesGuestParameters) -> some View {
         return HStack {
             Text(Localization.preferences.numberOfGuests.localised)
             Spacer()
-            if let guests {
+            if let guests = params.guests {
                 MealzCounterView(count: guests) { count in
-                    onGuestChanged(count)
+                    params.onGuestChanged(count)
                 }
             }
         }.background(Color.mealzColor(.lightBackground))
@@ -31,7 +28,9 @@ public struct MealzPreferencesGuest: PreferencesGuestProtocol {
 struct MealzPreferencesGuest_Previews: PreviewProvider {
     static var previews: some View {
         MealzPreferencesGuest().content(
+            params: PreferencesGuestParameters(
             guests: 4,
             onGuestChanged: {_ in})
+            )
     }
 }

@@ -22,23 +22,17 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class CatalogPackageRowParameters: CatalogPackageRowParametersProtocol {
-    public var onSeeAllRecipes: (String, String) -> Void
-    public var onShowRecipeDetails: (String) -> Void
-    public var onRecipeCallToActionTapped: (String) -> Void
+    public var actions: CatalogPackageRowActions
     
     public var callToAction: TypeSafeCatalogPackageCTA
     public var recipeCard: TypeSafeCatalogRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     
     public init(
-        onSeeAllRecipes: @escaping (String, String) -> Void,
-        onShowRecipeDetails: @escaping (String) -> Void,
-        onRecipeCallToActionTapped: @escaping (String) -> Void,
+        actions: CatalogPackageRowActions,
         viewOptions: CatalogPackageRowViewOptions = CatalogPackageRowViewOptions()
     ) {
-        self.onSeeAllRecipes = onSeeAllRecipes
-        self.onShowRecipeDetails = onShowRecipeDetails
-        self.onRecipeCallToActionTapped = onRecipeCallToActionTapped
+        self.actions = actions
         self.callToAction = viewOptions.callToAction
         self.recipeCard = viewOptions.recipeCard
         self.recipeCardLoading = viewOptions.recipeCardLoading

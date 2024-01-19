@@ -12,13 +12,10 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzMealPlannerBasketPreviewFooter: MealPlannerBasketFooterProtocol {
     public init() {}
-    public func content(
-        onNavigateToRecap: @escaping () -> Void,
-        onNavigateToBasket: @escaping () -> Void
-    ) -> some View {
+    public func content(params: MealPlannerBasketFooterParamaters) -> some View {
         VStack {
             Button {
-                onNavigateToRecap()
+                params.onNavigateToRecap()
             } label: {
                 Text(Localization.basket.continueShopping.localised)
             }
@@ -30,7 +27,7 @@ public struct MealzMealPlannerBasketPreviewFooter: MealPlannerBasketFooterProtoc
             .cornerRadius(Dimension.sharedInstance.mCornerRadius)
 
             Button {
-                onNavigateToBasket()
+                params.onNavigateToBasket()
             } label: {
                 Text(Localization.basket.moreDetails.localised)
             }
@@ -50,7 +47,9 @@ public struct MealzMealPlannerBasketPreviewFooter: MealPlannerBasketFooterProtoc
 struct MealzMealPlannerBasketPreviewFooter_Previews: PreviewProvider {
     static var previews: some View {
         MealzMealPlannerBasketPreviewFooter().content(
+            params: MealPlannerBasketFooterParamaters(
             onNavigateToRecap: {}, onNavigateToBasket: {}
+            )
         )
     }
 }

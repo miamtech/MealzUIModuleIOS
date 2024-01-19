@@ -15,38 +15,38 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
     public init() {}
     let dimension = Dimension.sharedInstance
     
-    public func content(
-        price: Double, 
-        pricePerGuest: Double,
-        priceStatus: ComponentUiState,
-        ingredientsStatus: IngredientStatus,
-        callToAction: @escaping () -> Void
-    ) -> some View {
+    public func content(params: RecipeDetailsFooterParameters) -> some View {
         var lockButton: Bool {
-            return priceStatus == ComponentUiState.locked || priceStatus == ComponentUiState.loading
+            return params.priceStatus == ComponentUiState.locked 
+            || params.priceStatus == ComponentUiState.loading
         }
         return HStack(spacing: 0) {
-            if priceStatus == ComponentUiState.loading {
+            if lockButton {
                 ProgressLoader(color: .primary, size: 24)
             } else {
-                MealzPricePerPerson(pricePerGuest: pricePerGuest)
+                if params.price > 0 {
+                    MealzPricePerPerson(pricePerGuest: params.pricePerGuest)
+                }
             }
             Spacer()
-            switch ingredientsStatus.type {
+            switch params.ingredientsStatus.type {
             case .noMoreToAdd:
                 ContinueMyShoppingCTA(
-                    callToAction: callToAction,
-                    buttonText: Localization.recipeDetails.continueShopping.localised, 
+                    callToAction: params.callToAction,
+                    buttonText: Localization.recipeDetails.continueShopping.localised,
                     disableButton: lockButton)
             case .initialState:
                 MealzAddAllToBasketCTA(
-                    callToAction: callToAction,
+                    callToAction: params.callToAction,
                     buttonText: Localization.recipeDetails.addAllProducts.localised,
                     disableButton: lockButton)
             default:
                 MealzAddAllToBasketCTA(
-                    callToAction: callToAction,
-                    buttonText: String(format: String.localizedStringWithFormat(Localization.ingredient.addProduct(numberOfProducts: ingredientsStatus.count).localised, ingredientsStatus.count), ingredientsStatus.count),
+                    callToAction: params.callToAction,
+                    buttonText: String(format: String.localizedStringWithFormat(
+                        Localization.ingredient.addProduct(numberOfProducts: params.ingredientsStatus.count).localised,
+                        params.ingredientsStatus.count),
+                                       params.ingredientsStatus.count),
                     disableButton: lockButton)
             }
         }

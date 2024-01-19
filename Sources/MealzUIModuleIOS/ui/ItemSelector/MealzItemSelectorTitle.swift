@@ -11,12 +11,12 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzItemSelectorTitle: BaseTitleProtocol {
     public init() {}
-    public func content(title: String, subtitle: String?) -> some View {
+    public func content(params: TitleParameters) -> some View {
         HStack(spacing: 2) {
-            Text(title.capitalizingFirstLetter() + " :")
+            Text(params.title.capitalizingFirstLetter() + " :")
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
                 .foregroundColor(Color.mealzColor(.standardDarkText))
-            if let subtitle {
+            if let subtitle = params.subtitle {
                 Text(subtitle)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBoldStyle)
                     .foregroundColor(Color.mealzColor(.primary))

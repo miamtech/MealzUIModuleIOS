@@ -11,19 +11,15 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzPreferencesFooter: PreferencesFooterProtocol {
     public init() {}
-    public func content(
-        recipesFound: Int?,
-        onApplied: @escaping () -> Void,
-        onClosed: @escaping () -> Void
-    ) -> some View {
+    public func content(params: PreferencesFooterParameters) -> some View {
         var createCTAText: String {
-            if let recipesFoundText = recipesFound {
+            if let recipesFoundText = params.recipesFound {
                 return Localization.catalog.showResults(numberOfResults: Int32(recipesFoundText)).localised
             } else { return Localization.catalog.showAll.localised }
         }
         return HStack {
             Button {
-                onClosed()
+                params.onClosed()
             } label: {
                 Text(Localization.preferences.cancel.localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
@@ -37,7 +33,7 @@ public struct MealzPreferencesFooter: PreferencesFooterProtocol {
             .overlay(
                 Capsule().stroke(Color.mealzColor(.border), lineWidth: 1.0))
             Button {
-                onApplied()
+                params.onApplied()
             } label: {
                 Text(createCTAText)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
@@ -57,9 +53,11 @@ public struct MealzPreferencesFooter: PreferencesFooterProtocol {
 struct MealzPreferencesFooter_Previews: PreviewProvider {
     static var previews: some View {
         MealzPreferencesFooter().content(
+            params: PreferencesFooterParameters(
             recipesFound: 4,
             onApplied: {},
             onClosed: {}
         )
+            )
     }
 }

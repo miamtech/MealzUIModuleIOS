@@ -15,18 +15,16 @@ public struct MealzGeneralSearch: SearchProtocol {
     public init(hasButton: Bool = true) {
         self.hasButton = hasButton
     }
-    public func content(
-        searchText: Binding<String>,
-        onApply: @escaping () -> Void
-    ) -> some View {
+    public func content(params: SearchParameters) -> some View {
         VStack(spacing: 10.0) {
             HStack(spacing: 10.0) {
                 HStack(spacing: 10.0) {
-                    TextField(Localization.catalog.searchTitle.localised, text: searchText).frame(height: 45.0)
+                    TextField(Localization.catalog.searchTitle.localised, text: params.searchText)
+                        .frame(height: 45.0)
                         .disableAutocorrection(true)
                     if hasButton {
                         Button {
-                            onApply()
+                            params.onApply()
                         } label: {
                             Image.mealzIcon(icon: .search)
                                 .renderingMode(.template)
@@ -49,8 +47,8 @@ public struct MealzGeneralSearch: SearchProtocol {
 @available(iOS 14, *)
 struct MealzGeneralSearch_Previews: PreviewProvider {
     static var previews: some View {
-        MealzGeneralSearch().content(
+        MealzGeneralSearch().content(params: SearchParameters(
             searchText: .constant(""),
-            onApply: {})
+            onApply: {}))
     }
 }
