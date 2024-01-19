@@ -11,16 +11,16 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzItemSelectorNoResultsView: ItemSelectorNoResultsProtocol {
     public init() {}
-    public func content(title: String, subtitle: String?, hasNoSubstitutes: Bool, goBack: @escaping () -> Void) -> some View {
+    public func content(params: ItemSelectorNoResultsParameters) -> some View {
         VStack {
             Image.mealzIcon(icon: .feelingBlue)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 250)
-            Text(title)
+            Text(params.title)
                 .foregroundColor(Color.mealzColor(.primary))
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
-            if let subtitle {
+            if let subtitle = params.subtitle {
                 Text(subtitle)
                     .foregroundColor(Color.mealzColor(.primary))
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.subtitleStyle)

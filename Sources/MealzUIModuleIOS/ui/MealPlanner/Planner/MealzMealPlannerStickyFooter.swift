@@ -14,16 +14,12 @@ public struct MealzMealPlannerStickyFooter: MealPlannerResultsFooterProtocol {
     
     let dimension = Dimension.sharedInstance
     public init() {}
-    public func content(
-        mealPlannerCriteria: MealPlannerCriteria,
-        budgetSpent: Binding<Double>,
-        onValidateTapped: @escaping () -> Void
-    ) -> some View {
+    public func content(params: MealPlannerResultsFooterParameters) -> some View {
         VStack {
             MealzMealPlannerBudgetFooter(
-                budgetSpent: budgetSpent.wrappedValue,
-                totalBudgetPermitted: mealPlannerCriteria.availableBudget)
-            MealzMealPlannerCTAFooter(onButtonAction: onValidateTapped)
+                budgetSpent: params.budgetSpent.wrappedValue,
+                totalBudgetPermitted: params.mealPlannerCriteria.availableBudget)
+            MealzMealPlannerCTAFooter(onButtonAction: params.onValidateTapped)
         }
     }
 }
@@ -108,13 +104,13 @@ struct MealzMealPlannerBudgetFooter: View {
 
 @available(iOS 14, *)
 struct MealzMealPlannerStickyFooter_Previews: PreviewProvider {
-
+    
     static var previews: some View {
         let mealPlannerCriteria = MealPlannerCriteria(
             availableBudget: 50.0,
             numberOfGuests: 4,
             numberOfMeals: 4)
-
+        
         GeometryReader { geometry in
             let safeArea = geometry.safeAreaInsets
             ZStack(alignment: .bottom) {
@@ -135,11 +131,12 @@ struct MealzMealPlannerStickyFooter_Previews: PreviewProvider {
                         .padding(.bottom, (geometry.safeAreaInsets.bottom + 150)) // Add padding for safe area at bottom
                     }
                 }
-//                StickyFooter(safeArea: safeArea) {
-                MealzMealPlannerStickyFooter().content(mealPlannerCriteria: mealPlannerCriteria, budgetSpent: .constant(50.0)) {
-                        print("hello world")
-                    }
-//                }
+                MealzMealPlannerStickyFooter().content(
+                    params: MealPlannerResultsFooterParameters(
+                        mealPlannerCriteria: mealPlannerCriteria, budgetSpent: .constant(50.0)) {
+                            print("hello world")
+                        }
+                )
                 .frame(maxWidth: .infinity)
             }.ignoresSafeArea()
         }

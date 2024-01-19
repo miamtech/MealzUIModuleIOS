@@ -42,7 +42,7 @@ public struct MealzRecipeCardLoading: RecipeCardLoadingProtocol {
         }
     }
 
-    public func content(recipeCardDimensions: CGSize) -> some View {
+    public func content(params: RecipeCardLoadingParameters) -> some View {
         VStack(alignment: .center, spacing: 0.0) {
             Rectangle()
                 .fill(Color.mealzColor(.lightBackground))
@@ -70,7 +70,7 @@ public struct MealzRecipeCardLoading: RecipeCardLoadingProtocol {
             .padding(.top, dimensions.lPadding)
             .padding([.leading, .trailing], dimensions.lPadding)
         }
-        .frame(width: recipeCardDimensions.width, height: recipeCardDimensions.height)
+        .frame(width: params.recipeCardDimensions.width, height: params.recipeCardDimensions.height)
         .redacted(reason: .placeholder).opacity(opacity)
         .cornerRadius(12.0)
         .overlay(RoundedRectangle(cornerRadius: 12.0).stroke(Color.mealzColor(.border), lineWidth: 1.0))
@@ -87,6 +87,7 @@ public struct MealzRecipeCardLoading: RecipeCardLoadingProtocol {
 @available(iOS 14, *)
 struct RecipeCardLoadingView_Previews: PreviewProvider {
     static var previews: some View {
-        MealzRecipeCardLoading().content(recipeCardDimensions: CGSize(width: 100, height: 200))
+        MealzRecipeCardLoading().content(
+            params: RecipeCardLoadingParameters(recipeCardDimensions: CGSize(width: 100, height: 200)))
     }
 }

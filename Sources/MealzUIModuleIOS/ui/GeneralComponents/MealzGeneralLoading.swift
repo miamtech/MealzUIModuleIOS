@@ -11,7 +11,7 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzGeneralLoading: LoadingProtocol {
     public init() {}
-    public func content() -> some View {
+    public func content(params: BaseLoadingParameters) -> some View {
         ProgressLoader(color: Color.mealzColor(.primary))
     }
 }
@@ -19,6 +19,6 @@ public struct MealzGeneralLoading: LoadingProtocol {
 @available(iOS 14, *)
 struct MealzGeneralLoading_Previews: PreviewProvider {
     static var previews: some View {
-        MealzGeneralLoading().content()
+        MealzGeneralLoading().content(params: BaseLoadingParameters())
     }
 }

@@ -12,15 +12,12 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct DefaultTitleView: BaseTitleProtocol {
     public init() {}
-    public func content(
-        title: String,
-        subtitle: String?
-    ) -> some View {
+    public func content(params: TitleParameters) -> some View {
         return VStack {
-            Text(title)
+            Text(params.title)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleBigStyle)
                 .foregroundColor(Color.mealzColor(.primary))
-            if let subtitle = subtitle {
+            if let subtitle = params.subtitle {
                 Text(subtitle)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleSmallStyle)
                     .foregroundColor(Color.mealzColor(.primary))
@@ -32,6 +29,6 @@ public struct DefaultTitleView: BaseTitleProtocol {
 @available(iOS 14, *)
 struct DefaultTitleView_Previews: PreviewProvider {
     static var previews: some View {
-        DefaultTitleView().content(title: "Test", subtitle: nil)
+        DefaultTitleView().content(params: TitleParameters(title: "Test", subtitle: nil))
     }
 }

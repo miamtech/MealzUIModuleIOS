@@ -11,14 +11,10 @@ import miamCore
 @available(iOS 14, *)
 public struct MealzFiltersCTA: FiltersCTAProtocol {
     public init() {}
-    public func content(
-        numberOfRecipes: Int,
-        onApply: @escaping () -> Void,
-        onClear: @escaping () -> Void
-    ) -> some View {
+    public func content(params: FiltersCTAParameters) -> some View {
         VStack {
             Button {
-                onClear()
+                params.onClear()
             } label: {
                 Text(Localization.catalog.removeFilters.localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
@@ -26,9 +22,9 @@ public struct MealzFiltersCTA: FiltersCTAProtocol {
             }.padding(EdgeInsets(top: 9, leading: 20, bottom: 9, trailing: 20))
             Divider().padding([.bottom, .top], 10)
             Button {
-                onApply()
+                params.onApply()
             } label: {
-                Text("Voir les \(numberOfRecipes) idées repas")
+                Text("Voir les \(params.numberOfRecipes) idées repas")
                     .padding(EdgeInsets(top: 9, leading: 20, bottom: 9, trailing: 20))
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
                     .foregroundColor(.white)
@@ -42,6 +38,6 @@ public struct MealzFiltersCTA: FiltersCTAProtocol {
 @available(iOS 14, *)
 struct MealzFiltersCTA_Previews: PreviewProvider {
     static var previews: some View {
-        MealzFiltersCTA().content(numberOfRecipes: 8, onApply: {}, onClear: {})
+        MealzFiltersCTA().content(params: FiltersCTAParameters(numberOfRecipes: 8, onApply: {}, onClear: {}))
     }
 }

@@ -13,33 +13,24 @@ import miamCore
 @available(iOS 14, *)
 public struct MealzRecipeCard: CatalogRecipeCardProtocol {
     public init() {}
-    public func content(
-        recipeCardDimensions: CGSize,
-        recipe: Recipe,
-        recipePrice: Double,
-        numberOfGuests: Int,
-        isCurrentlyInBasket: Bool,
-        onAddToBasket: @escaping (String) -> Void,
-        onShowRecipeDetails: @escaping (String) -> Void
-    ) -> some View {
+    public func content(params: CatalogRecipeCardParameters) -> some View {
         let dimensions = Dimension.sharedInstance
         let callToActionHeight: CGFloat = 70
-        let pictureHeight = recipeCardDimensions.height - callToActionHeight
-//        let pricePerServe = recipePrice / Double(numberOfGuests)
+        let pictureHeight = params.recipeCardDimensions.height - callToActionHeight
         
         func showTimeAndDifficulty() -> Bool {
-            return recipeCardDimensions.height >= 320
+            return params.recipeCardDimensions.height >= 320
         }
         
         return VStack(spacing: 0.0) {
             VStack(spacing: 0.0) {
                 ZStack {
-                    AsyncImage(url: recipe.pictureURL) { image in
+                    AsyncImage(url: params.recipe.pictureURL) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .padding(0)
-                            .frame(width: recipeCardDimensions.width, height: pictureHeight)
+                            .frame(width: params.recipeCardDimensions.width, height: pictureHeight)
                             .clipped()
                     }
                     .contentShape(Rectangle()) // this fixes gesture detector overflow to other cards
@@ -53,30 +44,30 @@ public struct MealzRecipeCard: CatalogRecipeCardProtocol {
                     VStack(alignment: .trailing, spacing: 0) {
                         LikeButton(
                             likeButtonInfo: LikeButtonInfo(
-                                recipeId: recipe.id
+                                recipeId: params.recipe.id
                             ))
                         .padding(dimensions.mPadding)
                         Spacer()
                         HStack {
-                            Text(recipe.title)
+                            Text(params.recipe.title)
                                 .foregroundColor(Color.mealzColor(.white))
                                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                                 .lineLimit(2)
                                 .multilineTextAlignment(.leading)
                                 .minimumScaleFactor(0.75)
                             Spacer()
-                            MealzSmallGuestView(guests: Int(numberOfGuests))
+                            MealzSmallGuestView(guests: Int(params.numberOfGuests))
                         }.padding(Dimension.sharedInstance.mlPadding)
                     }
                 }
                 .padding(0)
-                .frame(width: recipeCardDimensions.width, height: pictureHeight)
+                .frame(width: params.recipeCardDimensions.width, height: pictureHeight)
                 .clipped()
                 HStack {
-                    MealzPricePerPerson(pricePerGuest: recipe.attributes?.price?.pricePerServe ?? recipePrice)
+                    MealzPricePerPerson(pricePerGuest: params.recipe.attributes?.price?.pricePerServe ?? params.recipePrice)
                     Spacer()
-                    CallToAction(cardWidth: recipeCardDimensions.width, isCurrentlyInBasket: isCurrentlyInBasket) {
-                        onShowRecipeDetails(recipe.id)
+                    CallToAction(cardWidth: params.recipeCardDimensions.width, isCurrentlyInBasket: params.isCurrentlyInBasket) {
+                        params.onAddToBasket(params.recipe.id)
                     }
                 }
                 .frame(height: callToActionHeight)
@@ -84,10 +75,10 @@ public struct MealzRecipeCard: CatalogRecipeCardProtocol {
             }
         }
         .onTapGesture {
-            onShowRecipeDetails(recipe.id)
+            params.onShowRecipeDetails(params.recipe.id)
         }
         .padding(0)
-        .frame(width: recipeCardDimensions.width, height: recipeCardDimensions.height)
+        .frame(width: params.recipeCardDimensions.width, height: params.recipeCardDimensions.height)
         .cornerRadius(12.0)
         .overlay(
             RoundedRectangle(
@@ -132,6 +123,7 @@ struct MealzRecipeCard_Previews: PreviewProvider {
                 mediaUrl: "https://lh3.googleusercontent.com/tbMNuhJ4KxReIPF_aE0yve0akEHeN6O8hauty_XNUF2agWsmyprACLg0Zw6s8gW-QCS3A0QmplLVqBKiMmGf_Ctw4SdhARvwldZqAtMG"),
             relationships: nil)
         MealzRecipeCard().content(
+            params: CatalogRecipeCardParameters(
             recipeCardDimensions: CGSize(width: 380, height: 100),
             recipe: recipe,
             recipePrice: 12.4,
@@ -140,6 +132,7 @@ struct MealzRecipeCard_Previews: PreviewProvider {
             onAddToBasket: {_ in },
             onShowRecipeDetails: {_ in}
         )
+            )
         .padding(80.0)
     }
 }
@@ -147,26 +140,18 @@ struct MealzRecipeCard_Previews: PreviewProvider {
 @available(iOS 14, *)
 public struct DemoCatalogRecipeCardView: CatalogRecipeCardProtocol {
     public init() {} // if your views are in separate package like ours, make sure you have a public init
-    public func content(
-        recipeCardDimensions: CGSize,
-        recipe: Recipe,
-        recipePrice: Double,
-        numberOfGuests: Int,
-        isCurrentlyInBasket: Bool,
-        onAddToBasket: @escaping (String) -> Void,
-        onShowRecipeDetails: @escaping (String) -> Void
-    ) -> some View {
+    public func content(params: CatalogRecipeCardParameters) -> some View {
         VStack {
             ZStack(alignment: .topTrailing) { // image & like button
-                AsyncImage(url: recipe.pictureURL) { image in
+                AsyncImage(url: params.recipe.pictureURL) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(minWidth: 0, maxWidth: recipeCardDimensions.width, maxHeight: 150)
+                        .frame(minWidth: 0, maxWidth: params.recipeCardDimensions.width, maxHeight: 150)
                 }
                 LikeButton( // there are other parameters you can change to customize
                     likeButtonInfo: LikeButtonInfo(
-                        recipeId: recipe.id,
+                        recipeId: params.recipe.id,
                         likedIcon: Image.mealzIcon(icon: .caret),
                         unlikedIcon: Image.mealzIcon(icon: .basket),
                         iconSize: CGSize(width: 20, height: 20),
@@ -177,18 +162,18 @@ public struct DemoCatalogRecipeCardView: CatalogRecipeCardProtocol {
                 ).padding(10)
             }
             .frame(height: 150)
-            Text(recipe.title)
+            Text(params.recipe.title)
                 .lineLimit(2)
-            if !isCurrentlyInBasket { // button to add to basket if not here
+            if !params.isCurrentlyInBasket { // button to add to basket if not here
                 Button {
-                    onAddToBasket(recipe.id)
+                    params.onAddToBasket(params.recipe.id)
                 } label: {
                     Text(Localization.recipe.add.localised)
                 }
             }
         }
-        .onTapGesture { onShowRecipeDetails(recipe.id) } // tap entire card to see details
-        .frame(width: recipeCardDimensions.width, height: recipeCardDimensions.height)
+        .onTapGesture { params.onShowRecipeDetails(params.recipe.id) } // tap entire card to see details
+        .frame(width: params.recipeCardDimensions.width, height: params.recipeCardDimensions.height)
         .background(Color.green).cornerRadius(10)
     }
 }

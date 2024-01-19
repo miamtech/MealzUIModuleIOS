@@ -15,7 +15,10 @@ public struct MealzItemSelectorSelectedProduct: ItemSelectorSelectedProductProto
     
     public init(){}
     
-    public func content(product: Item) -> some View {
-        ItemSelectorProductRow(product:product,isSelected:true)
+    public func content(params: ItemSelectorSelectedProductParameters) -> some View {
+        ItemSelectorProductRow(product: params.product, isSelected: true)
+            .onTapGesture {
+                params.onSeeItemDetails(params.product.id)
+            }
     }
 }

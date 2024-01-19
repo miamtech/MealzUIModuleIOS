@@ -11,25 +11,21 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzCatalogPackageCTA: CatalogPackageCTAProtocol {
     public init () {}
-    public func content(
-        title: String,
-        subtitle: String?,
-        onSeeAllRecipes: @escaping () -> Void
-    ) -> some View {
+    public func content(params: CatalogPackageCTAParameters) -> some View {
         HStack(alignment: .bottom) {
             VStack(alignment: .leading) {
-                Text(title)
+                Text(params.title)
                     .foregroundColor(Color.mealzColor(.primaryText))
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleBigStyle)
                     .lineLimit(1)
-                if let subtitle = subtitle {
+                if let subtitle = params.subtitle {
                     Text(subtitle)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
                         .lineLimit(1)
                 }
             }
             Button( action: {
-                onSeeAllRecipes()
+                params.onSeeAllRecipes()
             }, label: {
                 HStack {
                     Text(Localization.catalog.showAll.localised)
@@ -51,9 +47,10 @@ public struct MealzCatalogPackageCTA: CatalogPackageCTAProtocol {
 struct MealzCatalogPackageCTA_Previews: PreviewProvider {
     static var previews: some View {
         MealzCatalogPackageCTA().content(
+            params: CatalogPackageCTAParameters(
             title: "test",
             subtitle: "test 1",
             onSeeAllRecipes: {}
-        )
+        ))
     }
 }

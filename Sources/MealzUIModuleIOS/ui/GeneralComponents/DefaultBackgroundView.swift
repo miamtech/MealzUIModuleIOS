@@ -11,14 +11,7 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct DefaultBackgroundView: BackgroundProtocol {
     public init() {}
-    public func content() -> some View {
+    public func content(params: BaseBackgroundParameters) -> some View {
         HStack {}
-    }
-}
-
-@available(iOS 14, *)
-struct DefaultBackgroundView_Previews: PreviewProvider {
-    static var previews: some View {
-        DefaultBackgroundView().content()
     }
 }

@@ -13,11 +13,7 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzMealPlannerRecap: MealPlannerRecapProtocol {
     public init() {}
-    public func content(
-        numberOfMeals: Int,
-        totalPrice: Double,
-        onTapGesture: @escaping () -> Void
-    ) -> some View {
+    public func content(params: MealPlannerRecapViewParameters) -> some View {
         VStack(alignment: .center, spacing: 32.0) {
             HStack {
                 Image.mealzIcon(icon: .check)
@@ -26,19 +22,19 @@ public struct MealzMealPlannerRecap: MealPlannerRecapProtocol {
             .frame(maxWidth: .infinity)
             .background(Color.mealzColor(.brownishYellow))
             .clipShape(RoundedRectangle(cornerRadius: 6.0))
-
+            
             Text("Les produits associés ont bien été ajoutés au panier.")
                 .frame(alignment: .center)
                 .multilineTextAlignment(.center)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
-
+            
             HStack(alignment: .top) {
-                    // Space Between
-                Text("\(numberOfMeals) repas pour")
+                // Space Between
+                Text("\(params.numberOfMeals) repas pour")
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
                 Spacer()
-                    // Alternative Views and Spacers
-                Text(totalPrice.currencyFormatted)
+                // Alternative Views and Spacers
+                Text(params.totalPrice.currencyFormatted)
                     .foregroundColor(Color.mealzColor(.primary))
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
             }
@@ -48,14 +44,14 @@ public struct MealzMealPlannerRecap: MealPlannerRecapProtocol {
                     .inset(by: 0.5)
                     .stroke(Color.mealzColor(.border), lineWidth: 1)
             )
-
+            
             Divider()
                 .frame(height: 1.0)
-
+            
             Text("Découvrez aussi")
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
             Button {
-                onTapGesture()
+                params.onTapGesture()
             } label: {
                 Text("Nos promotions")
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBoldStyle)
@@ -75,8 +71,10 @@ public struct MealzMealPlannerRecap: MealPlannerRecapProtocol {
 struct MealzMealPlannerRecapPreviews: PreviewProvider {
     static var previews: some View {
         MealzMealPlannerRecap().content(
-            numberOfMeals: 4,
-            totalPrice: 34.32) {
-        }
+            params: MealPlannerRecapViewParameters(
+                numberOfMeals: 4,
+                totalPrice: 34.32) {
+                }
+        )
     }
 }

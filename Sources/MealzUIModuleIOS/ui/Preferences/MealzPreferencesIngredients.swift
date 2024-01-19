@@ -12,22 +12,17 @@ import miamCore
 @available(iOS 14, *)
 public struct MealzPreferencesIngredients: PreferencesIngredientsProtocol {
     public init() {}
-    public func content(
-        ingredientsTag: [CheckableTag],
-        geometry: GeometryProxy,
-        onTogglePreference: @escaping (String) -> Void,
-        onGoToSearch: @escaping () -> Void
-    ) -> some View {
+    public func content(params: PreferencesIngredientsParameters) -> some View {
         
         MealzPreferencesTagsListView(
             title: Localization.preferences.tastesTitle.localised,
             subtitle: Localization.preferences.tastesSubtitle.localised,
-            tags: ingredientsTag,
-            geometry: geometry,
+            tags: params.ingredientsTag,
+            geometry: params.geometry,
             onToggleTag: { tag in
-                onTogglePreference(tag.tag.id)
+                params.onTogglePreference(tag.tag.id)
             },
-            onAddTagTapped: onGoToSearch)
+            onAddTagTapped: params.onGoToSearch)
     }
 }
 
@@ -36,10 +31,12 @@ struct MealzPreferencesIngredients_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { geometry in
             MealzPreferencesIngredients().content(
+                params: PreferencesIngredientsParameters(
                 ingredientsTag: [],
                 geometry: geometry,
                 onTogglePreference: {_ in},
                 onGoToSearch: {})
+                )
         }
     }
 }

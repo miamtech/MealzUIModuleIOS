@@ -11,12 +11,9 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzBasketTagItem: BaseTitleProtocol {
     public init() {}
-    public func content(
-        title: String,
-        subtitle: String?
-    ) -> some View {
+    public func content(params: TitleParameters) -> some View {
         VStack {
-            Text(title)
+            Text(params.title)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
                 .padding(Dimension.sharedInstance.mlPadding)
                 .frame(maxWidth: 150, alignment: .leading)
@@ -34,6 +31,6 @@ public struct MealzBasketTagItem: BaseTitleProtocol {
 @available(iOS 14, *)
 struct MealzBasketTagItem_Previews: PreviewProvider {
     static var previews: some View {
-        MealzBasketTagItem().content(title: "Test", subtitle: nil)
+        MealzBasketTagItem().content(params: TitleParameters(title: "Test", subtitle: nil))
     }
 }

@@ -11,8 +11,7 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzMyMealsEmpty: EmptyProtocol {
     public init() {}
-    
-    public func content(onOptionalCallback: (() -> Void)?) -> some View {
+    public func content(params: BaseEmptyParameters) -> some View {
         VStack(spacing: Dimension.sharedInstance.lPadding) {
             Image.mealzIcon(icon: .feelingBlue)
                 .resizable()
@@ -22,7 +21,7 @@ public struct MealzMyMealsEmpty: EmptyProtocol {
                 .foregroundColor(Color.mealzColor(.primary))
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
                 .multilineTextAlignment(.center)
-            if let optionalCallBack = onOptionalCallback {
+            if let optionalCallBack = params.onOptionalCallback {
                 Button {
                     withAnimation {
                         optionalCallBack()
@@ -50,6 +49,6 @@ public struct MealzMyMealsEmpty: EmptyProtocol {
 @available(iOS 14, *)
 struct MealzMyMealsEmpty_Previews: PreviewProvider {
     static var previews: some View {
-        MealzMyMealsEmpty().content(onOptionalCallback: {})
+        MealzMyMealsEmpty().content(params: BaseEmptyParameters(onOptionalCallback: {}))
     }
 }

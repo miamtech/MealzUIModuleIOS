@@ -20,8 +20,7 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class PreferencesParameters: PreferencesParametersProtocol {
-    public var onClosed: () -> Void
-    public var onGoToSearch: () -> Void
+    public var actions: PreferencesActions
     
     public var guestSection: TypeSafePreferencesGuest
     public var dietSection: TypeSafePreferencesDiet
@@ -30,12 +29,10 @@ public class PreferencesParameters: PreferencesParametersProtocol {
     public var footer: TypeSafePreferencesFooter
     
     public init(
-        onClosed: @escaping () -> Void,
-        onGoToSearch: @escaping () -> Void,
+        actions: PreferencesActions,
         viewOptions: PreferencesViewOptions = PreferencesViewOptions()
     ) {
-        self.onClosed = onClosed
-        self.onGoToSearch = onGoToSearch
+        self.actions = actions
         self.guestSection = viewOptions.guestSection
         self.dietSection = viewOptions.dietSection
         self.ingredientsSection = viewOptions.ingredientsSection

@@ -13,36 +13,28 @@ import miamCore
 @available(iOS 14, *)
 public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
     public init() {}
-    public func content(
-        recipeCardDimensions: CGSize,
-        recipe: Recipe,
-        numberOfGuests: Int,
-        totalPrice: Double,
-        numberOfProductsInRecipe: Int,
-        onDeleteRecipe: @escaping () -> Void,
-        onShowRecipeDetails: @escaping (String) -> Void
-    ) -> some View {
-        let pictureSize = recipeCardDimensions.height - (Dimension.sharedInstance.mlPadding * 2)
+    public func content(params: MyMealRecipeCardParameters) -> some View {
+        let pictureSize = params.recipeCardDimensions.height - (Dimension.sharedInstance.mlPadding * 2)
         
         func showTimeAndDifficulty() -> Bool {
-            return recipeCardDimensions.height >= 320
+            return params.recipeCardDimensions.height >= 320
         }
         
         func showCTA() -> Bool {
-            return recipeCardDimensions.height >= 225
+            return params.recipeCardDimensions.height >= 225
         }
         
         return VStack(alignment: .leading, spacing: 0) {
             HStack {
                 ZStack(alignment: .bottomTrailing) {
-                    AsyncImage(url: recipe.pictureURL) { image in
+                    AsyncImage(url: params.recipe.pictureURL) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: pictureSize, height: pictureSize)
                             .cornerRadius(Dimension.sharedInstance.mCornerRadius)
                     }
-                    MealzSmallGuestView(guests: numberOfGuests)
+                    MealzSmallGuestView(guests: params.numberOfGuests)
                         .padding(Dimension.sharedInstance.mPadding)
                 }
                 .frame(width: pictureSize, height: pictureSize)
@@ -51,13 +43,13 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                     .frame(width: Dimension.sharedInstance.mPadding)
                 VStack(alignment: .leading, spacing: Dimension.sharedInstance.mPadding) {
                     HStack {
-                        Text(recipe.title)
+                        Text(params.recipe.title)
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
                             .lineLimit(2)
                             .minimumScaleFactor(0.8)
                         Spacer()
                         Button {
-                            onDeleteRecipe()
+                            params.onDeleteRecipe()
                         } label: {
                             Image.mealzIcon(icon: .trash)
                                 .renderingMode(.template)
@@ -66,14 +58,14 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                                 .foregroundColor(Color.mealzColor(.grayText))
                         }
                     }
-                    Text(String(numberOfProductsInRecipe) + " " + Localization.myMeals.products.localised)
+                    Text(String(params.numberOfProductsInRecipe) + " " + Localization.myMeals.products.localised)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                         .foregroundColor(Color.mealzColor(.grayText))
-                    if let attributes = recipe.attributes {
-                        PricePerPersonView(price: totalPrice, numberOfGuests: numberOfGuests)
+                    if let attributes = params.recipe.attributes {
+                        PricePerPersonView(price: params.recipePrice, numberOfGuests: params.numberOfGuests)
                     }
                     Button(action: {
-                        onShowRecipeDetails(recipe.id)
+                        params.onShowRecipeDetails(params.recipe.id)
                     }, label: {
                         HStack {
                             Text(Localization.myMeals.seeProducts.localised)
@@ -98,10 +90,10 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
             .padding(Dimension.sharedInstance.mPadding)
         }
         .onTapGesture {
-            onShowRecipeDetails(recipe.id)
+            params.onShowRecipeDetails(params.recipe.id)
         }
         .padding(Dimension.sharedInstance.mPadding)
-        .frame(height: recipeCardDimensions.height)
+        .frame(height: params.recipeCardDimensions.height)
         .frame(maxWidth: .infinity)
         .cornerRadius(Dimension.sharedInstance.mCornerRadius)
         .overlay(
@@ -136,12 +128,14 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
 @available(iOS 14, *)
 #Preview {
     MealzMyMealRecipeCard().content(
+        params: MyMealRecipeCardParameters(
         recipeCardDimensions: CGSize(width: 400, height: 200),
         recipe: FakeRecipe().createRandomFakeRecipe(),
         numberOfGuests: 4,
-        totalPrice: 34.2,
+        recipePrice: 34.2,
         numberOfProductsInRecipe: 2,
         onDeleteRecipe: {},
         onShowRecipeDetails: { _ in }
+        )
     )
 }

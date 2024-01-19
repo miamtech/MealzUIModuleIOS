@@ -13,27 +13,22 @@ import MiamIOSFramework
 public struct MealzMealPlannerForm: MealPlannerFormProtocol {
     let dimension = Dimension.sharedInstance
     public init() {}
-    public func content(
-        mealPlannerCriteria: Binding<MealPlannerCriteria>,
-        activelyUpdatingTextField: Binding<Bool>,
-        isFetchingRecipes: Bool,
-        onFormValidated: @escaping (MealPlannerCriteria) -> Void
-    ) -> some View {
+    public func content(params: MealPlannerFormViewParameters) -> some View {
         VStack(spacing: 24.0) {
             MealzMealPlannerBudget(
-                budget: mealPlannerCriteria.availableBudget,
+                budget: params.mealPlannerCriteria.availableBudget,
                 caption: Localization.myBudget.totalBudgetTitle.localised,
                 currency: Localization.price.currency.localised)
-
+            
             MealzStepper(
-                value: mealPlannerCriteria.numberOfGuests,
+                value: params.mealPlannerCriteria.numberOfGuests,
                 caption: Localization.myBudget.numberOfGuestsTitle.localised)
             MealzStepper(
-                value: mealPlannerCriteria.numberOfMeals,
+                value: params.mealPlannerCriteria.numberOfMeals,
                 caption: Localization.myBudget.numberOfMealsTitle.localised)
-
-            MealPlannerSubmitCTA(isLoading: isFetchingRecipes) {
-                onFormValidated(mealPlannerCriteria.wrappedValue)
+            
+            MealPlannerSubmitCTA(isLoading: params.isFetchingRecipes) {
+                params.onFormValidated(params.mealPlannerCriteria.wrappedValue)
             }
         }
         .padding(dimension.mlPadding)
@@ -45,19 +40,21 @@ struct MealzMealPlannerFormPreview: PreviewProvider {
     static var previews: some View {
         BudgetFormPreview()
     }
-
+    
     struct BudgetFormPreview: View {
         @State var mealPlannerCriteria = MealPlannerCriteria(
             availableBudget: 40.0,
             numberOfGuests: 3,
             numberOfMeals: 2)
-
+        
         var body: some View {
             MealzMealPlannerForm().content(
-                mealPlannerCriteria: $mealPlannerCriteria,
-                activelyUpdatingTextField: .constant(false),
-                isFetchingRecipes: false,
-                onFormValidated: { _ in })
+                params: MealPlannerFormViewParameters(
+                    mealPlannerCriteria: $mealPlannerCriteria,
+                    activelyUpdatingTextField: .constant(false),
+                    isFetchingRecipes: false,
+                    onFormValidated: { _ in })
+            )
         }
     }
 }

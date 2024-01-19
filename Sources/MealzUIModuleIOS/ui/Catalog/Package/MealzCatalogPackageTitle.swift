@@ -11,13 +11,13 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzCatalogPackageTitle: BaseTitleProtocol {
     public init() {}
-    public func content(title: String, subtitle: String?) -> some View {
+    public func content(params: TitleParameters) -> some View {
         HStack(alignment: .bottom) {
             VStack(alignment: .leading) {
-                Text(title)
+                Text(params.title)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleBigStyle)
                     .lineLimit(1)
-                if let subtitle = subtitle {
+                if let subtitle = params.subtitle {
                     Text(subtitle)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
                         .lineLimit(1)
@@ -31,6 +31,6 @@ public struct MealzCatalogPackageTitle: BaseTitleProtocol {
 @available(iOS 14, *)
 struct MealzCatalogPackageTitle_Previews: PreviewProvider {
     static var previews: some View {
-        MealzCatalogPackageTitle().content(title: "Test", subtitle: "Subtitle")
+        MealzCatalogPackageTitle().content(params: TitleParameters(title: "Test", subtitle: "Subtitle"))
     }
 }

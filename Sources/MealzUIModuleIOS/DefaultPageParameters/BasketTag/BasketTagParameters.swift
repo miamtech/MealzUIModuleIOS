@@ -20,15 +20,15 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public class BasketTagParameters: BasketTagParametersProtocol {
     
-    public var onShowRecipeDetails: (String) -> Void
+    public var actions: BasketTagActions
     
     public var title: TypeSafeBaseTitle
     
     public init(
-        onShowRecipeDetails: @escaping (String) -> Void,
+        actions: BasketTagActions,
         viewOptions: BasketTagViewOptions = BasketTagViewOptions()
     ) {
-        self.onShowRecipeDetails = onShowRecipeDetails
+        self.actions = actions
         self.title = viewOptions.title
     }
 }

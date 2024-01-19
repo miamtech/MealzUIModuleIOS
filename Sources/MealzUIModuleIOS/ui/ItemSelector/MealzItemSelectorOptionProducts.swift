@@ -12,20 +12,17 @@ import SwiftUI
 
 @available(iOS 14, *)
 public struct MealzItemSelectorOptionProducts: ItemSelectorOptionProductsProtocol{
-    
     public init() {}
 
-    public func content(
-        products: [Item],
-        onItemSelected: @escaping (Item) -> Void
-    ) -> some View {
-        ForEach(products, id: \.self) { product in
+    public func content(params: ItemSelectorOptionProductsParameters) -> some View {
+        ForEach(params.products, id: \.self) { product in
             HStack {
                 ItemSelectorProductRow(
-                    product: product
+                    product: product,
+                    onSelectProduct: params.onItemSelected
                 )
             }.onTapGesture {
-                onItemSelected(product)
+                params.onSeeItemDetails(product.id)
             }
         }
     }

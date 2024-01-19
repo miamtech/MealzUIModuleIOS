@@ -12,15 +12,17 @@ import MiamIOSFramework
 public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductProtocol {
     public init() {}
     let dim = Dimension.sharedInstance
-    public func content(data: RecipeProductData, onAddProduct: @escaping () -> Void, onIgnoreProduct: @escaping () -> Void, onChooseProduct: @escaping () -> Void) -> some View {
+    public func content(params: RecipeDetailsUnaddedProductParameters) -> some View {
         VStack {
             HStack {
-                Text(data.ingredientName.capitalizingFirstLetter())
+                Text(params.data.ingredientName.capitalizingFirstLetter())
                     .padding(dim.mPadding)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                     .foregroundColor(Color.mealzColor(.standardDarkText))
                 Spacer()
-                if let ingredientQuantity = data.ingredientQuantity, let qty = Float(ingredientQuantity), let unit = data.ingredientUnit {
+                if let ingredientQuantity = params.data.ingredientQuantity,
+                   let qty = Float(ingredientQuantity),
+                   let unit = params.data.ingredientUnit {
                     Text(String(format: "%g \(unit)", qty))
                         .padding(dim.mPadding)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
@@ -33,7 +35,7 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
             .cornerRadius(dim.mCornerRadius, corners: .top)
             
             HStack {
-                if let pictureURL = URL(string: data.pictureURL) {
+                if let pictureURL = URL(string: params.data.pictureURL) {
                     AnyView(AsyncImage(url: pictureURL) { image in
                         image
                             .resizable()
@@ -43,18 +45,18 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
                 }
                 
                 VStack(alignment: .leading) {
-                    if let brand = data.brand {
+                    if let brand = params.data.brand {
                         Text(brand)
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallBoldStyle)
                     }
-                    Text(data.name)
+                    Text(params.data.name)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
-                    Text(data.capacity)
+                    Text(params.data.capacity)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
                         .foregroundColor(Color.mealzColor(.standardDarkText))
                         .padding(dim.mPadding)
                         .background(Capsule().fill(Color.mealzColor(.lightBackground)))
-                    Button(action: onChooseProduct, label: {
+                    Button(action: params.onChooseProduct, label: {
                         Text(Localization.myBudget.replaceItem.localised)
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                             .foregroundColor(Color.mealzColor(.primary))
@@ -65,16 +67,16 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
                 .padding(.top, dim.mPadding)
             }
             HStack(spacing: Dimension.sharedInstance.lPadding) {
-                Text(data.formattedProductPrice)
+                Text(params.data.formattedProductPrice)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleBigStyle)
                     .foregroundColor(Color.mealzColor(.primary))
                 Spacer()
-                Button(action: onIgnoreProduct, label: {
+                Button(action: params.onIgnoreProduct, label: {
                     Text(Localization.ingredient.ignoreProduct.localised)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                         .foregroundColor(Color.mealzColor(.grayText))
                 })
-                Button(action: onAddProduct, label: {
+                Button(action: params.onAddProduct, label: {
                     Image.mealzIcon(icon: .basket)
                         .renderingMode(.template)
                         .foregroundColor(Color.mealzColor(.white))

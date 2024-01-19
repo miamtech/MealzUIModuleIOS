@@ -21,20 +21,17 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class FiltersParameters: FiltersParametersProtocol {
-    public var onApplied: () -> Void
-    public var onClosed: () -> Void
+    public var actions: FiltersActions
     public var header: TypeSafeFiltersHeader
     public var callToAction: TypeSafeFiltersCTA
     public var section: TypeSafeFiltersSection
     public var background: TypeSafeBackground
         
     public init(
-        onApplied: @escaping () -> Void,
-        onClosed: @escaping () -> Void,
+        actions: FiltersActions,
         viewOptions: FiltersViewOptions = FiltersViewOptions()
     ) {
-        self.onApplied = onApplied
-        self.onClosed = onClosed
+        self.actions = actions
         self.header = viewOptions.header
         self.callToAction = viewOptions.callToAction
         self.section = viewOptions.section

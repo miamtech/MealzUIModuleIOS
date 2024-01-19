@@ -16,27 +16,21 @@ public struct MealzMealPlannerResultsToolbar: MealPlannerResultsToolbarProtocol 
     @State var numberMeals = 4
     let dimension = Dimension.sharedInstance
     public init() {}
-    
-    public func content(
-        mealPlannerCriteria: Binding<MealPlannerCriteria>,
-        activelyEditingTextField: Binding<Bool>,
-        isLoadingRecipes: Binding<Bool>,
-        onValidateTapped: @escaping () -> Void
-    ) -> some View {
+    public func content(params: MealPlannerResultsToolbarParameters) -> some View {
         HStack {
             MealzMealPlannerBudget(
-                budget: mealPlannerCriteria.availableBudget,
+                budget: params.mealPlannerCriteria.availableBudget,
                 currency: Localization.price.currency.localised)
             MealzStepperCollapsed(
-                value: mealPlannerCriteria.numberOfGuests,
+                value: params.mealPlannerCriteria.numberOfGuests,
                 icon: Image.mealzIcon(icon: .guests))
             MealzStepperCollapsed(
-                value: mealPlannerCriteria.numberOfMeals,
+                value: params.mealPlannerCriteria.numberOfMeals,
                 icon: Image.mealzIcon(icon: .cutlery))
             SubmitButtonCollapsed(
-                isLoading: isLoadingRecipes,
-                activelyEditingTextField: activelyEditingTextField.wrappedValue) {
-                onValidateTapped()
+                isLoading: params.isLoadingRecipes,
+                activelyEditingTextField: params.activelyEditingTextField.wrappedValue) {
+                    params.onValidateTapped()
             }
         }
     }
@@ -90,10 +84,12 @@ struct MiamBudgetPlannerToolbar_Previews: PreviewProvider {
             numberOfMeals: 4)
         var body: some View {
             MealzMealPlannerResultsToolbar().content(
+                params: MealPlannerResultsToolbarParameters(
                 mealPlannerCriteria: $mealPlannerCriteria,
                 activelyEditingTextField: .constant(false),
                 isLoadingRecipes: $loading,
                 onValidateTapped: {})
+                )
         }
     }
 }

@@ -12,19 +12,16 @@ import miamCore
 @available(iOS 14, *)
 public struct MealzMealsInBasketButtonSuccess: MealsInBasketButtonSuccessProtocol {
     public init() {}
-    public func content(
-        mealsCount: Int,
-        onNavigateToMyMeals: @escaping () -> Void
-    ) -> some View {
+    public func content(params: MealsInBasketButtonSuccessParameters) -> some View {
         Button {
-            onNavigateToMyMeals()
+            params.onNavigateToMyMeals()
         } label: {
             HStack {
                 Image.mealzIcon(icon: .cutlery)
                     .renderingMode(.template)
                     .foregroundColor(Color.mealzColor(.primary))
                 Spacer()
-                Text(Localization.myMeals.mealsAdded(numberOfMeals: Int32(mealsCount)).localised)
+                Text(Localization.myMeals.mealsAdded(numberOfMeals: Int32(params.mealsCount)).localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
                 Image.mealzIcon(icon: .caret)

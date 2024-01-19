@@ -13,7 +13,7 @@ public struct MealzRecipeDetailsLoadingProductView: LoadingProtocol {
     public init() {}
     let dim = Dimension.sharedInstance
     private let linePlaceholderHeight = 13.0
-    public func content() -> some View {
+    public func content(params: BaseLoadingParameters) -> some View {
         VStack {
             VStack {
                 RoundedRectangle(cornerRadius: dim.lCornerRadius)

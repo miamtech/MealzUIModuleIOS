@@ -13,12 +13,11 @@ import MiamIOSFramework
 public struct MealzMealPlannerResultsEmpty: MealPlannerResultsEmptyProtocol {
     
     public init() {}
-    public func content(mealPlannerCriteria: MealPlannerCriteria, reason: String) -> some View {
-        
+    public func content(params: MealPlannerResultsEmptyParameters) -> some View {
         VStack(alignment: .leading, spacing: 8.0) {
             Image.mealzIcon(icon: .alert)
                 .padding([.top, .leading], 12.0)
-            Text(reason)
+            Text(params.reason)
                 .foregroundColor(Color.mealzColor(.danger))
                 .lineLimit(5)
                 .padding([.leading, .trailing, .bottom], 12.0)

@@ -26,10 +26,10 @@ public struct ItemSelectorParameters: ItemSelectorParametersProtocol {
     public var productOptions: TypeSafeItemSelectorOptionProducts
     public var noResults: TypeSafeItemSelectorNoResults
     
-    public var onItemSelected: () -> Void
+    public var actions: ItemSelectorActions
     
     public init(
-        onItemSelected: @escaping () -> Void,
+        actions: ItemSelectorActions,
         viewOptions : ItemSelectorViewOptions = ItemSelectorViewOptions()
     ){
         self.searchBar = viewOptions.searchBar
@@ -38,6 +38,6 @@ public struct ItemSelectorParameters: ItemSelectorParametersProtocol {
         self.productOptions = viewOptions.productOptions
         self.noResults = viewOptions.noResults
         
-        self.onItemSelected = onItemSelected
+        self.actions = actions
     }
 }

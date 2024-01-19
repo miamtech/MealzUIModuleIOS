@@ -10,14 +10,14 @@ import SwiftUI
 
 @available(iOS 14, *)
 public struct MealzMealPlannerRecipePickerEmpty: EmptyProtocol {
-    public func content(onOptionalCallback: (() -> Void)?) -> some View {
-            VStack {
-                Text(Localization.catalog.noRecipeFound.localised)
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
-                    .padding(.top, 35)
-                Text(Localization.catalog.noRecipeFound.localised)
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.subtitleStyle)
-                Spacer()
-            }
+    public func content(params: BaseEmptyParameters) -> some View {
+        VStack {
+            Text(Localization.catalog.noRecipeFound.localised)
+                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+                .padding(.top, 35)
+            Text(Localization.catalog.noRecipeFound.localised)
+                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.subtitleStyle)
+            Spacer()
+        }
     }
 }

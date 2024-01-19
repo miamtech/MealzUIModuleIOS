@@ -14,18 +14,16 @@ public let mealzProductHeight: CGFloat = 230
 public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProtocol {
     public init() {}
     let dim = Dimension.sharedInstance
-    
-    public func content(
-        data: RecipeProductData,
-        onDeleteProduct: @escaping () -> Void,
-        onChangeProduct: @escaping () -> Void,
-        updateProductQuantity: @escaping (Int) -> Void
-    ) -> some View {
+    public func content(params: RecipeDetailsAddedProductParameters) -> some View {
         VStack {
             HStack {
-                Text(data.ingredientName.capitalizingFirstLetter()).padding(dim.mPadding).miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
+                Text(params.data.ingredientName.capitalizingFirstLetter())
+                    .padding(dim.mPadding)
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
-                if let ingredientQuantity = data.ingredientQuantity, let qty = Float(ingredientQuantity), let unit = data.ingredientUnit {
+                if let ingredientQuantity = params.data.ingredientQuantity,
+                    let qty = Float(ingredientQuantity),
+                   let unit = params.data.ingredientUnit {
                     Text(String(format: "%g \(unit)", qty))
                         .padding(dim.mPadding)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
@@ -36,7 +34,7 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
             .background(Color.mealzColor(.primary))
             .cornerRadius(dim.mCornerRadius, corners: .top)
             HStack {
-                if let pictureURL = URL(string: data.pictureURL) {
+                if let pictureURL = URL(string: params.data.pictureURL) {
                     AnyView(AsyncImage(url: pictureURL) { image in
                         image
                             .resizable()
@@ -46,18 +44,18 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                 }
                 
                 VStack(alignment: .leading) {
-                    if let brand = data.brand {
+                    if let brand = params.data.brand {
                         Text(brand)
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallBoldStyle)
                     }
-                    Text(data.name)
+                    Text(params.data.name)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
-                    Text(data.capacity)
+                    Text(params.data.capacity)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
                         .foregroundColor(Color.mealzColor(.standardDarkText))
                         .padding(dim.mPadding)
                         .background(Capsule().fill(Color.mealzColor(.lightBackground)))
-                    Button(action: onChangeProduct, label: {
+                    Button(action: params.onChangeProduct, label: {
                         Text(Localization.myBudget.replaceItem.localised)
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                             .foregroundColor(Color.mealzColor(.primary))
@@ -68,26 +66,26 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                 .padding(.top, dim.mPadding)
             }
             HStack {
-                Text(data.formattedProductPrice)
+                Text(params.data.formattedProductPrice)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleBigStyle)
                     .padding(.horizontal, 12)
                     .foregroundColor(Color.mealzColor(.primary))
                 Spacer()
                 HStack{
                     Button {
-                        if data.productQuantity == 1 {
-                            onDeleteProduct()
+                        if params.data.productQuantity == 1 {
+                            params.onDeleteProduct()
                         } else {
-                            updateProductQuantity(data.productQuantity - 1)
+                            params.updateProductQuantity(params.data.productQuantity - 1)
                         }
                     } label: {
                         Image.mealzIcon(icon: .minus)
                             .renderingMode(.template)
                             .foregroundColor(Color.mealzColor(.primary))
                     }
-                    Text(String(data.productQuantity)).frame(minWidth: 10, alignment: .center)
+                    Text(String(params.data.productQuantity)).frame(minWidth: 10, alignment: .center)
                     Button {
-                        updateProductQuantity(data.productQuantity + 1)
+                        params.updateProductQuantity(params.data.productQuantity + 1)
                     } label: {
                         Image.mealzIcon(icon: .plus)
                             .renderingMode(.template)
@@ -97,15 +95,15 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                 .padding(dim.mPadding)
             }
             Spacer()
-            if data.numberOfOtherRecipesSharingThisIngredient > 1 {
+            if params.data.numberOfOtherRecipesSharingThisIngredient > 1 {
                 HStack(alignment: .center) {
                     Text(
                         String(format: String.localizedStringWithFormat(
                             Localization.ingredient.productsSharedRecipe(
-                                numberOfProducts: Int32(data.numberOfOtherRecipesSharingThisIngredient)
+                                numberOfProducts: Int32(params.data.numberOfOtherRecipesSharingThisIngredient)
                             ).localised,
-                            data.numberOfOtherRecipesSharingThisIngredient),
-                            data.numberOfOtherRecipesSharingThisIngredient)
+                            params.data.numberOfOtherRecipesSharingThisIngredient),
+                               params.data.numberOfOtherRecipesSharingThisIngredient)
                     )
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
                     .foregroundColor(Color.mealzColor(.grayText))

@@ -11,19 +11,15 @@ import miamCore
 
 @available(iOS 14, *)
 public struct MealzRecipeDetailsStepsView: RecipeDetailsStepsProtocol {
-    
     public init() {}
-    public func content(
-        activeStep: Binding<Int>,
-        steps: [RecipeStep]
-    ) -> some View {
+    public func content(params: RecipeDetailsStepsParameters) -> some View {
         VStack(alignment: .leading) {
-            Text("\(steps.count) \(Localization.recipe.steps.localised)")
+            Text("\(params.steps.count) \(Localization.recipe.steps.localised)")
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
                 .padding()
             
             VStack {
-                ForEach(steps,id: \.self.id) {step in
+                ForEach(params.steps,id: \.self.id) {step in
                     RecipeDetailStep(stepNumber: Int(step.attributes?.stepNumber ?? 0) + 1, stepDescription: step.attributes?.stepDescription ?? "")
                 }
                 .padding(.bottom)

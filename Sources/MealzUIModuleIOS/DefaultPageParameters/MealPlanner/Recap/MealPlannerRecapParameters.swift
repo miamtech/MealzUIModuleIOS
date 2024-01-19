@@ -19,16 +19,16 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class MealPlannerRecapParameters: MealPlannerRecapParametersProtocol {
-    public var onNavigateAwayFromMealPlanner: () -> Void
+    public var actions: MealPlannerRecapActions
     
     public var success: TypeSafeMealPlannerRecap
     public var background: TypeSafeBackground
 
     public init(
-        onNavigateAwayFromMealPlanner: @escaping () -> Void,
+        actions: MealPlannerRecapActions,
         viewOptions: MealPlannerRecapViewOptions = MealPlannerRecapViewOptions()
     ) {
-        self.onNavigateAwayFromMealPlanner = onNavigateAwayFromMealPlanner
+        self.actions = actions
         self.success = viewOptions.success
         self.background = viewOptions.background
     }

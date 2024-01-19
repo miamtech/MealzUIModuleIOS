@@ -11,19 +11,13 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealzCatalogResultsToolbar: CatalogToolbarProtocol {
     public init () {}
-    public func content(
-        usesPreferences: Bool,
-        onFiltersTapped: @escaping () -> Void,
-        onSearchTapped: @escaping () -> Void,
-        onFavoritesTapped: @escaping () -> Void,
-        onPreferencesTapped: @escaping () -> Void
-    ) -> some View {
+    public func content(params: CatalogToolbarParameters) -> some View {
         HStack(spacing: Dimension.sharedInstance.xlPadding) {
-            CatalogToolbarSearchButton(onSearchTapped: onSearchTapped)
+            CatalogToolbarSearchButton(onSearchTapped: params.onSearchTapped)
             Spacer()
-            CatalogToolbarButtonFormat(icon:  Image.mealzIcon(icon: .filters), action: onFiltersTapped)
-            if usesPreferences {
-                CatalogToolbarButtonFormat(icon:  Image.mealzIcon(icon: .chefHat), action: onPreferencesTapped)
+            CatalogToolbarButtonFormat(icon:  Image.mealzIcon(icon: .filters), action: params.onFiltersTapped)
+            if params.usesPreferences {
+                CatalogToolbarButtonFormat(icon:  Image.mealzIcon(icon: .chefHat), action: params.onPreferencesTapped)
             }
         }
         .padding(Dimension.sharedInstance.mlPadding)
@@ -34,11 +28,11 @@ public struct MealzCatalogResultsToolbar: CatalogToolbarProtocol {
 struct MealzCatalogResultsToolbar_Previews: PreviewProvider {
     static var previews: some View {
         MealzCatalogToolbar().content(
+            params: CatalogToolbarParameters(
             usesPreferences: true,
             onFiltersTapped: {},
             onSearchTapped: {},
             onFavoritesTapped: {},
-            onPreferencesTapped: {})
+            onPreferencesTapped: {}))
     }
 }
-

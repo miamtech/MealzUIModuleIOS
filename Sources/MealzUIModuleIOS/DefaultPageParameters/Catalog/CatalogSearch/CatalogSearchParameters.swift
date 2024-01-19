@@ -20,14 +20,14 @@ import MiamIOSFramework
  */
 @available(iOS 14, *)
 public class CatalogSearchParameters: CatalogSearchParametersProtocol {
-    public var onApplied: () -> Void
+    public var actions: CatalogSearchActions
     public var search: TypeSafeSearch
     
     public init(
-        onApplied: @escaping () -> Void,
+        actions: CatalogSearchActions,
         viewOptions: CatalogSearchViewOptions = CatalogSearchViewOptions()
     ) {
-        self.onApplied = onApplied
+        self.actions = actions
         self.search = viewOptions.search
     }
 }

@@ -14,7 +14,7 @@ public struct MealzMealPlannerRecipePlaceholder: MealPlannerRecipePlaceholderPro
     private let recipeCardSize = CGSize(width: 175.0, height: 175.0)
     private let dimension = Dimension.sharedInstance
     public init() {}
-    public func content(onTapGesture: @escaping () -> Void) -> some View {
+    public func content(params: MealPlannerRecipePlaceholderParameters) -> some View {
         VStack {
             ZStack {
                 VStack {
@@ -30,7 +30,7 @@ public struct MealzMealPlannerRecipePlaceholder: MealPlannerRecipePlaceholderPro
                 }
                 VStack(spacing: dimension.lPadding) {
                     Button {
-                        onTapGesture()
+                        params.onTapGesture()
                     } label: {
                         RoundedRectangle(cornerRadius: dimension.sCornerRadius)
                             .fill(Color.mealzColor(.primary))
@@ -57,8 +57,8 @@ public struct MealzMealPlannerRecipePlaceholder: MealPlannerRecipePlaceholderPro
 @available(iOS 14, *)
 struct MealzMealPlannerRecipePlaceholderPreview: PreviewProvider {
     static var previews: some View {
-        MealzMealPlannerRecipePlaceholder().content {
+        MealzMealPlannerRecipePlaceholder().content(params: MealPlannerRecipePlaceholderParameters() {
 
-        }
+        })
     }
 }

@@ -12,15 +12,12 @@ import miamCore
 @available(iOS 14, *)
 public struct MealzPreferencesDiet: PreferencesDietProtocol {
     public init() {}
-    public func content(
-        dietsTag: [CheckableTag],
-        onTogglePreference: @escaping (String) -> Void
-    ) -> some View {
+    public func content(params: PreferencesDietParameters) -> some View {
         MealzPreferencesListView(
             title: Localization.preferences.dietTitle.localised,
              subtitle: Localization.preferences.dietSubtitle.localised,
-            preferences: dietsTag) { tag in
-                onTogglePreference(tag.tag.id)
+            preferences: params.dietsTag) { tag in
+                params.onTogglePreference(tag.tag.id)
         }
     }
 }
@@ -29,7 +26,9 @@ public struct MealzPreferencesDiet: PreferencesDietProtocol {
 struct MealzPreferencesDiet_Previews: PreviewProvider {
     static var previews: some View {
         MealzPreferencesDiet().content(
+            params: PreferencesDietParameters(
             dietsTag: [],
             onTogglePreference: {_ in})
+            )
     }
 }
