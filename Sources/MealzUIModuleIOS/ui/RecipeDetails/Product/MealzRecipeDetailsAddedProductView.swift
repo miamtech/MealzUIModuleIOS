@@ -83,7 +83,11 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                             .renderingMode(.template)
                             .foregroundColor(Color.mealzColor(.primary))
                     }
-                    Text(String(params.data.productQuantity)).frame(minWidth: 10, alignment: .center)
+                    if params.updatingQuantity {
+                        ProgressLoader(color: Color.mealzColor(.standardDarkText), size: 10)
+                    } else {
+                        Text(String(params.data.productQuantity)).frame(minWidth: 10, alignment: .center)
+                    }
                     Button {
                         params.updateProductQuantity(params.data.productQuantity + 1)
                     } label: {
