@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MiamIOSFramework
+import miamCore
 
 @available(iOS 14, *)
 public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductProtocol {
@@ -21,12 +22,17 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
                     .foregroundColor(Color.mealzColor(.standardDarkText))
                 Spacer()
                 if let ingredientQuantity = params.data.ingredientQuantity,
-                   let qty = Float(ingredientQuantity),
                    let unit = params.data.ingredientUnit {
-                    Text(String(format: "%g \(unit)", qty))
-                        .padding(dim.mPadding)
-                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
-                        .foregroundColor(Color.mealzColor(.standardDarkText))
+                    Text(QuantityFormatter.companion.readableFloatNumber(
+                        value: QuantityFormatter.companion.realQuantities(
+                            quantity: ingredientQuantity,
+                            currentGuest: Int32(params.data.guestsCount.wrappedValue),
+                            recipeGuest: Int32(params.data.defaultRecipeGuest)
+                        ),
+                        unit: unit))
+                    .padding(dim.mPadding)
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
+                    .foregroundColor(Color.mealzColor(.standardDarkText))
                 }
             }
             .foregroundColor(Color.mealzColor(.darkestGray))
