@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MiamIOSFramework
+import miamCore
 
 public let mealzProductHeight: CGFloat = 230
 
@@ -22,11 +23,16 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
                 if let ingredientQuantity = params.data.ingredientQuantity,
-                    let qty = Float(ingredientQuantity),
                    let unit = params.data.ingredientUnit {
-                    Text(String(format: "%g \(unit)", qty))
-                        .padding(dim.mPadding)
-                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
+                    Text(QuantityFormatter.companion.readableFloatNumber(
+                        value: QuantityFormatter.companion.realQuantities(
+                            quantity: ingredientQuantity,
+                            currentGuest: Int32(params.data.guestsCount.wrappedValue),
+                            recipeGuest: Int32(params.data.defaultRecipeGuest)
+                        ),
+                        unit: unit))
+                    .padding(dim.mPadding)
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
                 }
             }
             .foregroundColor(Color.mealzColor(.white))
@@ -35,12 +41,13 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
             .cornerRadius(dim.mCornerRadius, corners: .top)
             HStack {
                 if let pictureURL = URL(string: params.data.pictureURL) {
-                    AnyView(AsyncImage(url: pictureURL) { image in
+                    AsyncImage(url: pictureURL) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                    }).frame(width: 72, height: 72)
-                        .padding(dim.mPadding)
+                    }
+                    .frame(width: 72, height: 72)
+                    .padding(dim.mPadding)
                 }
                 
                 VStack(alignment: .leading) {
