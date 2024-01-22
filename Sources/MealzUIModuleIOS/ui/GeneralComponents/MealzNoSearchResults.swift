@@ -14,7 +14,7 @@ public struct MealzNoSearchResults: View {
         HStack {
             Image(systemName: "exclamationmark")
                 .resizable()
-                .foregroundColor(Color.miamColor(.danger))
+                .foregroundColor(Color.mealzColor(.danger))
                 .frame(width: 5, height: 25)
                 .padding(.trailing, Dimension.sharedInstance.lPadding)
             Text(message)
@@ -22,7 +22,7 @@ public struct MealzNoSearchResults: View {
         }
         .padding(.vertical, Dimension.sharedInstance.lPadding)
         .padding(.horizontal, Dimension.sharedInstance.xlPadding)
-        .background(Color.miamColor(.primaryDark))
+        .background(Color.mealzColor(.primary))
         .cornerRadius(Dimension.sharedInstance.mCornerRadius)
     }
 }

@@ -31,7 +31,7 @@ public struct MealzCatalogPackageCTA: CatalogPackageCTAProtocol {
                     Text(Localization.catalog.showAll.localised)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                         .foregroundColor(Color.mealzColor(.primary))
-                    Image.miamImage(icon: .rightArrow)
+                    Image.mealzIcon(icon: .arrow)
                         .renderingMode(.template)
                         .foregroundColor(Color.mealzColor(.primary))
                 }

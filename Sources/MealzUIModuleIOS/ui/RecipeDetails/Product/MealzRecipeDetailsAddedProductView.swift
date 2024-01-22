@@ -57,11 +57,12 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                     }
                     Text(params.data.name)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
-                    Text(params.data.capacity)
-                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallStyle)
-                        .foregroundColor(Color.mealzColor(.standardDarkText))
-                        .padding(dim.mPadding)
-                        .background(Capsule().fill(Color.mealzColor(.lightBackground)))
+                    HStack {
+                        IngredientUnitBubble(capacity: params.data.capacity)
+                        if params.data.isSponsored {
+                            MealzSponsoredTag()
+                        }
+                    }
                     Button(action: params.onChangeProduct, label: {
                         Text(Localization.myBudget.replaceItem.localised)
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
