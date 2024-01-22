@@ -27,10 +27,9 @@ public struct CatalogViewOptions {
     public var mealsInBasketButton: MealsInBasketButtonParameters
     
     public init(
-        useMealPlanner: Bool = false,
         catalogToolbar: TypeSafeCatalogToolbar = TypeSafeCatalogToolbar(MealzCatalogToolbar()),
         resultsToolbar: TypeSafeCatalogToolbar = TypeSafeCatalogToolbar(MealzCatalogResultsToolbar()),
-        mealPlannerCTA: TypeSafeMealPlannerCTA? = nil,
+        mealPlannerCTA: TypeSafeMealPlannerCTA = TypeSafeMealPlannerCTA( MealzMealPlannerCallToAction()),
         mealsInBasketButtonSuccess: TypeSafeMealsInBasketButtonSuccess = TypeSafeMealsInBasketButtonSuccess(MealzMealsInBasketButtonSuccess()),
         mealsInBasketButtonEmpty: TypeSafeEmpty = TypeSafeEmpty(DefaultEmptyView())
     ) {
@@ -41,14 +40,6 @@ public struct CatalogViewOptions {
             success: mealsInBasketButtonSuccess,
             empty: mealsInBasketButtonEmpty
         )
-        if useMealPlanner {
-            if let mealPlannerCTA {
-                self.mealPlannerCTA = mealPlannerCTA
-            } else {
-                self.mealPlannerCTA = TypeSafeMealPlannerCTA( MealzMealPlannerCallToAction())
-            }
-        } else {
-            self.mealPlannerCTA = TypeSafeMealPlannerCTA( DefaultMealPlannerCTA())
-        }
+        self.mealPlannerCTA = mealPlannerCTA
     }
 }

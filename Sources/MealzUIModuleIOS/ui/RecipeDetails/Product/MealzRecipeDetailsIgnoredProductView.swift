@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MiamIOSFramework
+import miamCore
 
 @available(iOS 14, *)
 public struct MealzRecipeDetailsIgnoredProductView: RecipeDetailsIgnoredProductProtocol {
@@ -20,9 +21,14 @@ public struct MealzRecipeDetailsIgnoredProductView: RecipeDetailsIgnoredProductP
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
                 if let ingredientQuantity = params.ingredientQuantity,
-                    let qty = Float(ingredientQuantity),
                    let unit = params.ingredientUnit {
-                    Text(String(format: "%g \(unit)", qty))
+                    Text(QuantityFormatter.companion.readableFloatNumber(
+                        value: QuantityFormatter.companion.realQuantities(
+                            quantity: ingredientQuantity,
+                            currentGuest: Int32(params.guestsCount.wrappedValue),
+                            recipeGuest: Int32(params.defaultRecipeGuest)
+                        ),
+                        unit: unit))
                         .padding(Dimension.sharedInstance.mPadding)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
                 }
