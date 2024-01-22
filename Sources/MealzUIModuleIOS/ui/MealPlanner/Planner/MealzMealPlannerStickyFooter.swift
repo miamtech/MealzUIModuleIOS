@@ -112,7 +112,6 @@ struct MealzMealPlannerStickyFooter_Previews: PreviewProvider {
             numberOfMeals: 4)
         
         GeometryReader { geometry in
-            let safeArea = geometry.safeAreaInsets
             ZStack(alignment: .bottom) {
                 ScrollView {
                     VStack {

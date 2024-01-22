@@ -61,9 +61,7 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                     Text(String(params.numberOfProductsInRecipe) + " " + Localization.myMeals.products.localised)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                         .foregroundColor(Color.mealzColor(.grayText))
-                    if let attributes = params.recipe.attributes {
-                        PricePerPersonView(price: params.recipePrice, numberOfGuests: params.numberOfGuests)
-                    }
+                    PricePerPersonView(price: params.recipePrice, numberOfGuests: params.numberOfGuests)
                     Button(action: {
                         params.onShowRecipeDetails(params.recipe.id)
                     }, label: {
