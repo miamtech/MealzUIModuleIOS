@@ -22,17 +22,10 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                     .padding(dim.mPadding)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
-                if let ingredientQuantity = params.data.ingredientQuantity,
-                   let unit = params.data.ingredientUnit {
-                    Text(QuantityFormatter.companion.readableFloatNumber(
-                        value: QuantityFormatter.companion.realQuantities(
-                            quantity: ingredientQuantity,
-                            currentGuest: Int32(params.data.guestsCount.wrappedValue),
-                            recipeGuest: Int32(params.data.defaultRecipeGuest)
-                        ),
-                        unit: unit))
-                    .padding(dim.mPadding)
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
+                if let unit = params.data.ingredientUnit {
+                    Text("\(params.data.ingredientQuantity) \(unit)")
+                        .padding(dim.mPadding)
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
                 }
             }
             .foregroundColor(Color.mealzColor(.white))
