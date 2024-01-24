@@ -58,7 +58,6 @@ public struct MealzMealPlannerRecipePlaceholder: MealPlannerRecipePlaceholderPro
 struct MealzMealPlannerRecipePlaceholderPreview: PreviewProvider {
     static var previews: some View {
         MealzMealPlannerRecipePlaceholder().content(params: MealPlannerRecipePlaceholderParameters() {
-
         })
     }
 }

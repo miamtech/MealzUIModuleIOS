@@ -122,7 +122,8 @@ struct MealzRecipeCard_Previews: PreviewProvider {
                 title: "Parmentier de Poulet",
                 mediaUrl: "https://lh3.googleusercontent.com/tbMNuhJ4KxReIPF_aE0yve0akEHeN6O8hauty_XNUF2agWsmyprACLg0Zw6s8gW-QCS3A0QmplLVqBKiMmGf_Ctw4SdhARvwldZqAtMG"),
             relationships: nil)
-        MealzRecipeCard().content(
+        MealzRecipeCard()
+            .content(
             params: CatalogRecipeCardParameters(
             recipeCardDimensions: CGSize(width: 380, height: 100),
             recipe: recipe,
@@ -131,8 +132,7 @@ struct MealzRecipeCard_Previews: PreviewProvider {
             isCurrentlyInBasket: false,
             onAddToBasket: {_ in },
             onShowRecipeDetails: {_ in}
-        )
-            )
+        ))
         .padding(80.0)
     }
 }
