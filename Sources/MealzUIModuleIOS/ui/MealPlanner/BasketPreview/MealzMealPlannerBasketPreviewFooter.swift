@@ -25,21 +25,11 @@ public struct MealzMealPlannerBasketPreviewFooter: MealPlannerBasketFooterProtoc
             .background(Color.mealzColor(.primary))
             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
             .cornerRadius(Dimension.sharedInstance.mCornerRadius)
-
-            Button {
-                params.onNavigateToBasket()
-            } label: {
-                Text(Localization.basket.moreDetails.localised)
-            }
-            .padding(Dimension.sharedInstance.lPadding)
-            .frame(maxWidth: .infinity)
-            .foregroundColor(Color.mealzColor(.primary))
-            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
-            .overlay(RoundedRectangle(cornerRadius: Dimension.sharedInstance.mCornerRadius)
-                .stroke(Color.mealzColor(.primary), lineWidth: 1.0))
         }
-        .padding(Dimension.sharedInstance.lPadding)
+        .padding(.vertical, Dimension.sharedInstance.mPadding)
+        .padding(.horizontal, Dimension.sharedInstance.lPadding)
         .background(Color.mealzColor(.standardLightText))
+        .frame(height: params.footerHeight)
     }
 }
 
@@ -48,6 +38,7 @@ struct MealzMealPlannerBasketPreviewFooter_Previews: PreviewProvider {
     static var previews: some View {
         MealzMealPlannerBasketPreviewFooter().content(
             params: MealPlannerBasketFooterParamaters(
+                footerHeight: 150,
             onNavigateToRecap: {}, onNavigateToBasket: {}
             )
         )

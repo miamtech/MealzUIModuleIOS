@@ -51,11 +51,15 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                         Button {
                             params.onDeleteRecipe()
                         } label: {
-                            Image.mealzIcon(icon: .trash)
-                                .renderingMode(.template)
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(Color.mealzColor(.grayText))
+                            if params.isDeleting {
+                                ProgressLoader(color: Color.mealzColor(.primary), size: 20)
+                            } else {
+                                Image.mealzIcon(icon: .trash)
+                                    .renderingMode(.template)
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(Color.mealzColor(.grayText))
+                            }
                         }
                     }
                     Text(String(params.numberOfProductsInRecipe) + " " + Localization.myMeals.products.localised)
@@ -82,6 +86,7 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                         RoundedRectangle(cornerRadius: 50)
                             .stroke(Color.mealzColor(.primary), lineWidth: 1)
                     )
+                    .frame(maxHeight: 40)
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -132,6 +137,7 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
         numberOfGuests: 4,
         recipePrice: 34.2,
         numberOfProductsInRecipe: 2,
+        isDeleting: false,
         onDeleteRecipe: {},
         onShowRecipeDetails: { _ in }
         )
