@@ -23,7 +23,7 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
                 if let unit = params.data.ingredientUnit {
-                    Text("\(params.data.ingredientQuantity) \(unit)")
+                    Text(QuantityFormatter.companion.readableFloatNumber(value: params.data.ingredientQuantity, unit: unit))
                         .padding(dim.mPadding)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
                 }
