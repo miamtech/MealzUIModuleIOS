@@ -16,7 +16,10 @@ public struct MealzGeneralSearch: SearchProtocol {
         self.hasButton = hasButton
     }
     public func content(params: SearchParameters) -> some View {
-        VStack(spacing: 10.0) {
+        var longerThanThreeChars: Bool {
+            return params.searchText.wrappedValue.count > 2
+        }
+        return VStack(spacing: 10.0) {
             HStack(spacing: 10.0) {
                 HStack(spacing: 10.0) {
                     TextField(Localization.catalog.searchTitle.localised, text: params.searchText)
@@ -33,6 +36,8 @@ public struct MealzGeneralSearch: SearchProtocol {
                                 .background(Color.mealzColor(.primary)).clipShape(Circle())
                                 .shadow(radius: 2.0)
                         }
+                        .darkenView(!longerThanThreeChars)
+                        .disabled(!longerThanThreeChars)
                     }
                 }
                 .padding([.leading], 16).frame(height: 45.0)
