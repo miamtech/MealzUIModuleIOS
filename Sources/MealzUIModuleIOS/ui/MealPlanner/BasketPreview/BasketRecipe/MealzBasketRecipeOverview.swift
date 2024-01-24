@@ -101,3 +101,24 @@ public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
         .padding(.top, Dimension.sharedInstance.sPadding)
     }
 }
+
+@available(iOS 14, *)
+#Preview(body: {
+    let recipe = FakeRecipe().createRandomFakeRecipe()
+    let basketData = BasketRecipeData(
+        recipe: recipe,
+        price: 14.56,
+        guests: 3,
+        isReloading: false,
+        totalProductCount: 4,
+        isExpandable: false,
+        isExpanded: false
+    )
+    return MealzBasketRecipeOverview().content(params: BasketRecipeOverviewParameters(
+        recipeCardDimensions: CGSize(width: 300, height: 300),
+        data: basketData,
+        onDeleteRecipe: {},
+        onExpand: {},
+        onUpdateGuests: {_ in},
+        onShowRecipeDetails: {_ in}))
+})

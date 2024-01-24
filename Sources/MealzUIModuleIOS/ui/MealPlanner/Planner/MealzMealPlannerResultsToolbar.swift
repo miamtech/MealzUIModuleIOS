@@ -11,9 +11,6 @@ import MiamIOSFramework
 
 @available(iOS 14, *)
 public struct MealzMealPlannerResultsToolbar: MealPlannerResultsToolbarProtocol {
-    @State var budget = 23.0
-    @State var numberGuests = 4
-    @State var numberMeals = 4
     let dimension = Dimension.sharedInstance
     public init() {}
     public func content(params: MealPlannerResultsToolbarParameters) -> some View {

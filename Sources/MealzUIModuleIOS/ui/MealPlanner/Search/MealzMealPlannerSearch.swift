@@ -39,3 +39,24 @@ public struct MealzMealPlannerSearch: SearchProtocol {
         .padding(Dimension.sharedInstance.lPadding)
     }
 }
+
+@available(iOS 14, *)
+struct MealzMealPlannerSearchh_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack{
+            Color.blue
+            BudgetSearchWrapper()
+        }
+    }
+    
+    struct BudgetSearchWrapper: View {
+        @SwiftUI.State var text = ""
+        
+        var body: some View {
+            VStack {
+                MealzMealPlannerSearch()
+                    .content(params: SearchParameters(searchText: $text, onApply: {}))
+            }
+        }
+    }
+}

@@ -32,32 +32,12 @@ public struct MealzRecipeDetailsIngredientsView: RecipeDetailsIngredientsProtoco
                 if index < params.ingredients.count {
                     IngrediantCard(
                         guestCount: params.currentGuests,
+                        defaultRecipeCount: params.recipeGuests,
                         ingredient: params.ingredients[index]
                     )
                 } else { Color.clear }
             }
         }
-    }
-    
-    func formatQuantity(quantity: Float, unit: String?) -> String {
-        return QuantityFormatter.default().readableFloatNumber(value: quantity, unit: unit)
-    }
-    
-    func quantityForIngredient(
-        _ ingredient: Ingredient,
-        currentNumberOfGuests: Int,
-        recipeNumberOfGuests: Int
-    ) -> Float {
-        guard let quantity = ingredient.attributes?.quantity else {
-            return 0.0
-        }
-        
-        let realQuantities = QuantityFormatter.default().realQuantities(
-            quantity: quantity,
-            currentGuest: Int32(currentNumberOfGuests),
-            recipeGuest: Int32(recipeNumberOfGuests)
-        )
-        return realQuantities
     }
 }
 
@@ -75,7 +55,7 @@ struct GridStack<Content: View>: View {
     let rows: Int
     let columns: Int
     let content: (Int, Int) -> Content
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             ForEach(0 ..< rows, id: \.self) { row in
@@ -87,7 +67,7 @@ struct GridStack<Content: View>: View {
             }
         }
     }
-
+    
     init(rows: Int, columns: Int, @ViewBuilder content: @escaping (Int, Int) -> Content) {
         self.rows = rows
         self.columns = columns
@@ -97,24 +77,26 @@ struct GridStack<Content: View>: View {
 
 @available(iOS 14, *)
 struct IngrediantCard: View {
-    var guestCount: Int
-    var recipeGuestCount: Int = 4
-
     var imageURL: URL?
     var title : String
     var quantity: String
-
-    init(guestCount: Int, ingredient: Ingredient) {
-        self.guestCount = guestCount
-
+    
+    init(guestCount: Int, defaultRecipeCount: Int, ingredient: Ingredient) {
         self.imageURL = URL(string: ingredient.attributes?.pictureUrl ?? "")
         self.title = ingredient.attributes?.name ?? ""
-
-        if let quantity = ingredient.attributes?.quantity, let qty = Float(quantity) {
-            self.quantity = "\(String(format: "%g", qty)) \(ingredient.attributes?.unit ?? "")"
+        
+        if let quantity = ingredient.attributes?.quantity, let unit = ingredient.attributes?.unit {
+            self.quantity = QuantityFormatter.companion.readableFloatNumber(
+                value: QuantityFormatter.companion.realQuantities(
+                    quantity: quantity,
+                    currentGuest: Int32(guestCount),
+                    recipeGuest: Int32(defaultRecipeCount)
+                ),
+                unit: unit
+            )
         } else { self.quantity = "" }
     }
-
+    
     var body: some View {
         VStack(alignment: .center){
             if let imageURL {
@@ -143,9 +125,5 @@ struct IngrediantCard: View {
                 .foregroundColor(Color.mealzColor(.standardDarkText))
                 .frame(maxWidth: .infinity, alignment: .center)
         }.frame(maxWidth: .infinity, alignment:.top)
-    }
-
-    func formatQuantity(quantity: Float, unit: String?) -> String {
-        return QuantityFormatter.default().readableFloatNumber(value: quantity, unit: unit)
     }
 }

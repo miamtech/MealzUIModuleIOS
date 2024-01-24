@@ -56,7 +56,8 @@ public struct MealzRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
                 }
             }
             .background(
-                mediaImageView(mediaURL: params.mediaURL).frame(height: imageHeight),
+                mediaImageView(mediaURL: params.mediaURL)
+                    .frame(height: imageHeight),
                 alignment: .top)
             .frame(maxWidth: .infinity)
             .frame(height: imageHeight)
@@ -77,6 +78,8 @@ public struct MealzRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(minWidth: 0, maxWidth: .infinity)
+                    .frame(height: imageHeight)
+                    .clipped()
             }
         } else {
             Image.mealzIcon(icon: .pan)
