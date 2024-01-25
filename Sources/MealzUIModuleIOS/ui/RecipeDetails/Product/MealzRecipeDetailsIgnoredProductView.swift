@@ -25,7 +25,7 @@ public struct MealzRecipeDetailsIgnoredProductView: RecipeDetailsIgnoredProductP
                     Text(QuantityFormatter.companion.readableFloatNumber(
                         value: QuantityFormatter.companion.realQuantities(
                             quantity: ingredientQuantity,
-                            currentGuest: Int32(params.guestsCount.wrappedValue),
+                            currentGuest: Int32(params.guestsCount),
                             recipeGuest: Int32(params.defaultRecipeGuest)
                         ),
                         unit: unit))

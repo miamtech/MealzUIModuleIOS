@@ -15,15 +15,20 @@ public struct MealzNotInBasketProduct: NotInBasketProductProtocol {
     public func content(params: NotInBasketProductParameters) -> some View {
         VStack {
             HStack {
-                Text(params.item.name.capitalizingFirstLetter())
+                Text(params.ingredientName.capitalizingFirstLetter())
                     .padding(Dimension.sharedInstance.mPadding)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                 Spacer()
-                if let ingredientQuantity = params.item.attributes?.quantity, let unit = params.item.selectedItem?.attributes?.capacityUnit {
-                    Text(String(format: "%g \(unit)", Float(truncating: ingredientQuantity)))
-                        .padding(Dimension.sharedInstance.mPadding)
-                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
-                }
+                Text(QuantityFormatter.companion.readableFloatNumber(
+                    value: QuantityFormatter.companion.realQuantities(
+                        quantity: params.ingredientQuantity,
+                        currentGuest: Int32(params.guestsCount),
+                        recipeGuest: Int32(params.defaultRecipeGuest)
+                    ),
+                    unit: params.ingredientUnit))
+                .padding(Dimension.sharedInstance.mPadding)
+                .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
+                
             }.frame(height:40)
             Text(Localization.ingredient.willNotBeAdded.localised).padding(Dimension.sharedInstance.mPadding)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
@@ -36,7 +41,7 @@ public struct MealzNotInBasketProduct: NotInBasketProductProtocol {
             }
         }
         .background(Color.mealzColor(.lightBackground))
-            .cornerRadius(Dimension.sharedInstance.mCornerRadius)
-            .padding(.horizontal, Dimension.sharedInstance.mPadding)
+        .cornerRadius(Dimension.sharedInstance.mCornerRadius)
+        .padding(.horizontal, Dimension.sharedInstance.mPadding)
     }
 }
