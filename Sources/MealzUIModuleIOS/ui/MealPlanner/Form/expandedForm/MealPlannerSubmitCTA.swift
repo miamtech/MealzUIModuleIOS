@@ -36,15 +36,17 @@ internal struct MealPlannerSubmitCTA: View {
                     onButtonAction()
                 }
             } label: {
-                if isLoading {
-                    ProgressLoader(color: .white)
-                        .scaleEffect(0.5)
-                } else {
-                    Text(buttonText)
-                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
-                        .padding(dimension.lPadding)
-                        .foregroundColor(buttonTextColor)
-                }
+                Group {
+                    if isLoading {
+                        ProgressLoader(color: .white)
+                            .scaleEffect(0.5)
+                    } else {
+                        Text(buttonText)
+                            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+                            .padding(dimension.lPadding)
+                            .foregroundColor(buttonTextColor)
+                    }
+                }.frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .frame(maxWidth: .infinity)
             .frame(height: 50)

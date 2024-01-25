@@ -43,7 +43,7 @@ struct MealzMealPlannerCTAFooter: View {
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
                     .padding(dimension.lPadding)
                     .foregroundColor(Color.mealzColor(.white))
-            }
+            }.frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .frame(maxWidth: .infinity)
         .frame(height: 50)
