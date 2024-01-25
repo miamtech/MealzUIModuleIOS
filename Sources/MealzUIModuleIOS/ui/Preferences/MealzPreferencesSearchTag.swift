@@ -28,6 +28,7 @@ struct MealzPreferencesSearchTag_Previews: PreviewProvider {
     static var previews: some View {
         MealzPreferencesSearchTag().content(params: BaseButtonParameters(
             buttonText: "Test",
+            buttonPressed: false,
             onButtonAction: { }))
     }
 }

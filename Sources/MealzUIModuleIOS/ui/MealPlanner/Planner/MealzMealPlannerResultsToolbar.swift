@@ -25,8 +25,8 @@ public struct MealzMealPlannerResultsToolbar: MealPlannerResultsToolbarProtocol 
                 value: params.mealPlannerCriteria.numberOfMeals,
                 icon: Image.mealzIcon(icon: .cutlery))
             SubmitButtonCollapsed(
-                isLoading: params.isLoadingRecipes,
-                activelyEditingTextField: params.activelyEditingTextField.wrappedValue) {
+                isLoading: params.$isLoadingRecipes,
+                activelyEditingTextField: params.$activelyEditingTextField.wrappedValue) {
                     params.onValidateTapped()
             }
         }
