@@ -55,9 +55,11 @@ public struct MealzMealPlannerRecap: MealPlannerRecapProtocol {
             } label: {
                 Text("Nos promotions")
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBoldStyle)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .padding(.vertical, Dimension.sharedInstance.lPadding)
             .frame(maxWidth: .infinity)
+            .frame(height: 50)
             .foregroundColor(.white)
             .background(Color.mealzColor(.primary))
             .clipShape(RoundedRectangle(cornerRadius: 6))

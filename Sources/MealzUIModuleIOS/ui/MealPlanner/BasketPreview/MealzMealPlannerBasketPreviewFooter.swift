@@ -18,6 +18,7 @@ public struct MealzMealPlannerBasketPreviewFooter: MealPlannerBasketFooterProtoc
                 params.onNavigateToRecap()
             } label: {
                 Text(Localization.basket.continueShopping.localised)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .padding(Dimension.sharedInstance.lPadding)
             .frame(maxWidth: .infinity)
