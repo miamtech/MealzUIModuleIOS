@@ -23,14 +23,14 @@ public struct MealzMealPlannerRecap: MealPlannerRecapProtocol {
             .background(Color.mealzColor(.brownishYellow))
             .clipShape(RoundedRectangle(cornerRadius: 6.0))
             
-            Text("Les produits associés ont bien été ajoutés au panier.")
+            Text(Localization.myBudget.mealPlannerProductAdded.localised)
                 .frame(alignment: .center)
                 .multilineTextAlignment(.center)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
             
             HStack(alignment: .top) {
                 // Space Between
-                Text("\(params.numberOfMeals) repas pour")
+                Text(Localization.myBudget.mealPlannerMealsFor(numberOfMeals: Int32(params.numberOfMeals)).localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
                 Spacer()
                 // Alternative Views and Spacers
@@ -48,12 +48,12 @@ public struct MealzMealPlannerRecap: MealPlannerRecapProtocol {
             Divider()
                 .frame(height: 1.0)
             
-            Text("Découvrez aussi")
+            Text(Localization.myBudget.mealPlannerDiscover.localised)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
             Button {
                 params.onTapGesture()
             } label: {
-                Text("Nos promotions")
+                Text(Localization.myBudget.mealPlannerPromotion.localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBoldStyle)
             }
             .padding(.vertical, Dimension.sharedInstance.lPadding)
