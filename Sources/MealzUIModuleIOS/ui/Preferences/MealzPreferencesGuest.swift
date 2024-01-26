@@ -1,6 +1,6 @@
 //
 //  MealzPreferencesGuest.swift
-//  
+//
 //
 //  Created by didi on 22/09/2023.
 //
@@ -12,15 +12,19 @@ import MiamIOSFramework
 public struct MealzPreferencesGuest: PreferencesGuestProtocol {
     public init() {}
     public func content(params: PreferencesGuestParameters) -> some View {
-        return HStack {
-            Text(Localization.preferences.numberOfGuests.localised)
-            Spacer()
+        VStack {
             if let guests = params.guests {
-                MealzCounterView(count: guests) { count in
-                    params.onGuestChanged(count)
+                HStack {
+                    Text(Localization.preferences.numberOfGuests.localised)
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
+                    Spacer()
+                    MealzCounterView(count: guests) { count in
+                        params.onGuestChanged(count)
+                    }
                 }
+                .padding(Dimension.sharedInstance.mPadding)
             }
-        }.background(Color.mealzColor(.lightBackground))
+        }
     }
 }
 
@@ -29,8 +33,8 @@ struct MealzPreferencesGuest_Previews: PreviewProvider {
     static var previews: some View {
         MealzPreferencesGuest().content(
             params: PreferencesGuestParameters(
-            guests: 4,
-            onGuestChanged: {_ in})
-            )
+                guests: 4,
+                onGuestChanged: {_ in})
+        )
     }
 }

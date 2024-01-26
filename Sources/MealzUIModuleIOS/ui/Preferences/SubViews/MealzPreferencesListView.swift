@@ -32,10 +32,10 @@ public struct MealzPreferencesListView: View {
         VStack(alignment: .leading) {
             Text(title)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
-                .padding(.top, Dimension.sharedInstance.mPadding)
+                .padding([.top, .horizontal], Dimension.sharedInstance.mPadding)
             Text(subtitle)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
-                .padding(.bottom, Dimension.sharedInstance.mPadding)
+                .padding([.bottom, .horizontal], Dimension.sharedInstance.mPadding)
             
             VStack(alignment: .leading) {
                 ForEach(preferences, id: \.self) { tag in
@@ -47,7 +47,7 @@ public struct MealzPreferencesListView: View {
                 .padding([.bottom], 8.0)
                 .cornerRadius(8.0)
                 .padding([.bottom], -8.0)
-        }.background(Color.mealzColor(.lightBackground))
+        }
     }
 }
 
