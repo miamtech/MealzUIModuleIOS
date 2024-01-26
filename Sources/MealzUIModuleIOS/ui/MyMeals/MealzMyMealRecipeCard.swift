@@ -62,7 +62,11 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                             }
                         }
                     }
-                    Text(String(params.numberOfProductsInRecipe) + " " + Localization.myMeals.products.localised)
+                    Text(String(format: String.localizedStringWithFormat(
+                        Localization.myMeals.products(
+                            numberOfProducts: Int32(params.numberOfProductsInRecipe)).localised,
+                        params.numberOfProductsInRecipe),
+                                params.numberOfProductsInRecipe))
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                         .foregroundColor(Color.mealzColor(.grayText))
                     PricePerPersonView(price: params.recipePrice, numberOfGuests: params.numberOfGuests)
