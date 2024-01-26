@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "MealzUIModuleIOS"
-  spec.version      = "0.0.1"
+  spec.version      = "1.0.0-beta"
   spec.summary      = "Mealz UI iOS SDK"
   spec.description  = <<-DESC
 Mealz UI iOS SDK.
@@ -20,6 +20,6 @@ Mealz UI iOS SDK.
  
    spec.source_files = 'Sources/**/*.{h,m,swift}'
    
-spec.dependency 'MiamIOSFramework', '~> 3.12.6'
+spec.dependency 'MiamIOSFramework', '~> 4.0'
 
 end

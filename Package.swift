@@ -16,8 +16,8 @@ let package = Package(
             targets: ["MealzUIModuleIOS"]),
     ],
     dependencies: [
-//        .package(url: "https://github.com/miamtech/miam-sdk", branch: "main"),
         .package(path: "../miam-sdk"),
+//        .package(url: "https://github.com/miamtech/MiamIOSFramework.git", from: "4.0.0"),
         ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
