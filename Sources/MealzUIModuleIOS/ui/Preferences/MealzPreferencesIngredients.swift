@@ -23,6 +23,7 @@ public struct MealzPreferencesIngredients: PreferencesIngredientsProtocol {
                 params.onTogglePreference(tag.tag.id)
             },
             onAddTagTapped: params.onGoToSearch)
+        .padding(Dimension.sharedInstance.mPadding)
     }
 }
 
