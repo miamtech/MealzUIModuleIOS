@@ -19,6 +19,7 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
         var lockButton: Bool {
             return params.priceStatus == ComponentUiState.locked 
             || params.priceStatus == ComponentUiState.loading
+            || params.isAddingAllIngredients
         }
         return HStack(spacing: 0) {
             if lockButton {
@@ -29,25 +30,29 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
                 }
             }
             Spacer()
-            switch params.ingredientsStatus.type {
-            case .noMoreToAdd:
-                ContinueMyShoppingCTA(
-                    callToAction: params.callToAction,
-                    buttonText: Localization.recipeDetails.continueShopping.localised,
-                    disableButton: lockButton)
-            case .initialState:
-                MealzAddAllToBasketCTA(
-                    callToAction: params.callToAction,
-                    buttonText: Localization.recipeDetails.addAllProducts.localised,
-                    disableButton: lockButton)
-            default:
-                MealzAddAllToBasketCTA(
-                    callToAction: params.callToAction,
-                    buttonText: String(format: String.localizedStringWithFormat(
-                        Localization.ingredient.addProduct(numberOfProducts: params.ingredientsStatus.count).localised,
-                        params.ingredientsStatus.count),
-                                       params.ingredientsStatus.count),
-                    disableButton: lockButton)
+            if params.isAddingAllIngredients {
+                LoadingButton()
+            } else {
+                switch params.ingredientsStatus.type {
+                case .noMoreToAdd:
+                    ContinueMyShoppingCTA(
+                        callToAction: params.callToAction,
+                        buttonText: Localization.recipeDetails.continueShopping.localised,
+                        disableButton: lockButton)
+                case .initialState:
+                    MealzAddAllToBasketCTA(
+                        callToAction: params.callToAction,
+                        buttonText: Localization.recipeDetails.addAllProducts.localised,
+                        disableButton: lockButton)
+                default:
+                    MealzAddAllToBasketCTA(
+                        callToAction: params.callToAction,
+                        buttonText: String(format: String.localizedStringWithFormat(
+                            Localization.ingredient.addProduct(numberOfProducts: params.ingredientsStatus.count).localised,
+                            params.ingredientsStatus.count),
+                                           params.ingredientsStatus.count),
+                        disableButton: lockButton)
+                }
             }
         }
         .padding(Dimension.sharedInstance.lPadding)
@@ -56,7 +61,16 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
         .background(Color.white)
     }
     
-    
+    internal struct LoadingButton: View {
+        var body: some View {
+            Button(action: {}, label: {
+                ProgressLoader(color: .white, size: 24)
+            })
+            .padding(Dimension.sharedInstance.mlPadding)
+            .background(Color.mealzColor(.primary))
+            .cornerRadius(Dimension.sharedInstance.mPadding)
+        }
+    }
     
     internal struct ContinueMyShoppingCTA: View {
         let callToAction: () -> Void
