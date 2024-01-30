@@ -35,7 +35,8 @@ public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
                 Text(Localization.recipe.showDetails.localised)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
                     .foregroundColor(Color.mealzColor(.primaryText))
-            }.padding([.top], Dimension.sharedInstance.sPadding)
+            }
+            .padding([.top], Dimension.sharedInstance.sPadding)
         }
         
         return VStack(alignment: .leading, spacing: 0) {
@@ -79,8 +80,7 @@ public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
             .frame(height: params.recipeCardDimensions.height, alignment: .topLeading)
             HStack {
                 if params.data.isReloading {
-                    ProgressLoader(color: Color.mealzColor(.primary))
-                        .scaleEffect(0.5)
+                    ProgressLoader(color: Color.mealzColor(.primary), size: 14)
                 } else {
                     Text(params.data.price.currencyFormatted)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)

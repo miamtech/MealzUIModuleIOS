@@ -30,30 +30,13 @@ public struct MealzRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
                     LikeButton(likeButtonInfo: LikeButtonInfo(recipeId: params.recipeId)).padding(16)
                 }
                 Spacer()
-                HStack{
-                    Spacer()
-                    HStack{
-                        Button {
-                            params.onUpdateGuests(max((params.currentGuests - 1), 1))
-                        } label: {
-                            Image.mealzIcon(icon: .minus)
-                                .renderingMode(.template).foregroundColor(.black)
-                        }
-                        Text("\(params.currentGuests)")
-                            .frame(minWidth: 10, alignment: .center)
-                            .foregroundColor(Color.mealzColor(.darkestGray))
-                        Image.mealzIcon(icon: .guests)
-                            .renderingMode(.template)
-                            .foregroundColor(Color.mealzColor(.darkestGray))
-                        Button {
-                            params.onUpdateGuests(params.currentGuests + 1)
-                        } label: {
-                            Image.mealzIcon(icon: .plus)
-                                .renderingMode(.template).foregroundColor(.black)
-                        }
-                    }.padding(8).background(Capsule().foregroundColor(Color.white))
-                        .padding(16)
+                if !params.isForMealPlanner {
+                    RecipeDetailsGuestCount(
+                        currentGuests: params.currentGuests,
+                        updateGuest: params.onUpdateGuests
+                    )
                 }
+                
             }
             .background(
                 mediaImageView(mediaURL: params.mediaURL)
@@ -67,6 +50,43 @@ public struct MealzRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
             MealzRecipeDetailsTagsView(tags: params.tags)
+        }
+    }
+    
+    internal struct RecipeDetailsGuestCount: View {
+        private let currentGuests: Int
+        private let updateGuest: (Int) -> Void
+        init(currentGuests: Int, updateGuest: @escaping (Int) -> Void) {
+            self.currentGuests = currentGuests
+            self.updateGuest = updateGuest
+        }
+        public var body: some View {
+            HStack{
+                Spacer()
+                HStack{
+                    Button {
+                        updateGuest(max((currentGuests - 1), 1))
+                    } label: {
+                        Image.mealzIcon(icon: .minus)
+                            .renderingMode(.template).foregroundColor(.black)
+                    }
+                    Text("\(currentGuests)")
+                        .frame(minWidth: 10, alignment: .center)
+                        .foregroundColor(Color.mealzColor(.darkestGray))
+                    Image.mealzIcon(icon: .guests)
+                        .renderingMode(.template)
+                        .foregroundColor(Color.mealzColor(.darkestGray))
+                    Button {
+                        updateGuest(currentGuests + 1)
+                    } label: {
+                        Image.mealzIcon(icon: .plus)
+                            .renderingMode(.template).foregroundColor(.black)
+                    }
+                }
+                .padding(8)
+                .background(Capsule().foregroundColor(Color.white))
+                .padding(16)
+            }
         }
     }
     
