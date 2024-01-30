@@ -23,6 +23,7 @@ import MiamIOSFramework
 public class FavoritesParameters: FavoritesParametersProtocol {
     public var actions: FavoritesActions
     
+    public var title: TypeSafeBaseTitle
     public var recipeCard: TypeSafeCatalogRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     
@@ -33,6 +34,6 @@ public class FavoritesParameters: FavoritesParametersProtocol {
         self.actions = actions
         self.recipeCard = viewOptions.recipeCard
         self.recipeCardLoading = viewOptions.recipeCardLoading
-        
+        self.title = viewOptions.title
     }
 }
