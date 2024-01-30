@@ -57,7 +57,8 @@ public struct MealzMealPlannerRecipePlaceholder: MealPlannerRecipePlaceholderPro
 @available(iOS 14, *)
 struct MealzMealPlannerRecipePlaceholderPreview: PreviewProvider {
     static var previews: some View {
-        MealzMealPlannerRecipePlaceholder().content(params: MealPlannerRecipePlaceholderParameters() {
-        })
+        MealzMealPlannerRecipePlaceholder().content(params: MealPlannerRecipePlaceholderParameters(
+            recipeCardDimensions: CGSize(width: 300, height: 150)
+        ) {})
     }
 }
