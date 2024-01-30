@@ -21,6 +21,7 @@ public struct MealzMealPlannerStickyFooter: MealPlannerResultsFooterProtocol {
                 totalBudgetPermitted: params.mealPlannerCriteria.availableBudget)
             MealzMealPlannerCTAFooter(onButtonAction: params.onValidateTapped)
         }.frame(height: params.heightOfFooter)
+            .background(Color.mealzColor(.white))
     }
 }
 

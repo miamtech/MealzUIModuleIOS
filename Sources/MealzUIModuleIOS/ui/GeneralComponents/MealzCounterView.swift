@@ -73,8 +73,7 @@ public struct MealzCounterView: View {
 
                 Spacer()
                 if isLoading {
-                    ProgressLoader(color: Color.mealzColor(.white))
-                        .scaleEffect(0.5)
+                    ProgressLoader(color: Color.mealzColor(.white), size: 14)
                 } else {
                     Text(
                         "\(count)" +
@@ -82,8 +81,8 @@ public struct MealzCounterView: View {
                     )
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleSmallStyle)
                         .foregroundColor(Color.mealzColor(.white))
-                    Spacer()
                 }
+                Spacer()
                 Button {
                    increase()
                 } label: {
