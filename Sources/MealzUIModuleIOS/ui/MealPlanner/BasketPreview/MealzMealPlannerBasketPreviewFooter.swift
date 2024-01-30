@@ -39,6 +39,8 @@ struct MealzMealPlannerBasketPreviewFooter_Previews: PreviewProvider {
         MealzMealPlannerBasketPreviewFooter().content(
             params: MealPlannerBasketFooterParamaters(
                 footerHeight: 150,
+                totalPrice: 45.3,
+                isLoading: false,
             onNavigateToRecap: {}, onNavigateToBasket: {}
             )
         )
