@@ -20,7 +20,7 @@ public struct MealzMealPlannerStickyFooter: MealPlannerResultsFooterProtocol {
                 budgetSpent: params.budgetSpent.wrappedValue,
                 totalBudgetPermitted: params.mealPlannerCriteria.availableBudget)
             MealzMealPlannerCTAFooter(onButtonAction: params.onValidateTapped)
-        }
+        }.frame(height: params.heightOfFooter)
     }
 }
 
@@ -132,7 +132,9 @@ struct MealzMealPlannerStickyFooter_Previews: PreviewProvider {
                 }
                 MealzMealPlannerStickyFooter().content(
                     params: MealPlannerResultsFooterParameters(
-                        mealPlannerCriteria: mealPlannerCriteria, budgetSpent: .constant(50.0)) {
+                        mealPlannerCriteria: mealPlannerCriteria,
+                        heightOfFooter: 80,
+                        budgetSpent: .constant(50.0)) {
                             print("hello world")
                         }
                 )
