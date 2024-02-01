@@ -19,8 +19,10 @@ public struct MealzRecipeDetailsStepsView: RecipeDetailsStepsProtocol {
                 .padding()
             
             VStack {
-                ForEach(params.steps,id: \.self.id) {step in
-                    RecipeDetailStep(stepNumber: Int(step.attributes?.stepNumber ?? 0) + 1, stepDescription: step.attributes?.stepDescription ?? "")
+                ForEach(Array(params.steps.enumerated()), id: \.offset) { index, step in
+                    RecipeDetailStep(
+                        stepNumber: index + 1,
+                        stepDescription: step.attributes?.stepDescription ?? "")
                 }
                 .padding(.bottom)
             }.frame(maxWidth: .infinity, alignment: .leading)
