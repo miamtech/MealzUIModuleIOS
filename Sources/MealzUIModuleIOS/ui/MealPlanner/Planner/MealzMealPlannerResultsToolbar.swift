@@ -28,7 +28,7 @@ public struct MealzMealPlannerResultsToolbar: MealPlannerResultsToolbarProtocol 
                 isLoading: params.$isLoadingRecipes,
                 activelyEditingTextField: params.$activelyEditingTextField.wrappedValue) {
                     params.onValidateTapped()
-            }
+                }
         }
     }
 }
@@ -72,7 +72,7 @@ struct MiamBudgetPlannerToolbar_Previews: PreviewProvider {
     static var previews: some View {
         Preview()
     }
-
+    
     struct Preview: View {
         @State var loading = false
         @State var mealPlannerCriteria = MealPlannerCriteria(
@@ -82,11 +82,13 @@ struct MiamBudgetPlannerToolbar_Previews: PreviewProvider {
         var body: some View {
             MealzMealPlannerResultsToolbar().content(
                 params: MealPlannerResultsToolbarParameters(
-                mealPlannerCriteria: $mealPlannerCriteria,
-                activelyEditingTextField: .constant(false),
-                isLoadingRecipes: $loading,
-                onValidateTapped: {})
-                )
+                    mealPlannerCriteria: $mealPlannerCriteria, 
+                    numberOfResults: 3, 
+                    activelyEditingCriteria: .constant(false),
+                    activelyEditingTextField: .constant(false),
+                    isLoadingRecipes: $loading,
+                    onValidateTapped: {})
+            )
         }
     }
 }
