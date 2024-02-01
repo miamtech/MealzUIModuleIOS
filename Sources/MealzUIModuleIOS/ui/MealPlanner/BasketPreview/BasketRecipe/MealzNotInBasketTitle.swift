@@ -13,20 +13,26 @@ import MiamIOSFramework
 public class MealzNotInBasketTitle: BaseButtonProtocol {
     public init() {}
     public func content(params: BaseButtonParameters) -> some View {
-        Button(action: {
+        var chevronAngle: CGFloat {
+            if params.buttonPressed { return 180.0}
+            else { return 270.0 }
+        }
+        
+        return Button(action: {
             withAnimation { params.onButtonAction() }
         }, label: {
             HStack {
                 Text(params.buttonText)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
-                    .foregroundColor(Color.mealzColor(.grayText))
+                    .foregroundColor(Color.mealzColor(.standardDarkText))
                 Spacer()
                 Image.mealzIcon(icon: .caret)
                     .resizable()
                     .renderingMode(.template)
                     .rotationEffect(Angle(degrees: 90))
-                    .frame(width: 14, height: 14)
-                    .foregroundColor(Color.mealzColor(.primary))
+                    .frame(width: 18, height: 18)
+                    .foregroundColor(Color.mealzColor(.grayText))
+                    .rotationEffect(Angle.degrees(chevronAngle))
             }
         })
         .padding(Dimension.sharedInstance.lPadding)
