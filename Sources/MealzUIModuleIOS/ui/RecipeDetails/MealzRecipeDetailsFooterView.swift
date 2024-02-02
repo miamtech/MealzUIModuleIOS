@@ -25,8 +25,8 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
             if lockButton {
                 ProgressLoader(color: .primary, size: 24)
             } else {
-                if params.price > 0 {
-                    MealzPricePerPerson(pricePerGuest: params.pricePerGuest)
+                if params.totalPriceOfProductsAdded > 0 {
+                    MealzPricePerPerson(pricePerGuest: params.totalPriceOfProductsAddedPerGuest)
                 }
             }
             Spacer()
