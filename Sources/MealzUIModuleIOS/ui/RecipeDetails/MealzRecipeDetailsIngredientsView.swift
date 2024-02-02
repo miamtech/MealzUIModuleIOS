@@ -109,8 +109,10 @@ struct IngrediantCard: View {
                     Circle().stroke(Color.mealzColor(.lightBackground)))
             } else {
                 Image.mealzIcon(icon: .pan)
+                    .renderingMode(.template)
                     .resizable()
-                    .foregroundColor(Color.mealzColor(.standardDarkText))
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(Color.mealzColor(.darkestGray))
                     .padding(8)
                     .frame(width: 56, height: 56)
                     .background(Circle().stroke(Color.mealzColor(.lightBackground)))
