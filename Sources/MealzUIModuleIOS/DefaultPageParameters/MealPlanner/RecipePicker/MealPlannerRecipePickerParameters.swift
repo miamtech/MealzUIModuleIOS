@@ -26,6 +26,7 @@ public class MealPlannerRecipePickerParameters: MealPlannerRecipePickerParameter
     public var actions: MealPlannerRecipePickerActions
     
     public var search: TypeSafeSearch
+    public var noResults: TypeSafeCatalogRecipesListNoResults
     public var recipeCard: TypeSafeCatalogRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     
@@ -37,5 +38,6 @@ public class MealPlannerRecipePickerParameters: MealPlannerRecipePickerParameter
         self.search = viewOptions.search
         self.recipeCard = viewOptions.recipeCard
         self.recipeCardLoading = viewOptions.recipeCardLoading
+        self.noResults = viewOptions.noResults
     }
 }
