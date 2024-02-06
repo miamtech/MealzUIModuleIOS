@@ -19,15 +19,18 @@ import MiamIOSFramework
 @available(iOS 14, *)
 public struct MealPlannerRecipePickerViewOptions {
     public var search: TypeSafeSearch
+    public var noResults: TypeSafeCatalogRecipesListNoResults
     public var recipeCard: TypeSafeCatalogRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     
     public init(
         search: TypeSafeSearch = TypeSafeSearch(MealzMealPlannerSearch()),
+        noResults: TypeSafeCatalogRecipesListNoResults = TypeSafeCatalogRecipesListNoResults(MealzCatalogRecipesListNoResults()),
         recipeCard: TypeSafeCatalogRecipeCard = TypeSafeCatalogRecipeCard(MealzRecipeCard()),
         recipeCardLoading: TypeSafeRecipeCardLoading = TypeSafeRecipeCardLoading(MealzRecipeCardLoading())
     ) {
         self.search = search
+        self.noResults = noResults
         self.recipeCard = recipeCard
         self.recipeCardLoading = recipeCardLoading
     }
