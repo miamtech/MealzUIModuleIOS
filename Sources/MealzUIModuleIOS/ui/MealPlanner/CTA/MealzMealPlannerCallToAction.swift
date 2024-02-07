@@ -53,6 +53,6 @@ public struct MealzMealPlannerCallToAction: MealPlannerCTAProtocol {
                 }
             }
         )
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .clipShape(RoundedRectangle(cornerRadius: Dimension.sharedInstance.buttonCornerRadius))
     }
 }

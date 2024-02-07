@@ -61,7 +61,7 @@ internal struct SubmitButtonCollapsed: View {
         }
         .frame(width: 50, height: 50)
         .background(Color.mealzColor(.primary))
-        .cornerRadius(dimension.mCornerRadius)
+        .cornerRadius(dimension.buttonCornerRadius)
         .disabled(activelyEditingTextField)
         .darkenView(activelyEditingTextField)
     }

@@ -87,7 +87,7 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                     })
                     .padding(Dimension.sharedInstance.mPadding)
                     .overlay( /// apply a rounded border
-                        RoundedRectangle(cornerRadius: 50)
+                        RoundedRectangle(cornerRadius: Dimension.sharedInstance.buttonCornerRadius)
                             .stroke(Color.mealzColor(.primary), lineWidth: 1)
                     )
                     .frame(maxHeight: 40)

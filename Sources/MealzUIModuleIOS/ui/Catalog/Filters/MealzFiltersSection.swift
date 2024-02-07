@@ -31,7 +31,7 @@ public struct MealzFiltersSection: FiltersSectionProtocol {
                             Rectangle().foregroundColor(.clear)
                         }
                     }.frame(width: 22, height: 22)
-                        .overlay(RoundedRectangle(cornerRadius: 4.0).stroke(Color.mealzColor(.primary), lineWidth: 1.0))
+                        .overlay(RoundedRectangle(cornerRadius: Dimension.sharedInstance.buttonCornerRadius).stroke(Color.mealzColor(.primary), lineWidth: 1.0))
                     Text(filter.uiLabel)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
                     Spacer()

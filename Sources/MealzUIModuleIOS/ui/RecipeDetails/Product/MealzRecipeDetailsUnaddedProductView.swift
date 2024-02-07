@@ -79,8 +79,8 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
                     Image.mealzIcon(icon: .basket)
                         .renderingMode(.template)
                         .foregroundColor(Color.mealzColor(.white))
-                        .padding(dim.lPadding)
-                        .background(Color.mealzColor(.primary).cornerRadius(dim.mPadding))
+                        .padding(dim.mlPadding)
+                        .background(Color.mealzColor(.primary).cornerRadius(dim.buttonCornerRadius))
                         .frame(width: 48, height: 48)
                 })
             }

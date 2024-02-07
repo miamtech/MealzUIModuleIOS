@@ -24,7 +24,7 @@ public struct MealzMealPlannerBasketPreviewFooter: MealPlannerBasketFooterProtoc
             .foregroundColor(Color.white)
             .background(Color.mealzColor(.primary))
             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigBoldStyle)
-            .cornerRadius(Dimension.sharedInstance.mCornerRadius)
+            .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
         }
         .padding(.vertical, Dimension.sharedInstance.mPadding)
         .padding(.horizontal, Dimension.sharedInstance.lPadding)
