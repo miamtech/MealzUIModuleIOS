@@ -97,10 +97,10 @@ public struct MealzRecipeCard: CatalogRecipeCardProtocol {
                 } else {
                     Button(action: callToAction, label: {
                         if isCurrentlyInBasket {
-                            Image.mealzIcon(icon: .pan)
-                                .renderingMode(.template)
+                            Image.mealzIcon(icon: .basketCheck)
+//                                .renderingMode(.template)
                                 .resizable()
-                                .foregroundColor(Color.mealzColor(.primary))
+//                                .foregroundColor(Color.mealzColor(.primary))
                                 .frame(width: 24, height: 24)
                         } else {
                             Image.mealzIcon(icon: .basket)
@@ -111,8 +111,12 @@ public struct MealzRecipeCard: CatalogRecipeCardProtocol {
                         }
                     })
                     .padding(Dimension.sharedInstance.mlPadding)
-                    .background(Color.mealzColor(isCurrentlyInBasket ? .lightBackground : .primary))
+                    .background(Color.mealzColor(isCurrentlyInBasket ? .white : .primary))
                     .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: Dimension.sharedInstance.buttonCornerRadius)
+                            .stroke(isCurrentlyInBasket ? Color.mealzColor(.primary) : Color.clear, lineWidth: 1)
+                    )
                 }
             }
         }
