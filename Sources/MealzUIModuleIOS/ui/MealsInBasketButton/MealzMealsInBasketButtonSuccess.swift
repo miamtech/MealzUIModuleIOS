@@ -33,6 +33,6 @@ public struct MealzMealsInBasketButtonSuccess: MealsInBasketButtonSuccessProtoco
         }
         .background(Color.mealzColor(.lightBackground))
         .foregroundColor(Color.mealzColor(.primary))
-        .cornerRadius(Dimension.sharedInstance.mCornerRadius, corners: [.top])
+        .cornerRadius(Dimension.sharedInstance.buttonCornerRadius, corners: [.top])
     }
 }

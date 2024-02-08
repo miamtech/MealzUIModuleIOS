@@ -79,12 +79,11 @@ public struct MealzRecipeCard: CatalogRecipeCardProtocol {
         }
         .padding(0)
         .frame(width: params.recipeCardDimensions.width, height: params.recipeCardDimensions.height)
-        .cornerRadius(12.0)
+        .background(Color.mealzColor(.white))
+        .cornerRadius(Dimension.sharedInstance.lCornerRadius)
         .overlay(
-            RoundedRectangle(
-                cornerRadius: 12.0)
-            .stroke(Color.mealzColor(.border)
-                    , lineWidth: 1.0))
+            RoundedRectangle(cornerRadius: Dimension.sharedInstance.lCornerRadius)
+            .stroke(Color.mealzColor(.border), lineWidth: 1.0))
     }
     
     internal struct CallToAction: View {
@@ -97,15 +96,23 @@ public struct MealzRecipeCard: CatalogRecipeCardProtocol {
                     MealzAddAllToBasketCTA(callToAction: callToAction, isCurrentlyInBasket: isCurrentlyInBasket)
                 } else {
                     Button(action: callToAction, label: {
-                        Image.mealzIcon(icon: .basket)
-                            .renderingMode(.template)
-                            .resizable()
-                            .foregroundColor(Color.mealzColor(.white))
-                            .frame(width: 24, height: 24)
+                        if isCurrentlyInBasket {
+                            Image.mealzIcon(icon: .pan)
+                                .renderingMode(.template)
+                                .resizable()
+                                .foregroundColor(Color.mealzColor(.primary))
+                                .frame(width: 24, height: 24)
+                        } else {
+                            Image.mealzIcon(icon: .basket)
+                                .renderingMode(.template)
+                                .resizable()
+                                .foregroundColor(Color.mealzColor(.white))
+                                .frame(width: 24, height: 24)
+                        }
                     })
                     .padding(Dimension.sharedInstance.mlPadding)
                     .background(Color.mealzColor(isCurrentlyInBasket ? .lightBackground : .primary))
-                    .cornerRadius(Dimension.sharedInstance.mPadding)
+                    .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
                 }
             }
         }

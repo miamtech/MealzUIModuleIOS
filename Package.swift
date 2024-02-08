@@ -25,7 +25,8 @@ let package = Package(
         .target(
             name: "MealzUIModuleIOS",
             dependencies: [
-                    .product(name: "MiamIOSFramework", package: "kmm-miam-sdk")
+//                    .product(name: "MiamIOSFramework", package: "kmm-miam-sdk")
+                .product(name: "MiamIOSFramework", package: "miam-sdk")
                   ],
             resources: [
                 .process("Resources"),

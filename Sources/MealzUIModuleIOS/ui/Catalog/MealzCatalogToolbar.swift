@@ -63,7 +63,7 @@ struct CatalogToolbarSearchButton: View {
         }
         .padding(Dimension.sharedInstance.mlPadding)
         .background(Color.mealzColor(.primary))
-        .cornerRadius(Dimension.sharedInstance.sCornerRadius)
+        .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
     }
 }
 

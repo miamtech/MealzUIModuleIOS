@@ -67,7 +67,7 @@ struct ItemSelectorProductRow: View {
                             .padding(.vertical, 9)
                             .foregroundColor(isSelected ? Color.mealzColor(.grayText) : Color.mealzColor(.white))
                             .background( isSelected ? Color.mealzColor(.lightBackground) : Color.mealzColor(.primary))
-                            .cornerRadius(Dimension.sharedInstance.sCornerRadius)
+                            .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
                     })
                 }
             }

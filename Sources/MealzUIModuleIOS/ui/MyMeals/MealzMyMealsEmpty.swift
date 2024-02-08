@@ -34,7 +34,7 @@ public struct MealzMyMealsEmpty: EmptyProtocol {
                 .padding(.horizontal)
                 .padding(.vertical, 15)
                 .background(Color.mealzColor(.primary))
-                .cornerRadius(Dimension.sharedInstance.lCornerRadius)
+                .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
                 .overlay(RoundedRectangle(cornerRadius: Dimension.sharedInstance.lCornerRadius)
                     .stroke(Color.clear, lineWidth: 1.0)
                 )

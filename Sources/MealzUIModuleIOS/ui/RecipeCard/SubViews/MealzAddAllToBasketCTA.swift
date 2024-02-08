@@ -44,7 +44,7 @@ public struct MealzAddAllToBasketCTA: View {
         })
         .padding(Dimension.sharedInstance.mlPadding)
         .background(Color.mealzColor(isCurrentlyInBasket ? .lightBackground : .primary))
-        .cornerRadius(Dimension.sharedInstance.mPadding)
+        .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
         .disabled(disableButton)
         .darkenView(disableButton)
     }
