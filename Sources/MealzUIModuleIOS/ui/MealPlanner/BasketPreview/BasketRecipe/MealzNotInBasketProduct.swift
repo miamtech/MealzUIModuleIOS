@@ -34,7 +34,7 @@ public struct MealzNotInBasketProduct: NotInBasketProductProtocol {
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumStyle)
             if let addIngredientAction = params.onAddToBasket {
                 Button(action: addIngredientAction, label: {
-                    Text(Localization.recipe.add.localised).padding(Dimension.sharedInstance.mPadding)
+                    Text(Localization.ingredient.chooseProduct.localised).padding(Dimension.sharedInstance.mPadding)
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                         .foregroundColor(Color.mealzColor(.primary))
                 })

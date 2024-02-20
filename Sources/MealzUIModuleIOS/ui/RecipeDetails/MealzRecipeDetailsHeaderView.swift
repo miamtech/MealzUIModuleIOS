@@ -68,9 +68,10 @@ public struct MealzRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
                         updateGuest(max((currentGuests - 1), 1))
                     } label: {
                         Image.mealzIcon(icon: .minus)
-                            .renderingMode(.template).foregroundColor(.black)
+                            .renderingMode(.template).foregroundColor(Color.mealzColor(.primaryText))
                     }
                     Text("\(currentGuests)")
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBoldStyle)
                         .frame(minWidth: 10, alignment: .center)
                         .foregroundColor(Color.mealzColor(.darkestGray))
                     Image.mealzIcon(icon: .guests)
@@ -80,7 +81,7 @@ public struct MealzRecipeDetailsHeaderView: RecipeDetailsHeaderProtocol {
                         updateGuest(currentGuests + 1)
                     } label: {
                         Image.mealzIcon(icon: .plus)
-                            .renderingMode(.template).foregroundColor(.black)
+                            .renderingMode(.template).foregroundColor(Color.mealzColor(.primaryText))
                     }
                 }
                 .padding(8)

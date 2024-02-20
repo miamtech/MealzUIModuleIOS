@@ -11,42 +11,59 @@ import MiamIOSFramework
 import miamCore
 
 @available(iOS 14, *)
-public struct MealzRecipeDetailsSelectedControlView:
-    RecipeDetailsSelectedControlProtocol {
-    
-    var titles: [String] = [Localization.recipeDetails.shopping.localised, Localization.recipeDetails.cooking.localised]
-    @SwiftUI.State private var frames = Array<CGRect>(repeating: .zero, count: 4)
-    
+public struct MealzRecipeDetailsSelectedControlView: RecipeDetailsSelectedControlProtocol {
     public init() {}
     public func content(params: RecipeDetailsSelectedControlParameters) -> some View {
-        HStack(spacing: 0) {
-            ForEach(titles.indices, id:\.self) { index in
-                ZStack {
-                    Rectangle()
-                        .fill(Color.mealzColor(.lightBackground))
-                    Rectangle()
-                        .fill(Color.mealzColor(.primary))
-                        .cornerRadius(25)
-                        .padding(2)
-                        .opacity(params.selection.wrappedValue == index ? 1 : 0.01)
-                        .onTapGesture {
-                            withAnimation(.interactiveSpring()) {
-                                params.selection.wrappedValue = index
-                            }
+        GeometryReader { geometry in
+            ZStack {
+                Rectangle()
+                    .fill(Color.mealzColor(.lightBackground))
+                Rectangle()
+                    .fill(Color.mealzColor(.primary))
+                    .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
+                    .padding(2)
+                    .frame(width: geometry.size.width / 2, height: 50)
+                    .offset(x: params.selection == .shopping ? geometry.size.width * -0.25 : geometry.size.width  * 0.25, y: 0)
+                    .animation(.interactiveSpring(), value: params.selection)
+                    .frame(maxWidth: .infinity)
+                HStack(spacing: 0) {
+                    TabView(
+                        title: Localization.recipeDetails.shopping.localised,
+                        currentTab: params.selection,
+                        tabActive: params.selection == .shopping) {
+                            params.selection = .shopping
                         }
+                        .frame(width: geometry.size.width / 2)
+                    TabView(
+                        title: Localization.recipeDetails.cooking.localised,
+                        currentTab: params.selection,
+                        tabActive: params.selection == .cooking) {
+                            params.selection = .cooking
+                        }
+                        .frame(width: geometry.size.width / 2)
                 }
-                .overlay(
-                    Text(titles[index]).lineLimit(1)
-                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
-                        .foregroundColor(
-                            (params.selection.wrappedValue == index) ?
-                            Color.mealzColor(.standardLightText) :
-                                Color.mealzColor(.standardDarkText))
-                )
             }
+            .frame(maxWidth: .infinity)
         }
         .frame(height: 50)
-        .cornerRadius(25)
+        .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
         .padding(Dimension.sharedInstance.lPadding)
+    }
+    
+    private struct TabView: View {
+        let title: String
+        let currentTab: SelectedControlPage
+        let tabActive: Bool
+        let changeTab: () -> Void
+        var body: some View {
+            Button(action: {
+                withAnimation { changeTab() }
+            }, label: {
+                Text(title).lineLimit(1)
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
+                    .foregroundColor(tabActive ?
+                                     Color.mealzColor(.standardLightText) : Color.mealzColor(.standardDarkText))
+            })
+        }
     }
 }
