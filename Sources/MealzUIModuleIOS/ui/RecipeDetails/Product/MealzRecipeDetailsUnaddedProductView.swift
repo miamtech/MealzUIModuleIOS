@@ -68,7 +68,7 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
             HStack(spacing: Dimension.sharedInstance.lPadding) {
                 Text(params.data.formattedProductPrice)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleBigStyle)
-                    .foregroundColor(Color.mealzColor(.primary))
+                    .foregroundColor(Color.mealzColor(.primaryText))
                 Spacer()
                 Button(action: params.onIgnoreProduct, label: {
                     Text(Localization.ingredient.ignoreProduct.localised)
@@ -77,10 +77,12 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
                 })
                 Button(action: params.onAddProduct, label: {
                     Image.mealzIcon(icon: .basket)
+                        .resizable()
                         .renderingMode(.template)
                         .foregroundColor(Color.mealzColor(.white))
                         .padding(dim.mlPadding)
-                        .background(Color.mealzColor(.primary).cornerRadius(dim.buttonCornerRadius))
+                        .background(Color.mealzColor(.primary)
+                            .cornerRadius(dim.buttonCornerRadius))
                         .frame(width: 48, height: 48)
                 })
             }
