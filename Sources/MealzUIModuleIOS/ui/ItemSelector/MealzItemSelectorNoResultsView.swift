@@ -16,13 +16,13 @@ public struct MealzItemSelectorNoResultsView: ItemSelectorNoResultsProtocol {
             Image.mealzIcon(icon: .feelingBlue)
                 .resizable()
                 .scaledToFit()
-                .frame(height: 250)
+                .frame(height: 200)
             Text(params.title)
                 .foregroundColor(Color.mealzColor(.primary))
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
             if let subtitle = params.subtitle {
                 Text(subtitle)
-                    .foregroundColor(Color.mealzColor(.primary))
+                    .foregroundColor(Color.mealzColor(.primaryText))
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.subtitleStyle)
             }
         }

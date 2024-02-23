@@ -80,6 +80,7 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
                         .resizable()
                         .renderingMode(.template)
                         .foregroundColor(Color.mealzColor(.white))
+                        .frame(width: 20, height: 20)
                         .padding(dim.mlPadding)
                         .background(Color.mealzColor(.primary)
                             .cornerRadius(dim.buttonCornerRadius))
