@@ -70,7 +70,7 @@ public struct MealzRecipeDetailsAddedProductView: RecipeDetailsAddedProductProto
                 Text(params.data.formattedProductPrice)
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleBigStyle)
                     .padding(.horizontal, 12)
-                    .foregroundColor(Color.mealzColor(.primary))
+                    .foregroundColor(Color.mealzColor(.primaryText))
                 Spacer()
                 HStack{
                     Button {

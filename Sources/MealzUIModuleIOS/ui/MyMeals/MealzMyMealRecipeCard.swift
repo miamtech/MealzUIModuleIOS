@@ -42,11 +42,12 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                 Spacer()
                     .frame(width: Dimension.sharedInstance.mPadding)
                 VStack(alignment: .leading, spacing: Dimension.sharedInstance.mPadding) {
-                    HStack {
+                    HStack(alignment: .top) {
                         Text(params.recipe.title)
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
                             .lineLimit(2)
                             .minimumScaleFactor(0.8)
+                            .frame(height: 40)
                         Spacer()
                         Button {
                             params.onDeleteRecipe()
@@ -85,11 +86,6 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                                 .foregroundColor(Color.mealzColor(.primary))
                         }
                     })
-                    .padding(Dimension.sharedInstance.mPadding)
-                    .overlay( /// apply a rounded border
-                        RoundedRectangle(cornerRadius: Dimension.sharedInstance.buttonCornerRadius)
-                            .stroke(Color.mealzColor(.primary), lineWidth: 1)
-                    )
                     .frame(maxHeight: 40)
                 }
                 .frame(maxWidth: .infinity)
