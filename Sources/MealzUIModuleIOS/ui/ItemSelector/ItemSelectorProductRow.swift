@@ -52,7 +52,7 @@ struct ItemSelectorProductRow: View {
                 HStack {
                     if let unitPrice = product.attributes?.unitPrice, let price = Double(unitPrice) {
                         Text(price.currencyFormatted)
-                            .foregroundColor(Color.mealzColor(.primary))
+                            .foregroundColor(Color.mealzColor(.primaryText))
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
                     }
                     Spacer()
