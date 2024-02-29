@@ -11,7 +11,10 @@ import miamCore
 
 @available(iOS 14, *)
 public struct MealzRecipeDetailsStepsView: RecipeDetailsStepsProtocol {
-    public init() {}
+    let addLinesUnderneath: Bool
+    public init(addLinesUnderneath: Bool = false) {
+        self.addLinesUnderneath = addLinesUnderneath
+    }
     public func content(params: RecipeDetailsStepsParameters) -> some View {
         VStack(alignment: .leading) {
             Text("\(params.steps.count) \(Localization.recipe.steps.localised)")
@@ -23,6 +26,9 @@ public struct MealzRecipeDetailsStepsView: RecipeDetailsStepsProtocol {
                     RecipeDetailStep(
                         stepNumber: index + 1,
                         stepDescription: step.attributes?.stepDescription ?? "")
+                    if addLinesUnderneath && index < params.steps.count - 1 {
+                        Divider()
+                    }
                 }
                 .padding(.bottom)
             }.frame(maxWidth: .infinity, alignment: .leading)

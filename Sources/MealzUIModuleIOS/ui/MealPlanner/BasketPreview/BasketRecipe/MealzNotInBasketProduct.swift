@@ -38,6 +38,9 @@ public struct MealzNotInBasketProduct: NotInBasketProductProtocol {
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                         .foregroundColor(Color.mealzColor(.primary))
                 })
+                .background(Color.mealzColor(.white))
+                .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
+                .padding(Dimension.sharedInstance.mPadding)
             }
         }
         .background(Color.mealzColor(.lightBackground))
