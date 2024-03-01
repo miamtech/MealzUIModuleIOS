@@ -32,10 +32,17 @@ public struct MealzCatalogRecipesListNoResults: CatalogRecipesListNoResultsProto
                 .background(Capsule().foregroundColor(.white))
                 .overlay(Capsule().stroke(.white, lineWidth: 1.0))
             } else {
-                Text("\(Localization.catalog.noRecipeFound.localised) \n\"\(params.searchText)\"")
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Color.mealzColor(.white))
+                if params.searchText != "" {
+                    Text("\(Localization.catalog.noRecipeFound.localised) \n\"\(params.searchText)\"")
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Color.mealzColor(.white))
+                } else {
+                    Text(Localization.catalog.noRecipeFoundFilter.localised)
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(Color.mealzColor(.white))
+                }
                 Text(Localization.catalog.tryAnotherSearch.localised)
                     .italic()
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyBigStyle)
