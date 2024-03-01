@@ -29,6 +29,7 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
     public var header: TypeSafeRecipeDetailsHeader
     public var sponsor: TypeSafeRecipeDetailsSponsor
     public var selectedControl: TypeSafeRecipeDetailsSelectedControl
+    public var numberOfIngredientsTitle: TypeSafeBaseTitle
     public var ingredients: TypeSafeRecipeDetailsIngredients
     public var steps: TypeSafeRecipeDetailsSteps
     public var footer: TypeSafeRecipeDetailsFooter
@@ -46,6 +47,7 @@ public class RecipeDetailParameters: RecipeDetailsParametersProtocol {
         
         self.header = viewOptions.header
         self.sponsor = viewOptions.sponsor
+        self.numberOfIngredientsTitle = viewOptions.numberOfIngredientsTitle
         self.ingredients = viewOptions.ingredients
         self.steps = viewOptions.steps
         self.footer = viewOptions.footer

@@ -22,6 +22,7 @@ import MiamIOSFramework
 public struct RecipeDetailsViewOptions {
     public var header: TypeSafeRecipeDetailsHeader
     public var sponsor: TypeSafeRecipeDetailsSponsor
+    public var numberOfIngredientsTitle: TypeSafeBaseTitle
     public var selectedControl: TypeSafeRecipeDetailsSelectedControl
     public var ingredients: TypeSafeRecipeDetailsIngredients
     public var steps: TypeSafeRecipeDetailsSteps
@@ -37,6 +38,7 @@ public struct RecipeDetailsViewOptions {
         header: TypeSafeRecipeDetailsHeader = TypeSafeRecipeDetailsHeader(MealzRecipeDetailsHeaderView()),
         sponsor: TypeSafeRecipeDetailsSponsor = TypeSafeRecipeDetailsSponsor(MealzRecipeDetailsSponsor()),
         selectedControl: TypeSafeRecipeDetailsSelectedControl = TypeSafeRecipeDetailsSelectedControl(MealzRecipeDetailsSelectedControlView()),
+        numberOfIngredientsTitle: TypeSafeBaseTitle = TypeSafeBaseTitle(MealzRecipeDetailsNumberOfIngredientsTitleView()),
         ingredients: TypeSafeRecipeDetailsIngredients = TypeSafeRecipeDetailsIngredients(MealzRecipeDetailsIngredientsView()),
         steps: TypeSafeRecipeDetailsSteps = TypeSafeRecipeDetailsSteps(MealzRecipeDetailsStepsView()),
         footer: TypeSafeRecipeDetailsFooter = TypeSafeRecipeDetailsFooter(MealzRecipeDetailsFooterView()),
@@ -48,6 +50,7 @@ public struct RecipeDetailsViewOptions {
         self.header = header
         self.sponsor = sponsor
         self.selectedControl = selectedControl
+        self.numberOfIngredientsTitle = numberOfIngredientsTitle
         self.ingredients = ingredients
         self.steps = steps
         self.footer = footer
