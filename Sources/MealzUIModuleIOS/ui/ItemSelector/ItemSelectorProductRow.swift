@@ -24,7 +24,8 @@ struct ItemSelectorProductRow: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
+        let capacity = (product.attributes?.capacityVolume ?? "") + " " + (product.attributes?.capacityUnit ?? "")
+        return VStack(spacing: 0) {
             VStack {
                 HStack {
                     if let picture = URL(string: product.attributes?.image ?? "") {
@@ -44,7 +45,7 @@ struct ItemSelectorProductRow: View {
                             .padding(.bottom, 8)
                         Text(product.attributes?.name ??  "")
                             .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodySmallBoldStyle)
-                        IngredientUnitBubble(capacity: product.capacity)
+                        IngredientUnitBubble(capacity: capacity)
                         Spacer()
                     }.padding(16)
                     Spacer()
