@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
         spec.name         = 'MealzUIModuleIOS'
-        spec.version      = '1.0.0-beta2'
+        spec.version      = '1.0.0'
         spec.summary      = 'Mealz UI iOS SDK'
         spec.homepage     = 'https://www.miam.tech'
         spec.description  = <<-DESC
@@ -13,6 +13,6 @@ Pod::Spec.new do |spec|
         spec.source       = { :git => "https://github.com/miamtech/MealzUIModuleIOS.git", :tag => "#{spec.version}" }
         
         spec.source_files = 'Sources/**/*.{h,m,swift}'
-        spec.dependency 'MiamIOSFramework', '~> 4.0.0-beta2'
+        spec.dependency 'MiamIOSFramework', '~> 4.0.0'
         spec.static_framework = true
 end
