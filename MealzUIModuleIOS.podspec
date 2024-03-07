@@ -15,4 +15,5 @@ Pod::Spec.new do |spec|
         spec.source_files = 'Sources/**/*.{h,m,swift}'
         spec.dependency 'MiamIOSFramework', '~> 4.0.0'
         spec.static_framework = true
+        spec.resource_bundles = {'MealzUIModuleIOS' => ['*.xcprivacy']}
 end
