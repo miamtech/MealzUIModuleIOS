@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftUI
-import miamCore
-import MiamIOSFramework
+import mealzcore
+import MealzIOSFramework
 
 @available(iOS 14, *)
 struct ItemSelectorProductRow: View {

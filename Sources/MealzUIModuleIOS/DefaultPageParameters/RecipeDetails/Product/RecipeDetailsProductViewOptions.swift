@@ -5,7 +5,7 @@
 //  Created by didi on 18/10/2023.
 //
 
-import MiamIOSFramework
+import MealzIOSFramework
 
 /**
  A protocol defining the necessary parameters for RecipeDetails

@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
-import miamCore
+import MealzIOSFramework
+import mealzcore
 
 @available(iOS 14.0, *)
 public struct DefaultErrorView: ErrorProtocol {

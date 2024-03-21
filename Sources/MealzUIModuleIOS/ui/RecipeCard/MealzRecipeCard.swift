@@ -1,14 +1,14 @@
 //
 //  MealzRecipeCard.swift
-//  MiamIOSFramework
+//  MealzIOSFramework
 //
 //  Created by Vincent Kergonna on 26/05/2023.
 //  Copyright © 2023 Miam. All rights reserved.
 //
 
 import SwiftUI
-import MiamIOSFramework
-import miamCore
+import MealzIOSFramework
+import mealzcore
 
 @available(iOS 14, *)
 public struct MealzRecipeCard: CatalogRecipeCardProtocol {

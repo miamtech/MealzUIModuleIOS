@@ -1,6 +1,6 @@
 //
 //  RoundCornerOptions.swift
-//  MiamIOSFramework
+//  MealzIOSFramework
 //
 //  Created by didi on 5/23/23.
 //  Copyright © 2023 Miam. All rights reserved.

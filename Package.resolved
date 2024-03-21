@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "mealziosframeworkspm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/miamtech/MealzIOSFrameworkSPM",
+      "state" : {
+        "revision" : "416cbc46dfb274d455586f2b6a50530e5673ebc1",
+        "version" : "1.0.0-beta1"
+      }
+    },
+    {
+      "identity" : "releasemealz",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/miamtech/releaseMealz",
+      "state" : {
+        "revision" : "44854faf6d8ee51c5e07995dea089115bd023ee5",
+        "version" : "1.0.0-beta3"
+      }
+    }
+  ],
+  "version" : 2
+}

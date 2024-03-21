@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import MiamIOSFramework
+import MealzIOSFramework
 import SwiftUI
 
 @available(iOS 14, *)

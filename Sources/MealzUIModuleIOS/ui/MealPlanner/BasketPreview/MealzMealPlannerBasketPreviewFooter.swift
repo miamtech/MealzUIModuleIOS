@@ -1,13 +1,13 @@
 //
 //  MiamMealPlannerBasketPreviewFooter.swift
-//  MiamIOSFramework
+//  MealzIOSFramework
 //
 //  Created by Vincent Kergonna on 08/06/2023.
 //  Copyright © 2023 Miam. All rights reserved.
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzMealPlannerBasketPreviewFooter: MealPlannerBasketFooterProtocol {

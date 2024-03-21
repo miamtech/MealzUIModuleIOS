@@ -5,7 +5,7 @@
 //  Created by didi on 10/08/2023.
 //
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 // this is implemented empty so that clients have the option to NOT have the meal Planner
 @available(iOS 14, *)

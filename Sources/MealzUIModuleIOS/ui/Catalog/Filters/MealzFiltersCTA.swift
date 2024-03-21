@@ -5,8 +5,8 @@
 //  Created by didi on 07/08/2023.
 //
 import SwiftUI
-import MiamIOSFramework
-import miamCore
+import MealzIOSFramework
+import mealzcore
 
 @available(iOS 14, *)
 public struct MealzFiltersCTA: FiltersCTAProtocol {
