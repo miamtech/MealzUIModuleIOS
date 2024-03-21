@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 /**
  A class implementing the necessary parameters for the Catalog Package Rows, or Catagories.

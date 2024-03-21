@@ -1,6 +1,6 @@
 //
 //  ProgressLoader.swift
-//  MiamIOSFramework
+//  MealzIOSFramework
 //
 //  Created by Miam on 21/06/2022.
 //

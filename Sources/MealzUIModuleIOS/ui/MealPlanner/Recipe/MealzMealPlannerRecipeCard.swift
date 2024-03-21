@@ -1,14 +1,14 @@
 //
 //  MiamBudgetRecipeCard.swift
-//  MiamIOSFramework
+//  MealzIOSFramework
 //
 //  Created by Vincent Kergonna on 26/04/2023.
 //  Copyright © 2023 Miam. All rights reserved.
 //
 
 import SwiftUI
-import miamCore
-import MiamIOSFramework
+import mealzcore
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzMealPlannerRecipeCard: MealPlannerRecipeCardProtocol {

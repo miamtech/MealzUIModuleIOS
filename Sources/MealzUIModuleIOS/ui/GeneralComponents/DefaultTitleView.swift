@@ -1,13 +1,13 @@
 //
 //  DefaultTitleView.swift
-//  MiamIOSFramework
+//  MealzIOSFramework
 //
 //  Created by didi on 03/10/2023.
 //  Copyright © 2023 Miam. All rights reserved.
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct DefaultTitleView: BaseTitleProtocol {

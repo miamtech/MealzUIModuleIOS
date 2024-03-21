@@ -5,7 +5,7 @@
 //  Created by didi on 20/10/2023.
 //
 
-import MiamIOSFramework
+import MealzIOSFramework
 
 /**
  An object containing all the views for the Meal Planner Recipe Picker Page. If nothing is passed in, the Miam Default will be used

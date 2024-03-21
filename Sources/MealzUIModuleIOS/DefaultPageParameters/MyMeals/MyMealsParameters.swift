@@ -5,7 +5,7 @@
 //  Created by didi on 11/10/2023.
 //
 
-import MiamIOSFramework
+import MealzIOSFramework
 
 /**
  A class implemening the necessary parameters for the MyMeals Page.

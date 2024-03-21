@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
-import miamCore
+import MealzIOSFramework
+import mealzcore
 
 public let mealzProductHeight: CGFloat = 230
 

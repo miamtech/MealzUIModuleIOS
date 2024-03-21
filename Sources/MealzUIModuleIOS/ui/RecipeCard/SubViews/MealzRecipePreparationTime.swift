@@ -1,13 +1,13 @@
 //
 //  RecipePreparationTime.swift
-//  MiamIOSFramework
+//  MealzIOSFramework
 //
 //  Created by Vincent Kergonna on 04/05/2023.
 //  Copyright © 2023 Miam. All rights reserved.
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzRecipePreparationTime: View {

@@ -5,7 +5,7 @@
 //  Created by didi on 18/10/2023.
 //
 
-import MiamIOSFramework
+import MealzIOSFramework
 
 /**
  The optional View parameters for Preferences. If nothing is passed in, the Miam Default will be used

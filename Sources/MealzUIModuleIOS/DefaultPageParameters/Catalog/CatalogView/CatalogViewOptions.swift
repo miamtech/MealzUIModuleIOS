@@ -5,7 +5,7 @@
 //  Created by didi on 18/10/2023.
 //
 
-import MiamIOSFramework
+import MealzIOSFramework
 
 /**
  An object containing all the views for the Catalog. If nothing is passed in, the Miam Default will be used

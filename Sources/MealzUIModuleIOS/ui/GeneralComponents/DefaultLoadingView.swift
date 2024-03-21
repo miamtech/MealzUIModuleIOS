@@ -5,7 +5,7 @@
 //  Created by didi on 09/08/2023.
 //
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct DefaultLoadingView: LoadingProtocol {

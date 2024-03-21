@@ -1,13 +1,13 @@
 //
 //  MealPlannerSubmitCTA.swift
-//  MiamIOSFramework
+//  MealzIOSFramework
 //
 //  Created by didi on 5/9/23.
 //  Copyright © 2023 Miam. All rights reserved.
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available (iOS 14, *)
 internal struct MealPlannerSubmitCTA: View {

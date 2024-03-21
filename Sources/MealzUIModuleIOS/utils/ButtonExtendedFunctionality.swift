@@ -1,6 +1,6 @@
 //
 //  ButtonExtendedFunctionality.swift
-//  MiamIOSFramework
+//  MealzIOSFramework
 //
 //  Created by didi on 5/16/23.
 //  Copyright © 2023 Miam. All rights reserved.

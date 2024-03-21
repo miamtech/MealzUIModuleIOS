@@ -8,7 +8,7 @@
 // can i delete?
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzNoSearchResults: View {
