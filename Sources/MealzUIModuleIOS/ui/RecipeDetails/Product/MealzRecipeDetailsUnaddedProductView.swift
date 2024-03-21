@@ -14,6 +14,10 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
     public init() {}
     let dim = Dimension.sharedInstance
     public func content(params: RecipeDetailsUnaddedProductParameters) -> some View {
+        var lockButton: Bool {
+            return params.productStatus == ComponentUiState.locked
+            || params.productStatus == ComponentUiState.loading
+        }
         VStack {
             HStack {
                 Text(params.data.ingredientName.capitalizingFirstLetter())
@@ -75,17 +79,26 @@ public struct MealzRecipeDetailsUnaddedProductView: RecipeDetailsUnaddedProductP
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyMediumBoldStyle)
                         .foregroundColor(Color.mealzColor(.grayText))
                 })
-                Button(action: params.onAddProduct, label: {
-                    Image.mealzIcon(icon: .basket)
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundColor(Color.mealzColor(.white))
-                        .frame(width: 20, height: 20)
-                        .padding(dim.mlPadding)
-                        .background(Color.mealzColor(.primary)
-                            .cornerRadius(dim.buttonCornerRadius))
-                        .frame(width: 48, height: 48)
-                })
+                if lockButton {
+                    Button(action: {}, label: {
+                        ProgressLoader(color: .white, size: 24)
+                    })
+                    .padding(Dimension.sharedInstance.mlPadding)
+                    .background(Color.mealzColor(.primary))
+                    .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
+                }else{
+                    Button(action: params.onAddProduct, label: {
+                        Image.mealzIcon(icon: .basket)
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(Color.mealzColor(.white))
+                            .frame(width: 20, height: 20)
+                            .padding(dim.mlPadding)
+                            .background(Color.mealzColor(.primary)
+                                .cornerRadius(dim.buttonCornerRadius))
+                            .frame(width: 48, height: 48)
+                    })
+                }
             }
             .padding(.horizontal, dim.mlPadding)
             Spacer()
