@@ -60,7 +60,6 @@ let package = Package(
             resources: [
                 .copy("PrivacyInfo.xcprivacy"),
                 .process("Resources"),
-                .copy("./PrivacyInfo.xcprivacy")
             ]
         ),
     ]
