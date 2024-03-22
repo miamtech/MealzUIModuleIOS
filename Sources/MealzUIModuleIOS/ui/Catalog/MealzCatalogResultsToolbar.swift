@@ -23,16 +23,3 @@ public struct MealzCatalogResultsToolbar: CatalogToolbarProtocol {
         .padding(Dimension.sharedInstance.mlPadding)
     }
 }
-
-@available(iOS 14, *)
-struct MealzCatalogResultsToolbar_Previews: PreviewProvider {
-    static var previews: some View {
-        MealzCatalogToolbar().content(
-            params: CatalogToolbarParameters(
-            usesPreferences: true,
-            onFiltersTapped: {},
-            onSearchTapped: {},
-            onFavoritesTapped: {},
-            onPreferencesTapped: {}))
-    }
-}

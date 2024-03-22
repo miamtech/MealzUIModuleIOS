@@ -66,16 +66,3 @@ struct CatalogToolbarSearchButton: View {
         .cornerRadius(Dimension.sharedInstance.buttonCornerRadius)
     }
 }
-
-@available(iOS 14, *)
-struct MealzCatalogToolbar_Previews: PreviewProvider {
-    static var previews: some View {
-        MealzCatalogToolbar().content(
-            params: CatalogToolbarParameters(
-            usesPreferences: true,
-            onFiltersTapped: {},
-            onSearchTapped: {},
-            onFavoritesTapped: {},
-            onPreferencesTapped: {}))
-    }
-}
