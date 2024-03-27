@@ -29,7 +29,7 @@ struct MealzCatalogResultsToolbar_Previews: PreviewProvider {
     static var previews: some View {
         MealzCatalogToolbar().content(
             params: CatalogToolbarParameters(
-            usesPreferences: true,
+                numberOfActiveFilters: 0, usesPreferences: true,
             onFiltersTapped: {},
             onSearchTapped: {},
             onFavoritesTapped: {},
