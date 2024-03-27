@@ -53,7 +53,10 @@ public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
                         } label: {
                             Image.mealzIcon(icon: .trash)
                                 .renderingMode(.template)
-                                .foregroundColor(Color.mealzColor(.primary))
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(Color.mealzColor(.primaryText))
                         }
                     }.frame(maxWidth: .infinity)
                     Text(params.data.price.pricePerPersonWithText(numberOfGuests: params.data.guests))
