@@ -5,7 +5,7 @@ import PackageDescription
 import Foundation
 
 //let configurationMode = ProcessInfo.processInfo.environment["CONFIGURATION_MODE"] ?? "dev"
-let configurationMode = "prod"
+let configurationMode = "devWithSPM"
 
 let package = Package(
     name: "MealzUIModuleIOS",
@@ -28,10 +28,16 @@ let package = Package(
                 .package(path: "../MealzIOSFramework")
             ]
             )
+        } else if configurationMode == "devWithSPM" {
+            dependencies.append(contentsOf: [
+                .package(path: "../MealzCore"),
+                .package(path: "../MealzIOSFrameworkSPM")
+            ]
+            )
         } else {
             dependencies.append(contentsOf: [
                 .package(url: "https://github.com/miamtech/releaseMealz", from: "1.0.0-beta3"),
-                .package(url: "https://github.com/miamtech/MealzIOSFrameworkSPM", exact: "1.0.0-beta2")
+                .package(url: "https://github.com/miamtech/MealzIOSFrameworkSPM", exact: "1.0.0-beta3")
             ]
             )
         }
@@ -46,6 +52,12 @@ let package = Package(
                     dependencies.append(contentsOf: [
                         .product(name: "MealzCore", package: "MealzCore"),
                         .product(name: "MealzIOSFramework", package: "MealzIOSFramework")
+                    ]
+                    )
+                } else if configurationMode == "devWithSPM" {
+                    dependencies.append(contentsOf: [
+                        .product(name: "MealzCore", package: "MealzCore"),
+                        .product(name: "MealzIOSFrameworkSPM", package: "MealzIOSFrameworkSPM")
                     ]
                     )
                 } else {
