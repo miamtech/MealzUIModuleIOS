@@ -5,7 +5,7 @@ import PackageDescription
 import Foundation
 
 //let configurationMode = ProcessInfo.processInfo.environment["CONFIGURATION_MODE"] ?? "dev"
-let configurationMode = "devWithSPM"
+let configurationMode = "prod"
 
 let package = Package(
     name: "MealzUIModuleIOS",
