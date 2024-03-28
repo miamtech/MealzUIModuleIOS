@@ -1,14 +1,14 @@
 //
-//  MyMealsViewOptions.swift
+//  File.swift
 //  
 //
-//  Created by didi on 18/10/2023.
+//  Created by Antonin Francois on 28/03/2024.
 //
 
 import MealzIOSFramework
 
 /**
- The optional View parameters for MyMeals. If nothing is passed in, the Miam Default will be used
+ The optional View parameters for nested MyMeals. If nothing is passed in, the Mealz Default will be used
  
  - title:  An implementation of ``BaseTitleProtocol``
  - recipeCard:  An implementation of ``MyMealRecipeCardProtocol``
@@ -16,27 +16,18 @@ import MealzIOSFramework
 
  */
 @available(iOS 14, *)
-public struct MyMealsViewOptions {
+public struct NestedMyMealsViewOptions {
     public var title: TypeSafeBaseTitle
     public var recipeCard: TypeSafeMyMealRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     
     public init(
-        title: TypeSafeBaseTitle = TypeSafeBaseTitle(MealzMyMealsTitle()),
+        title: TypeSafeBaseTitle = TypeSafeBaseTitle(EmptyTitleView()),
         recipeCard: TypeSafeMyMealRecipeCard = TypeSafeMyMealRecipeCard(MealzMyMealRecipeCard()),
         recipeCardLoading: TypeSafeRecipeCardLoading = TypeSafeRecipeCardLoading(MealzRecipeCardLoading())
     ) {
         self.title = title
         self.recipeCard = recipeCard
         self.recipeCardLoading = recipeCardLoading
-    }
-}
-
-@available(iOS 14, *)
-public extension MyMealsViewOptions {
-    public init(nestedOptions: NestedMyMealsViewOptions) {
-        self.title = nestedOptions.title
-        self.recipeCard = nestedOptions.recipeCard
-        self.recipeCardLoading = nestedOptions.recipeCardLoading
     }
 }

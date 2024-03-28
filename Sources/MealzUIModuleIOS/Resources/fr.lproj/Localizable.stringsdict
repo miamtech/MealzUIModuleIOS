@@ -12,6 +12,8 @@
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
+			<key>zero</key>
+			<string>Aucun repas ajouté</string>
 			<key>one</key>
 			<string>%d repas ajouté</string>
 			<key>other</key>
