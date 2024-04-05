@@ -22,7 +22,7 @@ public struct MealzCatalogPackageTitle: BaseTitleProtocol {
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
                         .lineLimit(1)
                 }
-            }
+            }.padding(.horizontal, Dimension.sharedInstance.mPadding)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

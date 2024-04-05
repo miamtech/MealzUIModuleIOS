@@ -30,10 +30,7 @@ public struct MealzMealPlannerRecap: MealPlannerRecapProtocol {
             
             HStack(alignment: .top) {
                 // Space Between
-                Text(String(format: String.localizedStringWithFormat(
-                        Localization.myBudget.mealPlannerMealsFor(numberOfMeals: Int32(params.numberOfMeals)).localised,
-                        params.numberOfMeals),
-                                       params.numberOfMeals))
+                Text(String(format: String.localizedStringWithFormat(Localization.myBudget.mealPlannerMealsFor(numberOfMeals: Int32(params.numberOfMeals)).localised,params.numberOfMeals),params.numberOfMeals))
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
                 Spacer()
                 // Alternative Views and Spacers

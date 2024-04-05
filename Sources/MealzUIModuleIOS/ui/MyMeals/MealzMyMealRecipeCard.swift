@@ -58,6 +58,7 @@ public struct MealzMyMealRecipeCard: MyMealRecipeCardProtocol {
                                 Image.mealzIcon(icon: .trash)
                                     .renderingMode(.template)
                                     .resizable()
+                                    .aspectRatio(contentMode: .fit)
                                     .frame(width: 20, height: 20)
                                     .foregroundColor(Color.mealzColor(.grayText))
                             }
