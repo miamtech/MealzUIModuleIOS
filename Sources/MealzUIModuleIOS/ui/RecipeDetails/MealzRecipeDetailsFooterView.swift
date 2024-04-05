@@ -31,7 +31,7 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
                 ProgressLoader(color: .primary, size: 24)
             } else {
                 if params.totalPriceOfProductsAdded > 0 {
-                    MealzPricePerPerson(pricePerGuest: params.totalPriceOfProductsAddedPerGuest)
+                    PriceInMyBasket(totalPriceInBasket: params.totalPriceOfProductsAdded.currencyFormatted)
                 }
             }
             Spacer()
@@ -109,6 +109,21 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
             )
             .disabled(disableButton)
             .darkenView(disableButton)
+        }
+    }
+    
+    internal struct PriceInMyBasket: View {
+        let totalPriceInBasket: String
+        
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text(totalPriceInBasket)
+                    .foregroundColor(Color.mealzColor(.primaryText))
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+                Text(Localization.recipeDetails.inMyBasket.localised)
+                    .foregroundColor(Color.mealzColor(.primaryText))
+                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyExtraSmallStyle)
+            }
         }
     }
 }
