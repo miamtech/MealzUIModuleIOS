@@ -32,17 +32,3 @@ public struct MealzMealPlannerBasketPreviewFooter: MealPlannerBasketFooterProtoc
         .frame(height: params.footerHeight)
     }
 }
-
-@available(iOS 14, *)
-struct MealzMealPlannerBasketPreviewFooter_Previews: PreviewProvider {
-    static var previews: some View {
-        MealzMealPlannerBasketPreviewFooter().content(
-            params: MealPlannerBasketFooterParamaters(
-                footerHeight: 150,
-                totalPrice: 45.3,
-                isLoading: false,
-            onNavigateToRecap: {}, onNavigateToBasket: {}
-            )
-        )
-    }
-}
