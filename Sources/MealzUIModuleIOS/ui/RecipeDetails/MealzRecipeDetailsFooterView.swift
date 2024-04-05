@@ -35,7 +35,7 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
                 }
             }
             Spacer()
-                if params.isAddingAllIngredients {
+                if params.isAddingAllIngredients || lockButton {
                     LoadingButton()
                 } else {
                     switch params.ingredientsStatus.type {
@@ -44,18 +44,13 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
                             callToAction: params.callToAction,
                             buttonText: Localization.recipeDetails.continueShopping.localised,
                             disableButton: lockButton)
-                    case .initialState:
-                        MealzAddAllToBasketCTA(
-                            callToAction: params.callToAction,
-                            buttonText: Localization.recipeDetails.addAllProducts.localised,
-                            disableButton: lockButton)
                     default:
                         MealzAddAllToBasketCTA(
                             callToAction: params.callToAction,
                             buttonText: String(format: String.localizedStringWithFormat(
                                 Localization.ingredient.addProduct(numberOfProducts: params.ingredientsStatus.count).localised,
                                 params.ingredientsStatus.count),
-                                               params.ingredientsStatus.count),
+                                               params.ingredientsStatus.count).appending(" (\(params.totalPriceOfRemainingProducts.currencyFormatted))"),
                             disableButton: lockButton)
                     }
                 }
@@ -76,7 +71,10 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
         }
         var body: some View {
             HStack {
-                MealzPricePerPerson(pricePerGuest: recipeStickerPrice / Double(numberOfGuests))
+                Spacer()
+                if recipeStickerPrice == 0 {
+                    EmptyView()
+                } else { MealzPricePerPerson(pricePerGuest: recipeStickerPrice / Double(numberOfGuests)) }
                 Spacer()
             }
         }
