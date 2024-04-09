@@ -111,19 +111,4 @@ public struct MealzRecipeDetailsFooterView: RecipeDetailsFooterProtocol {
             .darkenView(disableButton)
         }
     }
-    
-    internal struct PriceInMyBasket: View {
-        let totalPriceInBasket: String
-        
-        var body: some View {
-            VStack(alignment: .leading) {
-                Text(totalPriceInBasket)
-                    .foregroundColor(Color.mealzColor(.primaryText))
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
-                Text(Localization.recipeDetails.inMyBasket.localised)
-                    .foregroundColor(Color.mealzColor(.primaryText))
-                    .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyExtraSmallStyle)
-            }
-        }
-    }
 }

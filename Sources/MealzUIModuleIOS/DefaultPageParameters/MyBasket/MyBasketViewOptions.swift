@@ -18,12 +18,15 @@ import MealzIOSFramework
 public struct MyBasketViewOptions {
     public var title: TypeSafeBaseTitle
     public var swapper: TypeSafeMyBasketSwapper
+    public var footer: TypeSafeMyBasketFooter
 
     public init(
         title: TypeSafeBaseTitle = TypeSafeBaseTitle(MealzMyMealsTitle()),
-        swapper: TypeSafeMyBasketSwapper = TypeSafeMyBasketSwapper(MealzMyBasketSwapper())
+        swapper: TypeSafeMyBasketSwapper = TypeSafeMyBasketSwapper(MealzMyBasketSwapper()),
+        footer: TypeSafeMyBasketFooter = TypeSafeMyBasketFooter(MealzMyBasketFooter())
     ) {
         self.title = title
         self.swapper = swapper
+        self.footer = footer
     }
 }
