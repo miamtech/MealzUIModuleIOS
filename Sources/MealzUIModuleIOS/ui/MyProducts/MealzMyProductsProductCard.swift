@@ -34,23 +34,27 @@ public struct MealzMyProductsProductCard: MyProductsProductCardProtocol {
                         Text(params.entry.selectedItem?.attributes?.name ?? "")
                         HStack {
                             IngredientUnitBubble(capacity: capacity)
-                            // TODO: add price per unit when merged
+                            if let capacityUnit = params.entry.selectedItem?.attributes?.capacityUnit {
+                                Text(String(params.entry.pricePerUnit.currencyFormatted) + " / " + capacityUnit)
+                                    .foregroundColor(Color.mealzColor(.grayText))
+                            }
                         }
-                        ReplaceButton().padding(.top, 4)
+                        if (params.entry.recipeCount > 0) {
+                            ReplaceButton().content(replaceProduct: params.onReplaceProduct).padding(.top, 4)
+                        }
                         Spacer()
                     }
                     Spacer()
                 }
                 HStack {
-                    if let unitPrice = params.entry.selectedItem?.attributes?.unitPrice, let price = Double(unitPrice) {
-                        Text(price.currencyFormatted)
-                            .foregroundColor(Color.mealzColor(.primaryText))
-                            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
-                    }
+                    Text(params.entry.unitPrice.currencyFormatted)
+                        .foregroundColor(Color.mealzColor(.primaryText))
+                        .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
                     Spacer()
                     // TODO: add custom view
-                    MealzCounterView(count: 0, lightMode: true) { count in
-                        // TODO: when VM is done
+                    MealzCounterView(count: Int(params.entry.quantity), lightMode: true) { count in
+                        // TODO: delete doesn't work
+                        params.updateQuantity(count)
                     }
                 }
             }
@@ -59,11 +63,10 @@ public struct MealzMyProductsProductCard: MyProductsProductCardProtocol {
         }
     }
     
-    struct ReplaceButton: View {
-        var body: some View {
-            Button(action: {
-                // TODO: when VM is done
-            }) {
+    struct ReplaceButton {
+        public func content(replaceProduct: @escaping () -> Void) -> some View {
+            // TODO: Fix
+            Button(action: replaceProduct) {
                 //Text(Localization.myProducts.replace.localised)
                 Text("Remplacer")
                     .font(.system(size: 14, weight: .semibold))

@@ -20,13 +20,13 @@ import MealzIOSFramework
 @available(iOS 14, *)
 public class MyProductsParameters: MyProductsParametersProtocol {
     public var productCard: TypeSafeMyProductsProductCard
-    public var onNoResultsRedirect: () -> Void
+    public var actions: MyProductsActions
     
     public init(
         viewOptions: MyProductsViewOptions = MyProductsViewOptions(),
-        onNoResultsRedirect: @escaping () -> Void
+        actions: MyProductsActions
     ) {
         self.productCard = viewOptions.productCard
-        self.onNoResultsRedirect = onNoResultsRedirect
+        self.actions = actions
     }
 }
