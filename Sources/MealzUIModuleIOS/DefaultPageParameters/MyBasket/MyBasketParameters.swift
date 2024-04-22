@@ -18,11 +18,18 @@ import MealzIOSFramework
 public class MyBasketParameters: MyBasketParametersProtocol {
     public var title: TypeSafeBaseTitle
     public var swapper: TypeSafeMyBasketSwapper
+    public var footer: TypeSafeMyBasketFooter
+    
+    public var actions: MyBasketActions
 
     public init(
+        actions: MyBasketActions,
         viewOptions: MyBasketViewOptions = MyBasketViewOptions()
     ) {
+        self.actions = actions
+        
         self.title = viewOptions.title
         self.swapper = viewOptions.swapper
+        self.footer = viewOptions.footer
     }
 }
