@@ -35,7 +35,7 @@ public struct MealzMyProductsProductCard: MyProductsProductCardProtocol {
                         HStack {
                             IngredientUnitBubble(capacity: capacity)
                             if let capacityUnit = params.entry.selectedItem?.attributes?.capacityUnit {
-                                Text(String(params.entry.pricePerUnit.currencyFormatted) + " / " + capacityUnit)
+                                Text(String(params.entry.price.currencyFormatted) + " / " + capacityUnit)
                                     .foregroundColor(Color.mealzColor(.grayText))
                             }
                         }

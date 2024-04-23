@@ -19,6 +19,7 @@ import MealzIOSFramework
  */
 @available(iOS 14, *)
 public class MyProductsParameters: MyProductsParametersProtocol {
+    public var itemSelectorCTA: TypeSafeBaseButton
     public var productCard: TypeSafeMyProductsProductCard
     public var actions: MyProductsActions
     
@@ -27,6 +28,7 @@ public class MyProductsParameters: MyProductsParametersProtocol {
         actions: MyProductsActions
     ) {
         self.productCard = viewOptions.productCard
+        self.itemSelectorCTA = viewOptions.itemSelectorCTA
         self.actions = actions
     }
 }

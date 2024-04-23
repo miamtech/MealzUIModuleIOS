@@ -18,15 +18,18 @@ import MealzIOSFramework
 @available(iOS 14, *)
 public struct NestedMyMealsViewOptions {
     public var title: TypeSafeBaseTitle
+    public var itemSelectorCTA: TypeSafeBaseButton
     public var recipeCard: TypeSafeMyMealRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     
     public init(
         title: TypeSafeBaseTitle = TypeSafeBaseTitle(EmptyTitleView()),
+        itemSelectorCTA: TypeSafeBaseButton = TypeSafeBaseButton(MyBasketOpenItemSelectorCTA()),
         recipeCard: TypeSafeMyMealRecipeCard = TypeSafeMyMealRecipeCard(MealzMyMealRecipeCard()),
         recipeCardLoading: TypeSafeRecipeCardLoading = TypeSafeRecipeCardLoading(MealzRecipeCardLoading())
     ) {
         self.title = title
+        self.itemSelectorCTA = itemSelectorCTA
         self.recipeCard = recipeCard
         self.recipeCardLoading = recipeCardLoading
     }

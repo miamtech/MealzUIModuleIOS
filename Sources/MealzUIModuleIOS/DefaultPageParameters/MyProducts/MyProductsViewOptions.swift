@@ -16,10 +16,13 @@ import MealzIOSFramework
 @available(iOS 14, *)
 public struct MyProductsViewOptions {
     public var productCard: TypeSafeMyProductsProductCard
+    public var itemSelectorCTA: TypeSafeBaseButton
     
     public init(
-        productCard: TypeSafeMyProductsProductCard = TypeSafeMyProductsProductCard(MealzMyProductsProductCard())
+        productCard: TypeSafeMyProductsProductCard = TypeSafeMyProductsProductCard(MealzMyProductsProductCard()),
+        itemSelectorCTA: TypeSafeBaseButton = TypeSafeBaseButton(MyBasketOpenItemSelectorCTA())
     ) {
         self.productCard = productCard
+        self.itemSelectorCTA = itemSelectorCTA
     }
 }
