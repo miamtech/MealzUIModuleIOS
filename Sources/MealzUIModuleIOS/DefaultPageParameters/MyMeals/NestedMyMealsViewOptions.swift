@@ -24,7 +24,7 @@ public struct NestedMyMealsViewOptions {
     
     public init(
         title: TypeSafeBaseTitle = TypeSafeBaseTitle(EmptyTitleView()),
-        itemSelectorCTA: TypeSafeBaseButton = TypeSafeBaseButton(MyBasketOpenItemSelectorCTA()),
+        itemSelectorCTA: TypeSafeBaseButton = TypeSafeBaseButton(MealzMyBasketOpenItemSelectorCTA()),
         recipeCard: TypeSafeMyMealRecipeCard = TypeSafeMyMealRecipeCard(MealzMyMealRecipeCard()),
         recipeCardLoading: TypeSafeRecipeCardLoading = TypeSafeRecipeCardLoading(MealzRecipeCardLoading())
     ) {

@@ -20,7 +20,7 @@ public struct MyProductsViewOptions {
     
     public init(
         productCard: TypeSafeMyProductsProductCard = TypeSafeMyProductsProductCard(MealzMyProductsProductCard()),
-        itemSelectorCTA: TypeSafeBaseButton = TypeSafeBaseButton(MyBasketOpenItemSelectorCTA())
+        itemSelectorCTA: TypeSafeBaseButton = TypeSafeBaseButton(MealzMyBasketOpenItemSelectorCTA())
     ) {
         self.productCard = productCard
         self.itemSelectorCTA = itemSelectorCTA
