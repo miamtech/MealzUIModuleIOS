@@ -23,6 +23,7 @@ public class MyMealsParameters: MyMealsParametersProtocol {
     public var actions: MyMealsActions
   
     public var title: TypeSafeBaseTitle
+    public var itemSelectorCTA: TypeSafeBaseButton
     public var recipeCard: TypeSafeMyMealRecipeCard
     public var recipeCardLoading: TypeSafeRecipeCardLoading
     
@@ -32,6 +33,7 @@ public class MyMealsParameters: MyMealsParametersProtocol {
     ) {
         self.actions = actions
         self.recipeCard = viewOptions.recipeCard
+        self.itemSelectorCTA = viewOptions.itemSelectorCTA
         self.recipeCardLoading = viewOptions.recipeCardLoading
         self.title = viewOptions.title
     }
