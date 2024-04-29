@@ -93,11 +93,12 @@ public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
                 MealzCounterView(
                     count: params.data.guests,
                     lightMode: false,
-                    onCounterChanged: { guestCount in params.onUpdateGuests(guestCount) },
                     isLoading: params.data.isReloading,
                     isDisable: params.data.isReloading,
                     minValue: 1,
-                    maxValue: 99)
+                    maxValue: 99) { guestCount in
+                        params.onUpdateGuests(guestCount)
+                    }
             }
         }
         .padding([.leading, .trailing], 16.0)

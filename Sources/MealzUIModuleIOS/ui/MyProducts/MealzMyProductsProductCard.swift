@@ -52,7 +52,7 @@ public struct MealzMyProductsProductCard: MyProductsProductCardProtocol {
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
                     Spacer()
                     // TODO: add custom view
-                    MealzCounterView(count: Int(params.entry.quantity), lightMode: true) { count in
+                    MealzCounterView(count: Int(params.entry.quantity), lightMode: true, isLoading: params.isLocked, isDisable: params.isLocked) { count in
                         // TODO: delete doesn't work
                         params.updateQuantity(count)
                     }
