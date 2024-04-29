@@ -21,6 +21,7 @@ import MealzIOSFramework
 public class MyProductsParameters: MyProductsParametersProtocol {
     public var itemSelectorCTA: TypeSafeBaseButton
     public var productCard: TypeSafeMyProductsProductCard
+    public var loadingProduct: TypeSafeLoading
     public var actions: MyProductsActions
     
     public init(
@@ -28,6 +29,7 @@ public class MyProductsParameters: MyProductsParametersProtocol {
         actions: MyProductsActions
     ) {
         self.productCard = viewOptions.productCard
+        self.loadingProduct = viewOptions.loadingProduct
         self.itemSelectorCTA = viewOptions.itemSelectorCTA
         self.actions = actions
     }
