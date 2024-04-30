@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import MiamIOSFramework
+import MealzIOSFramework
 import SwiftUI
 
 @available(iOS 14, *)
@@ -16,7 +16,7 @@ public struct BaseComponentViewParameters: BaseViewsProtocol {
     public var background: TypeSafeBackground
     
     public init(
-        loading: TypeSafeLoading = TypeSafeLoading(DefaultLoadingView(size: 10)),
+        loading: TypeSafeLoading = TypeSafeLoading(MealzGeneralComponentLoading()),
         empty: TypeSafeEmpty = TypeSafeEmpty(DefaultEmptyView()),
         background: TypeSafeBackground = TypeSafeBackground(DefaultBackgroundView())
     ) {

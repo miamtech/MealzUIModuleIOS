@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzBasketProduct: BasketProductProtocol {
@@ -66,6 +66,9 @@ public struct MealzBasketProduct: BasketProductProtocol {
                 } label: {
                     Image.mealzIcon(icon: .trash)
                         .renderingMode(.template)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20, height: 20)
                         .foregroundColor(Color.mealzColor(.primaryText))
                 }
                 .padding(Dimension.sharedInstance.mlPadding)

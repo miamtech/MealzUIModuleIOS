@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
@@ -53,7 +53,10 @@ public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
                         } label: {
                             Image.mealzIcon(icon: .trash)
                                 .renderingMode(.template)
-                                .foregroundColor(Color.mealzColor(.primary))
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(Color.mealzColor(.primaryText))
                         }
                     }.frame(maxWidth: .infinity)
                     Text(params.data.price.pricePerPersonWithText(numberOfGuests: params.data.guests))
@@ -90,11 +93,12 @@ public struct MealzBasketRecipeOverview: BasketRecipeOverviewProtocol {
                 MealzCounterView(
                     count: params.data.guests,
                     lightMode: false,
-                    onCounterChanged: { guestCount in params.onUpdateGuests(guestCount) },
                     isLoading: params.data.isReloading,
                     isDisable: params.data.isReloading,
                     minValue: 1,
-                    maxValue: 99)
+                    maxValue: 99) { guestCount in
+                        params.onUpdateGuests(guestCount)
+                    }
             }
         }
         .padding([.leading, .trailing], 16.0)

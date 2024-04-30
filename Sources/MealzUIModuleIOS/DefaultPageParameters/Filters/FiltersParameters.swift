@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 /**
  An implementation of ``FiltersParametersProtocol``

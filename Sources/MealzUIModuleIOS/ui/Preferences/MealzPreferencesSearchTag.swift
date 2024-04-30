@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
-import miamCore
+import MealzIOSFramework
+import mealzcore
 
 @available(iOS 14, *)
 public struct MealzPreferencesSearchTag: BaseButtonProtocol {

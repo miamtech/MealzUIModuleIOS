@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzCatalogPackageTitle: BaseTitleProtocol {
@@ -22,7 +22,7 @@ public struct MealzCatalogPackageTitle: BaseTitleProtocol {
                         .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
                         .lineLimit(1)
                 }
-            }
+            }.padding(.horizontal, Dimension.sharedInstance.mPadding)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }

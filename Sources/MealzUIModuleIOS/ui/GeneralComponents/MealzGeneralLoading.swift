@@ -6,13 +6,21 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzGeneralLoading: LoadingProtocol {
     public init() {}
     public func content(params: BaseLoadingParameters) -> some View {
         ProgressLoader(color: Color.mealzColor(.primary))
+    }
+}
+
+@available(iOS 14, *)
+public struct MealzGeneralComponentLoading: LoadingProtocol {
+    public init() {}
+    public func content(params: BaseLoadingParameters) -> some View {
+        EmptyView()
     }
 }
 

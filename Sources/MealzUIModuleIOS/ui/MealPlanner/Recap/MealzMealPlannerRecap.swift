@@ -1,6 +1,6 @@
 //
 //  MiamBudgetRecap.swift
-//  MiamIOSFramework
+//  MealzIOSFramework
 //
 //  Created by Vincent Kergonna on 28/06/2023.
 //  Copyright © 2023 Miam. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzMealPlannerRecap: MealPlannerRecapProtocol {
@@ -30,10 +30,7 @@ public struct MealzMealPlannerRecap: MealPlannerRecapProtocol {
             
             HStack(alignment: .top) {
                 // Space Between
-                Text(String(format: String.localizedStringWithFormat(
-                        Localization.myBudget.mealPlannerMealsFor(numberOfMeals: Int32(params.numberOfMeals)).localised,
-                        params.numberOfMeals),
-                                       params.numberOfMeals))
+                Text(String(format: String.localizedStringWithFormat(Localization.myBudget.mealPlannerMealsFor(numberOfMeals: Int32(params.numberOfMeals)).localised,params.numberOfMeals),params.numberOfMeals))
                     .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.bodyStyle)
                 Spacer()
                 // Alternative Views and Spacers

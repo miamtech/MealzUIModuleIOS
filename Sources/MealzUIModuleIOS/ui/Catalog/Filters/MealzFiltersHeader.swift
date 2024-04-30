@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzFiltersHeader: FiltersHeaderProtocol {
@@ -17,11 +17,6 @@ public struct MealzFiltersHeader: FiltersHeaderProtocol {
             Text(Localization.catalog.filtersTitle.localised)
                 .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleMediumStyle)
             Spacer()
-            Button {
-                params.onCloseFilters()
-            } label: {
-                Image.mealzIcon(icon: .plus)
-            }
         }.padding([.top], 20)
     }
 }

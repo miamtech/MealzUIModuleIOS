@@ -5,7 +5,7 @@
 //  Created by didi on 10/10/2023.
 //
 
-import MiamIOSFramework
+import MealzIOSFramework
 
 /**
  A class implementing the necessary parameters for the Meal Planner Form

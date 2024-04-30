@@ -6,26 +6,26 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzCounterView: View {
     @State public var count: Int
-    public var onCounterChanged: (Int) -> Void
     public var lightMode: Bool
     public var maxValue: Int?
     public var minValue: Int?
     public var isLoading: Bool
     public var isDisable: Bool
+    public var onCounterChanged: (Int) -> Void
 
     public init(
         count: Int,
         lightMode: Bool = false,
-        onCounterChanged: @escaping (Int) -> Void,
         isLoading: Bool = false,
         isDisable: Bool = false,
         minValue: Int? = nil,
-        maxValue: Int? = nil
+        maxValue: Int? = nil,
+        onCounterChanged: @escaping (Int) -> Void
     ) {
         self.lightMode = lightMode
         self.onCounterChanged = onCounterChanged

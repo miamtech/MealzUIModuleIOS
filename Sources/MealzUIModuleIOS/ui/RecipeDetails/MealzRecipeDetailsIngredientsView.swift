@@ -5,8 +5,8 @@
 //  Created by didi on 7/6/23.
 //
 import SwiftUI
-import MiamIOSFramework
-import miamCore
+import MealzIOSFramework
+import mealzcore
 
 @available(iOS 14.0, *)
 public struct MealzRecipeDetailsIngredientsView: RecipeDetailsIngredientsProtocol {

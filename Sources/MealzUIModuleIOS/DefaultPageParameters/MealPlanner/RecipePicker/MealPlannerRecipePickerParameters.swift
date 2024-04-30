@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
-import miamCore
+import MealzIOSFramework
+import mealzcore
 
 /**
  A class implementing the necessary parameters for the Meal Planner Recipe Picker

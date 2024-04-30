@@ -6,19 +6,14 @@
 //
 
 import SwiftUI
-import MiamIOSFramework
+import MealzIOSFramework
 
 @available(iOS 14, *)
 public struct MealzMyMealsTitle: BaseTitleProtocol {
     public init() {}
     public func content(params: TitleParameters) -> some View {
-        EmptyView()
-    }
-}
-
-@available(iOS 14, *)
-struct MealzMyMealsTitle_Previews: PreviewProvider {
-    static var previews: some View {
-        MealzMyMealsTitle().content(params: TitleParameters(title: "Test", subtitle: "Subtitle"))
+        Text(params.title)
+            .miamFontStyle(style: MiamFontStyleProvider.sharedInstance.titleStyle)
+            .foregroundColor(Color.mealzColor(.primaryText))
     }
 }

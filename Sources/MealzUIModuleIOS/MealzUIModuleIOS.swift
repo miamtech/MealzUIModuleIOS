@@ -1,4 +1,4 @@
-import miamCore
+import mealzcore
 
 public struct MealzUIModuleIOS {
     public private(set) var text = "Hello, World!"

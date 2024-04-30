@@ -5,8 +5,8 @@
 //  Created by didi on 05/10/2023.
 //
 
-import MiamIOSFramework
-import miamCore
+import MealzIOSFramework
+import mealzcore
 
 /**
  A class implemening the necessary parameters for the PreferencesSearch Page.
